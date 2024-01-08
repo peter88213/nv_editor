@@ -1,0 +1,5 @@
+/build/
+*.pyc
+*.bak
+/test/nv_editor.py
+/test/work/

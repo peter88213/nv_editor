@@ -1,0 +1,126 @@
+# nv_editor Dictionary (English-German)
+# Copyright (C) 2022 Peter Triesberger
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"POT-Creation-Date: 2024-01-08 21:05:32\n"
+"PO-Revision-Date: 2024-01-08 21:05:32\n"
+"Last-Translator: Peter Triesberger\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "Apply changes"
+msgstr "Änderungen übernehmen"
+
+msgid "Apply section changes?"
+msgstr "Änderungen am Abschnitt übernehmen?"
+
+msgid "Bold"
+msgstr "Fett"
+
+msgid "Bright mode"
+msgstr "Heller Modus"
+
+msgid "Cannot apply section changes, because the project is locked.\nUnlock and apply changes?"
+msgstr "Das Projekt ist gesperrt.\nEntsperren und Änderungen übernehmen.?"
+
+msgid "Cannot create sections, because the project is locked."
+msgstr "Abschnitte können nicht erzeugt werden werden, weil das Projekt gesperrt ist."
+
+msgid "Cannot edit sections, because the project is locked."
+msgstr "Abschnitte können nicht bearbeitet werden werden, weil das Projekt gesperrt ist."
+
+msgid "Cannot split the section, because the project is locked."
+msgstr "Abschnitte können nicht geteilt werden, weil das Projekt gesperrt ist."
+
+msgid "Copy"
+msgstr "Kopieren"
+
+msgid "Create section"
+msgstr "Abschnitt erzeugen"
+
+msgid "Cut"
+msgstr "Ausschneiden"
+
+msgid "Dark mode"
+msgstr "Dunkler Modus"
+
+msgid "Disable live update"
+msgstr "Laufende Aktualisierung ausschalten"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Editor plugin Online help"
+msgstr "Editor-Plugin Online-Hilfe"
+
+msgid "Emphasis"
+msgstr "Betont"
+
+msgid "Enable live update"
+msgstr "Laufende Aktualisierung einschalten"
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "Format"
+msgstr "Format"
+
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "Italic"
+msgstr "Kursiv"
+
+msgid "Light mode"
+msgstr "Lichter Modus"
+
+msgid "Move the text from the cursor position to the end into a new section"
+msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben"
+
+msgid "Next"
+msgstr "Vor"
+
+msgid "Online help"
+msgstr "Online-Hilfe"
+
+msgid "Paste"
+msgstr "Einfügen"
+
+msgid "Plain"
+msgstr "Unformatiert"
+
+msgid "Previous"
+msgstr "Zurück"
+
+msgid "Section"
+msgstr "Abschnitt"
+
+msgid "Section Editor"
+msgstr "Abschnittseditor"
+
+msgid "Split at cursor position"
+msgstr "An der Cursorposition teilen"
+
+msgid "Strong emphasis"
+msgstr "Stark betont"
+
+msgid "Update"
+msgstr "Aktualisieren"
+
+msgid "View"
+msgstr "Ansicht"
+
+msgid "Word count"
+msgstr "Wortzählung"
+
+msgid "new"
+msgstr "neu"
+
+msgid "words"
+msgstr "Wörter"
+
