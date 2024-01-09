@@ -53,7 +53,7 @@ OPTIONS = dict(
 class Plugin:
     """noveltree multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    NOVELYST_API = '1.0'
+    NOVELTREE_API = '1.0'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://peter88213.github.io/noveltree_editor'
     _HELP_URL = 'https://peter88213.github.io/noveltree_editor/usage'
