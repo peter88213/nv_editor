@@ -10,7 +10,7 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import os
 import sys
 from shutil import copytree
-from shutil import copyfile
+from shutil import copy2
 from pathlib import Path
 try:
     from tkinter import *
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         if os.path.isfile(f'./{PLUGIN}'):
             pluginDir = f'{noveltreeDir}/plugin'
             os.makedirs(pluginDir, exist_ok=True)
-            copyfile(PLUGIN, f'{pluginDir}/{PLUGIN}')
+            copy2(PLUGIN, f'{pluginDir}/{PLUGIN}')
             output(f'Sucessfully installed "{PLUGIN}" at "{os.path.normpath(pluginDir)}"')
         else:
             output(f'ERROR: file "{PLUGIN}" not found.')
@@ -64,10 +64,6 @@ if __name__ == '__main__':
         # Install the icon files.
         output(f'Copying icons ...')
         copytree('icons', f'{noveltreeDir}/icons', dirs_exist_ok=True)
-        for f in os.listdir(f'{noveltreeDir}/icons'):
-            if not f.endswith('.png') and not f.endswith('.ico'):
-                output(f'Deleting {noveltreeDir}/icons/{f} ...')
-                os.remove(f'{noveltreeDir}/icons/{f}')
     else:
         output(f'ERROR: Cannot find a noveltree installation at "{noveltreeDir}"')
 
