@@ -56,7 +56,7 @@ class Plugin:
     NOVELTREE_API = '1.0'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://peter88213.github.io/noveltree_editor'
-    _HELP_URL = 'https://peter88213.github.io/noveltree_editor/usage'
+    _HELP_URL = 'https://peter88213.github.io/noveltree-help/noveltree_editor/'
 
     def install(self, model, view, controller, prefs):
         """Add a submenu to the main menu.
