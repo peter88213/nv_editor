@@ -2,7 +2,7 @@
 
 Requires Python 3.6+
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/noveltree_editor
+For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 This program is free software: you can redistribute it and/or modify
@@ -55,8 +55,8 @@ class Plugin:
     VERSION = '@release'
     NOVELTREE_API = '1.0'
     DESCRIPTION = 'A multi-section "plain text" editor'
-    URL = 'https://peter88213.github.io/noveltree_editor'
-    _HELP_URL = 'https://peter88213.github.io/noveltree-help/noveltree_editor/'
+    URL = 'https://peter88213.github.io/nv_editor'
+    _HELP_URL = 'https://peter88213.github.io/noveltree-help/nv_editor/'
 
     def install(self, model, view, controller, prefs):
         """Add a submenu to the main menu.

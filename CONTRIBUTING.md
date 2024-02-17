@@ -6,13 +6,13 @@ First, you need to know your language code according to ISO 639-1.
 
 For English, this is, for example, `en`, for German, it is `de`.
 
-**NOTE:** The procedure described below is greatly simplified if you create a language pack based on the [noveltree_xx](https://github.com/peter88213/noveltree_xx) template and use the tools provided for this purpose. 
+**NOTE:** The procedure described below is greatly simplified if you create a language pack based on the [nv_xx](https://github.com/peter88213/nv_xx) template and use the tools provided for this purpose. 
 
 ### Create a message catalog
 
 A "message catalog" is a dictionary for the plugin's messages and menu entries.
 
-For creating a message catalog, you download a template with all English messages from [here](https://github.com/peter88213/noveltree_editor/blob/main/i18n/messages.pot). 
+For creating a message catalog, you download a template with all English messages from [here](https://github.com/peter88213/nv_editor/blob/main/i18n/messages.pot). 
 
 
 Rename `messages.pot` to `<your language code>.po`, then give some specific information in the header data by modifying the following lines:
@@ -63,7 +63,7 @@ Then start *noveltree* and see whether your translation works.
 
 **NOTE:** At startup, *noveltree* tries to load a message dictionary that fits to the system language. If it doesn't find a matching language code in the *locale* directory, it uses English as default language. 
 
-**HINT:** *noveltree_editor* comes with German translations. Look at the `de` directory tree, if you need an example. 
+**HINT:** *nv_editor* comes with German translations. Look at the `de` directory tree, if you need an example. 
 
 
 ### Contribute your translations

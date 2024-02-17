@@ -3,7 +3,7 @@
 This script is for the Windows Explorer context menu
 as specified by the ".reg" file to generate. 
 
-For further information see https://github.com/peter88213/noveltree_editor
+For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import os
