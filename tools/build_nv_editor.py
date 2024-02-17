@@ -22,6 +22,7 @@ TARGET_FILE = f'{BUILD}nv_editor.py'
 
 
 def main():
+    os.makedirs(BUILD, exist_ok=True)
     inliner.run(SOURCE_FILE, TARGET_FILE, 'nveditorlib', '../src/')
     print('Done.')
 
