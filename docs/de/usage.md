@@ -1,14 +1,14 @@
-[Projekt-Homepage](https://peter88213.github.io/nv_editor) > Gebrauchsanleitung
+[Projekt-Homepage](https://github.com/peter88213/nv_editor) > Gebrauchsanleitung
 
 --- 
 
-A simple [noveltree](https://peter88213.github.io/noveltree/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
+A simple [noveltree](https://github.com/peter88213/noveltree/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
 
 ---
 
 # Installation
 
-Wenn [noveltree](https://peter88213.github.io/noveltree/) installiert ist, installiert das Setup-Skript automatisch das*nv_editor*-Plugin im *noveltree* Plugin-Verzeichnis.
+Wenn [noveltree](https://github.com/peter88213/noveltree/) installiert ist, installiert das Setup-Skript automatisch das*nv_editor*-Plugin im *noveltree* Plugin-Verzeichnis.
 
 Das Plugin hängt einen **Bearbeiten**-Eintrag an das *noveltree* **Abschnitt**-Menü, und einen **Editor-Plugin Online-Hilfe**-Eintrag an das **Hilfe**-Menü an.  
 

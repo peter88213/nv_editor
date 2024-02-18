@@ -13,7 +13,7 @@ from nveditorlib.nveditor_globals import _
 from nveditorlib.text_box import TextBox
 import tkinter as tk
 
-HELP_URL = 'https://peter88213.github.io/nv_editor/usage'
+HELP_URL = 'https://github.com/peter88213/nv_editor/usage'
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
 KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')

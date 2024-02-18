@@ -53,10 +53,10 @@ OPTIONS = dict(
 class Plugin:
     """noveltree multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    NOVELTREE_API = '1.0'
+    NOVELTREE_API = '1.8'
     DESCRIPTION = 'A multi-section "plain text" editor'
-    URL = 'https://peter88213.github.io/nv_editor'
-    _HELP_URL = 'https://peter88213.github.io/noveltree-help/nv_editor/'
+    URL = 'https://github.com/peter88213/nv_editor'
+    _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
 
     def install(self, model, view, controller, prefs):
         """Add a submenu to the main menu.
