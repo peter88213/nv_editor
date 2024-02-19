@@ -78,7 +78,7 @@ An easy way may be to put a posting in the [noveltree forum](https://github.com/
 
 - The plugin uses the [tkinter text widget](https://tkdocs.com/tutorial/text.html).
 - To enhance the editor's capabilities, modify the **TextBox** class.
-- An example for an enhanced text box can be found in the [noveltree_rich_editor](https://github.com/peter88213/noveltree_rich_editor) plugin.
+- A *novelyst* example for an enhanced text box can be found in the [novelyst_rich_editor](https://github.com/peter88213/novelyst_rich_editor) plugin.
 
 
 ### Conventions
