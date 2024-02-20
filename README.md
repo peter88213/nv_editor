@@ -1,12 +1,12 @@
 [![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v2.0.0.zip)
 [![Changelog](docs/img/changelog-button.png)](docs/changelog.md)
-[![News](docs/img/news-button.png)](https://github.com/peter88213/noveltree/discussions/1)
+[![News](docs/img/news-button.png)](https://github.com/peter88213/novelibre/discussions/1)
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_editor/)
 
 
 # ![E](icons/eLog032.png) nv_editor
 
-The [noveltree](https://github.com/peter88213/noveltree/) Python program helps authors organize novels.  
+The [novelibre](https://github.com/peter88213/novelibre/) Python program helps authors organize novels.  
 
 *nv_editor* is a plugin providing a "plain text" section editor. 
 
@@ -28,12 +28,12 @@ The [noveltree](https://github.com/peter88213/noveltree/) Python program helps a
     - Split the section at the cursor position.
     - Navigation to the next or previous section.
     
-**WARNING:** With this text editor, you can damage your *noveltree* section content by malforming it. 
+**WARNING:** With this text editor, you can damage your *novelibre* section content by malforming it. 
 So if you don't know what "well-formed XML" means, this plugin might not be the right thing for you. 
 
 ## Requirements
 
-- [noveltree](https://github.com/peter88213/noveltree/) version 2.0+
+- [novelibre](https://github.com/peter88213/novelibre/) version 2.0+
 
 ## Download and install
 

@@ -1,4 +1,4 @@
-"""Provide a text editor widget for the noveltree editor plugin.
+"""Provide a text editor widget for the novelibre editor plugin.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
@@ -20,7 +20,7 @@ NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\
 
 
 class TextBox(tk.Text):
-    """A text editor widget for noveltree raw markup."""
+    """A text editor widget for novelibre raw markup."""
     _TAGS = ('em', 'strong')
     # Supported tags.
 
@@ -106,7 +106,7 @@ class TextBox(tk.Text):
         return 'break'
 
     def _set_format(self, event=None, tag=''):
-        """Insert an opening/closing pair of noveltree markup tags."""
+        """Insert an opening/closing pair of novelibre markup tags."""
         if tag:
             # Toggle format as specified by tag.
             if self.tag_ranges('sel'):

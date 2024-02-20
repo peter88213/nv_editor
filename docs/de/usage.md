@@ -2,15 +2,15 @@
 
 --- 
 
-A simple [noveltree](https://github.com/peter88213/noveltree/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
+A simple [novelibre](https://github.com/peter88213/novelibre/) multi-section editor plugin based on the *tkinter.scrolledtext* widget.
 
 ---
 
 # Installation
 
-Wenn [noveltree](https://github.com/peter88213/noveltree/) installiert ist, installiert das Setup-Skript automatisch das*nv_editor*-Plugin im *noveltree* Plugin-Verzeichnis.
+Wenn [novelibre](https://github.com/peter88213/novelibre/) installiert ist, installiert das Setup-Skript automatisch das*nv_editor*-Plugin im *novelibre* Plugin-Verzeichnis.
 
-Das Plugin hängt einen **Bearbeiten**-Eintrag an das *noveltree* **Abschnitt**-Menü, und einen **Editor-Plugin Online-Hilfe**-Eintrag an das **Hilfe**-Menü an.  
+Das Plugin hängt einen **Bearbeiten**-Eintrag an das *novelibre* **Abschnitt**-Menü, und einen **Editor-Plugin Online-Hilfe**-Eintrag an das **Hilfe**-Menü an.  
 
 ---
 
@@ -61,7 +61,7 @@ It is assumed that very few types of text markup are needed for a novel text:
 - *Strongly emphasized* (usually shown as capitalized).
 - *Citation* (paragraph visually distinguished from body text).
 
-When exporting to ODT format, *noveltree* replaces these formattings as follows: 
+When exporting to ODT format, *novelibre* replaces these formattings as follows: 
 
 - Text with `[i]Kursiv markup[/i]` is formatted as *Emphasized*.
 - Text with `[b]Fett markup[/b]` is formatted as *Strongly emphasized*. 
@@ -115,8 +115,8 @@ Via **Datei > Abschnitt erzeugen** or **Ctrl-Alt-N** you can create a section.
 
 ## Änderungen übernehmen
 
-- You can apply changes to the section with **Ctrl-S**. Then "Modified" status is displayed in *noveltree*.
-- If the project is locked in *noveltree*, you will be asked to unlock it before changes can be applied.
+- You can apply changes to the section with **Ctrl-S**. Then "Modified" status is displayed in *novelibre*.
+- If the project is locked in *novelibre*, you will be asked to unlock it before changes can be applied.
 
 ---
 

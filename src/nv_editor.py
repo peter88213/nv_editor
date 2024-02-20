@@ -1,4 +1,4 @@
-"""A multi-section "plain text" editor plugin for noveltree.
+"""A multi-section "plain text" editor plugin for novelibre.
 
 Requires Python 3.6+
 Copyright (c) 2024 Peter Triesberger
@@ -51,7 +51,7 @@ OPTIONS = dict(
 
 
 class Plugin:
-    """noveltree multi-section "plain text" editor plugin class."""
+    """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
     API_VERSION = '2.0'
     DESCRIPTION = 'A multi-section "plain text" editor'
@@ -83,7 +83,7 @@ class Plugin:
         self.kwargs.update(self.configuration.settings)
         self.kwargs.update(self.configuration.options)
 
-        # Add the "Edit" command to noveltree's "Section" menu.
+        # Add the "Edit" command to novelibre's "Section" menu.
         self._ui.sectionMenu.add_separator()
         self._ui.sectionMenu.add_command(label=_('Edit'), underline=0, command=self.open_node)
 
@@ -137,7 +137,7 @@ class Plugin:
                 self.sectionEditors[scId].on_quit()
 
     def on_quit(self, event=None):
-        """Actions to be performed when noveltree is closed."""
+        """Actions to be performed when novelibre is closed."""
         self.on_close()
 
         #--- Save project specific configuration

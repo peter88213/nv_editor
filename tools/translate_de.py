@@ -20,7 +20,7 @@ import msgfmt
 APP_NAME = 'nv_editor'
 PO_PATH = '../i18n/de.po'
 MO_PATH = '../i18n/locale/de/LC_MESSAGES/nv_editor.mo'
-MO_COPY = '../../noveltree/src/locale/de/LC_MESSAGES/nv_editor.mo'
+MO_COPY = '../../novelibre/src/locale/de/LC_MESSAGES/nv_editor.mo'
 
 
 def main(version='unknown'):

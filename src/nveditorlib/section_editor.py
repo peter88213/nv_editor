@@ -1,4 +1,4 @@
-"""Provide a section editor class for the noveltree plugin.
+"""Provide a section editor class for the novelibre plugin.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor

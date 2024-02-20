@@ -1,10 +1,10 @@
-"""Build a section editor noveltree plugin.
+"""Build a section editor novelibre plugin.
         
 In order to distribute a single script without dependencies, 
 this script "inlines" all modules imported from the novxlib package.
 
 The novxlib project (see see https://github.com/peter88213/novxlib)
-must be located on the same directory level as the noveltree project. 
+must be located on the same directory level as the novelibre project. 
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
