@@ -48,7 +48,7 @@ Name the binary file **nv_editor.mo**.
 
 ### Install your translation for testing
 
-Add a subdirectory tree to **~/.noveltree/locale**, and place *nv_editor.mo* there, like this:
+Add a subdirectory tree to **~/.novx/locale**, and place *nv_editor.mo* there, like this:
 
 ```
 <your home directory>

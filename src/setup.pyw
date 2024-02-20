@@ -47,10 +47,10 @@ if __name__ == '__main__':
 
     # Install the plugin.
     homePath = str(Path.home()).replace('\\', '/')
-    noveltreeDir = f'{homePath}/.noveltree'
-    if os.path.isdir(noveltreeDir):
+    applicationDir = f'{homePath}/.novx'
+    if os.path.isdir(applicationDir):
         if os.path.isfile(f'./{PLUGIN}'):
-            pluginDir = f'{noveltreeDir}/plugin'
+            pluginDir = f'{applicationDir}/plugin'
             os.makedirs(pluginDir, exist_ok=True)
             copy2(PLUGIN, f'{pluginDir}/{PLUGIN}')
             output(f'Sucessfully installed "{PLUGIN}" at "{os.path.normpath(pluginDir)}"')
@@ -59,13 +59,13 @@ if __name__ == '__main__':
 
         # Install the localization files.
         output(f'Copying locale ...')
-        copytree('locale', f'{noveltreeDir}/locale', dirs_exist_ok=True)
+        copytree('locale', f'{applicationDir}/locale', dirs_exist_ok=True)
 
         # Install the icon files.
         output(f'Copying icons ...')
-        copytree('icons', f'{noveltreeDir}/icons', dirs_exist_ok=True)
+        copytree('icons', f'{applicationDir}/icons', dirs_exist_ok=True)
     else:
-        output(f'ERROR: Cannot find a noveltree installation at "{noveltreeDir}"')
+        output(f'ERROR: Cannot find a noveltree installation at "{applicationDir}"')
 
     root.quitButton = Button(text="Quit", command=quit)
     root.quitButton.config(height=1, width=30)

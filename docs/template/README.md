@@ -33,7 +33,7 @@ So if you don't know what "well-formed XML" means, this plugin might not be the 
 
 ## Requirements
 
-- [noveltree](https://github.com/peter88213/noveltree/) version 1.8+
+- [noveltree](https://github.com/peter88213/noveltree/) version 2.0+
 
 ## Download and install
 

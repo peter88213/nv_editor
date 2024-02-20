@@ -53,7 +53,7 @@ OPTIONS = dict(
 class Plugin:
     """noveltree multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    NOVELTREE_API = '1.8'
+    API_VERSION = '2.0'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
@@ -73,7 +73,7 @@ class Plugin:
         #--- Load configuration.
         try:
             homeDir = str(Path.home()).replace('\\', '/')
-            configDir = f'{homeDir}/.noveltree/config'
+            configDir = f'{homeDir}/.novx/config'
         except:
             configDir = '.'
         self.iniFile = f'{configDir}/editor.ini'
