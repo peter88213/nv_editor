@@ -4,7 +4,7 @@
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_editor/)
 
 
-# ![E](icons/eLog032.png) nv_editor
+# ![E](icons/eLogo32.png) nv_editor
 
 The [novelibre](https://github.com/peter88213/novelibre/) Python program helps authors organize novels.  
 
