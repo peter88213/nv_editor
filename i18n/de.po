@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.1.0\n"
-"POT-Creation-Date: 2024-02-23 10:59:41\n"
-"PO-Revision-Date: 2024-02-23 10:59:42\n"
+"Project-Id-Version: 2.1.1\n"
+"POT-Creation-Date: 2024-03-01 13:21:23\n"
+"PO-Revision-Date: 2024-03-01 13:21:23\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,11 @@ msgstr "Abschnitte können nicht erzeugt werden werden, weil das Projekt gesperr
 msgid "Cannot edit sections, because the project is locked."
 msgstr "Abschnitte können nicht bearbeitet werden werden, weil das Projekt gesperrt ist."
 
+msgid "Cannot split the section at the cursor position."
+msgstr "Der Abschnitt kann an der Cursorposition nicht geteilt werden."
+
 msgid "Cannot split the section, because the project is locked."
-msgstr "Abschnitte können nicht geteilt werden, weil das Projekt gesperrt ist."
+msgstr "Der Abschnitt kann nicht geteilt werden, weil das Projekt gesperrt ist."
 
 msgid "Copy"
 msgstr "Kopieren"

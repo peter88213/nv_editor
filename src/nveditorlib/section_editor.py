@@ -12,6 +12,7 @@ from nveditorlib.nveditor_globals import APPLICATION
 from nveditorlib.nveditor_globals import _
 from nveditorlib.text_box import TextBox
 import tkinter as tk
+import xml.etree.ElementTree as ET
 
 HELP_URL = 'https://github.com/peter88213/nv_editor/usage'
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
@@ -202,7 +203,11 @@ class SectionEditor(tk.Toplevel):
     def _create_section(self, event=None):
         """Create a new section after the currently edited section."""
         if self._ctrl.isLocked:
-            messagebox.showinfo(APPLICATION, _('Cannot create sections, because the project is locked.'), parent=self)
+            messagebox.showinfo(
+                APPLICATION,
+                _('Cannot create sections, because the project is locked.'),
+                parent=self
+                )
             self.lift()
             return
 
@@ -306,6 +311,7 @@ class SectionEditor(tk.Toplevel):
 
     def _split_section(self, event=None):
         """Split a section at the cursor position."""
+
         try:
             self._sectionEditor.check_validity()
         except ValueError as ex:
@@ -314,15 +320,33 @@ class SectionEditor(tk.Toplevel):
             return
 
         if self._ctrl.isLocked:
-            messagebox.showinfo(APPLICATION, _('Cannot split the section, because the project is locked.'), parent=self)
+            messagebox.showinfo(
+                APPLICATION,
+                _('Cannot split the section, because the project is locked.'),
+                parent=self
+                )
             self.lift()
             return
 
-        if not messagebox.askyesno(APPLICATION, f'{_("Move the text from the cursor position to the end into a new section")}?', parent=self):
+        # Verify that the split would produce a valid result.
+        try:
+            ET.fromstring(f"<a>{self._sectionEditor.get('1.0', 'insert')}</a>")
+            ET.fromstring(f"<a>{self._sectionEditor.get('insert', 'end')}</a>")
+        except:
+            self._ui.show_warning(_('Cannot split the section at the cursor position.'))
             self.lift()
             return
 
-        self.lift()
+        if messagebox.askyesno(
+            APPLICATION,
+            f'{_("Move the text from the cursor position to the end into a new section")}?',
+            parent=self
+            ):
+            self.lift()
+        else:
+            self.lift()
+            return
+
         # Add a new section.
         thisNode = self._scId
         newId = self._ctrl.add_section(
@@ -333,6 +357,7 @@ class SectionEditor(tk.Toplevel):
             status=self._mdl.novel.sections[self._scId].status
             )
         if newId:
+
             # Cut the actual section's content from the cursor position to the end.
             newContent = self._sectionEditor.get_text('insert', 'end').strip(' \n')
             self._sectionEditor.delete('insert', 'end')
@@ -361,7 +386,11 @@ class SectionEditor(tk.Toplevel):
             return
 
         if self._ctrl.isLocked:
-            if messagebox.askyesno(APPLICATION, _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'), parent=self):
+            if messagebox.askyesno(
+                APPLICATION,
+                _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'),
+                parent=self
+                ):
                 self._ctrl.unlock()
                 self._section.sectionContent = sectionText
             self.lift()

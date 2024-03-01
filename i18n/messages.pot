@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.1.0\n"
-"POT-Creation-Date: 2024-02-23 10:59:41\n"
+"Project-Id-Version: 2.1.1\n"
+"POT-Creation-Date: 2024-03-01 13:21:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -33,6 +33,9 @@ msgid "Cannot create sections, because the project is locked."
 msgstr ""
 
 msgid "Cannot edit sections, because the project is locked."
+msgstr ""
+
+msgid "Cannot split the section at the cursor position."
 msgstr ""
 
 msgid "Cannot split the section, because the project is locked."
