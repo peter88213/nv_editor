@@ -6,7 +6,7 @@
 
 ### v2.1.1
 
-- Bugfix: Before creating a new section, check the split contents of both sections for XML errors.
+- Bugfix: Before creating a new section by splitting, check the split content for XML errors.
 
 Compatibility: noveltree v2.1 API
 
