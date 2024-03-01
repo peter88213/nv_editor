@@ -1,4 +1,4 @@
-[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v2.1.2.zip)
+[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v2.1.3.zip)
 [![Changelog](docs/img/changelog-button.png)](docs/changelog.md)
 [![News](docs/img/news-button.png)](https://github.com/peter88213/novelibre/discussions/1)
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_editor/)
@@ -28,7 +28,7 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
     - Split the section at the cursor position.
     - Navigation to the next or previous section.
     
-**WARNING:** With this text editor, you can damage your *novelibre* section content by malforming it. 
+**WARNING:** With this text editor, you can mess up your *novelibre* section content by malforming it. 
 So if you don't know what "well-formed XML" means, this plugin might not be the right thing for you. 
 
 ## Requirements
@@ -37,9 +37,9 @@ So if you don't know what "well-formed XML" means, this plugin might not be the 
 
 ## Download and install
 
-[Download the latest release (version 2.1.2)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v2.1.2.zip)
+[Download the latest release (version 2.1.3)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v2.1.3.zip)
 
-- Extract the "nv_editor_v2.1.2" folder from the downloaded zipfile "nv_editor_v2.1.2.zip".
+- Extract the "nv_editor_v2.1.3" folder from the downloaded zipfile "nv_editor_v2.1.3.zip".
 - Move into this new folder and launch **setup.pyw**. This installs the plugin for the local user.
 
 ---

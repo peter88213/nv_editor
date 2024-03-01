@@ -28,7 +28,7 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
     - Split the section at the cursor position.
     - Navigation to the next or previous section.
     
-**WARNING:** With this text editor, you can damage your *novelibre* section content by malforming it. 
+**WARNING:** With this text editor, you can mess up your *novelibre* section content by malforming it. 
 So if you don't know what "well-formed XML" means, this plugin might not be the right thing for you. 
 
 ## Requirements

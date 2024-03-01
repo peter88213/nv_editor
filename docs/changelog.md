@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.1.3
+
+- Button: Replace "Exit" with "Close". 
+
+Compatibility: noveltree v2.1 API
+
 ### v2.1.2
 
 - Under Windows, exit with Alt-F4 instead of Ctrl-Q.

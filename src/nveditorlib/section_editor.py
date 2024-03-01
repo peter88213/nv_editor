@@ -92,7 +92,7 @@ class SectionEditor(tk.Toplevel):
 
         # Add buttons to the bottom line.
         ttk.Button(self, text=_('Next'), command=self._load_next).pack(side='right')
-        ttk.Button(self, text=_('Exit'), command=self.on_quit).pack(side='right')
+        ttk.Button(self, text=_('Close'), command=self.on_quit).pack(side='right')
         ttk.Button(self, text=_('Previous'), command=self._load_prev).pack(side='right')
 
         # Load the section content into the text editor.
