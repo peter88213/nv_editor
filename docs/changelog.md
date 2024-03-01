@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v2.1.2
+
+- Under Windows, exit with Alt-F4 instead of Ctrl-Q.
+
+Compatibility: noveltree v2.1 API
+
 ### v2.1.1
 
 - Bugfix: Before creating a new section by splitting, check the split content for XML errors.

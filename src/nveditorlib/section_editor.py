@@ -4,6 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
+import sys
 from tkinter import messagebox
 from tkinter import ttk
 import webbrowser
@@ -107,13 +108,16 @@ class SectionEditor(tk.Toplevel):
         tk.Button(self._buttonBar, text=_('Bold'), command=self._sectionEditor.strong_emphasis).pack(side='left')
         '''
 
-        # Add a "File" Submenu to the editor window.
-        self._fileMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('Section'), menu=self._fileMenu)
-        self._fileMenu.add_command(label=_('Next'), command=self._load_next)
-        self._fileMenu.add_command(label=_('Previous'), command=self._load_prev)
-        self._fileMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
-        self._fileMenu.add_command(label=_('Exit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
+        # Add a "Section" Submenu to the editor window.
+        self._sectionMenu = tk.Menu(self._mainMenu, tearoff=0)
+        self._mainMenu.add_cascade(label=_('Section'), menu=self._sectionMenu)
+        self._sectionMenu.add_command(label=_('Next'), command=self._load_next)
+        self._sectionMenu.add_command(label=_('Previous'), command=self._load_prev)
+        self._sectionMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
+        if sys.platform == 'win32':
+            self._sectionMenu.add_command(label=_('Exit'), accelerator='Alt-F4', command=self.on_quit)
+        else:
+            self._sectionMenu.add_command(label=_('Quit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
 
         # Add a "View" Submenu to the editor window.
         self._viewMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -153,8 +157,9 @@ class SectionEditor(tk.Toplevel):
         self.helpMenu.add_command(label=_('Online help'), command=lambda: webbrowser.open(HELP_URL))
 
         # Event bindings.
+        if sys.platform != 'win32':
+            self.bind_class('Text', KEY_QUIT_PROGRAM[0], self.on_quit)
         self.bind_class('Text', KEY_APPLY_CHANGES[0], self._apply_changes)
-        self.bind_class('Text', KEY_QUIT_PROGRAM[0], self.on_quit)
         self.bind_class('Text', KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
         self.bind_class('Text', KEY_SPLIT_SCENE[0], self._split_section)
         self.bind_class('Text', KEY_CREATE_SCENE[0], self._create_section)
