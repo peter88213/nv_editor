@@ -1,4 +1,4 @@
-[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v2.1.3.zip)
+[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v3.0.0.zip)
 [![Changelog](docs/img/changelog-button.png)](docs/changelog.md)
 [![News](docs/img/news-button.png)](https://github.com/peter88213/novelibre/discussions/1)
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_editor/)
@@ -33,13 +33,13 @@ So if you don't know what "well-formed XML" means, this plugin might not be the 
 
 ## Requirements
 
-- [novelibre](https://github.com/peter88213/novelibre/) version 2.1+
+- [novelibre](https://github.com/peter88213/novelibre/) version 3.0+
 
 ## Download and install
 
-[Download the latest release (version 2.1.3)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v2.1.3.zip)
+[Download the latest release (version 3.0.0)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v3.0.0.zip)
 
-- Extract the "nv_editor_v2.1.3" folder from the downloaded zipfile "nv_editor_v2.1.3.zip".
+- Extract the "nv_editor_v3.0.0" folder from the downloaded zipfile "nv_editor_v3.0.0.zip".
 - Move into this new folder and launch **setup.pyw**. This installs the plugin for the local user.
 
 ---
