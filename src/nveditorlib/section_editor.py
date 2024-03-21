@@ -158,15 +158,15 @@ class SectionEditor(tk.Toplevel):
 
         # Event bindings.
         if sys.platform != 'win32':
-            self.bind_class('Text', KEY_QUIT_PROGRAM[0], self.on_quit)
-        self.bind_class('Text', KEY_APPLY_CHANGES[0], self._apply_changes)
-        self.bind_class('Text', KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
-        self.bind_class('Text', KEY_SPLIT_SCENE[0], self._split_section)
-        self.bind_class('Text', KEY_CREATE_SCENE[0], self._create_section)
-        self.bind_class('Text', KEY_ITALIC[0], self._sectionEditor.emphasis)
-        self.bind_class('Text', KEY_BOLD[0], self._sectionEditor.strong_emphasis)
-        self.bind_class('Text', KEY_PLAIN[0], self._sectionEditor.plain)
-        self.bind_class('Text', '<Return>', self._sectionEditor.new_paragraph)
+            self._sectionEditor.bind(KEY_QUIT_PROGRAM[0], self.on_quit)
+        self._sectionEditor.bind(KEY_APPLY_CHANGES[0], self._apply_changes)
+        self._sectionEditor.bind(KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
+        self._sectionEditor.bind(KEY_SPLIT_SCENE[0], self._split_section)
+        self._sectionEditor.bind(KEY_CREATE_SCENE[0], self._create_section)
+        self._sectionEditor.bind(KEY_ITALIC[0], self._sectionEditor.emphasis)
+        self._sectionEditor.bind(KEY_BOLD[0], self._sectionEditor.strong_emphasis)
+        self._sectionEditor.bind(KEY_PLAIN[0], self._sectionEditor.plain)
+        self._sectionEditor.bind('<Return>', self._sectionEditor.new_paragraph)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
         if SectionEditor.liveWordCount:

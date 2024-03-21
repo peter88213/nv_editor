@@ -91,14 +91,17 @@ class TextBox(tk.Text):
     def emphasis(self, event=None):
         """Make the selection emphasized, or begin with emphasized input."""
         self._set_format(tag='em')
+        return 'break'
 
     def strong_emphasis(self, event=None):
         """Make the selection strongly emphasized, or begin with strongly emphasized input."""
         self._set_format(tag='strong')
+        return 'break'
 
     def plain(self, event=None):
         """Remove formatting from the selection."""
         self._set_format()
+        return 'break'
 
     def new_paragraph(self, event=None):
         """Insert an opening/closing pair of paragraph tags."""
