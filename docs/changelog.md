@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v3.0.2
+
+- Fix a bug where the main status bar is blank after rewriting modified section content. 
+
+Compatibility: novelibre v3.0 API
+
 ### v3.0.1
 
 - Fix a bug where the keybindings are changed for the Text class instead of the section editor's TextBox instance. 

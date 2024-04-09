@@ -401,5 +401,4 @@ class SectionEditor(tk.Toplevel):
             self.lift()
         else:
             self._section.sectionContent = sectionText
-        self._ui.show_status()
 
