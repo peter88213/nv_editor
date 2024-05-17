@@ -4,6 +4,10 @@
 
 ## Changelog
 
+### v4.0.0
+
+Compatibility: novelibre v4.0 API
+
 ### v3.0.2
 
 - Fix a bug where the main status bar is blank after rewriting modified section content. 

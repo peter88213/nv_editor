@@ -53,7 +53,7 @@ OPTIONS = dict(
 class Plugin:
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '3.0'
+    API_VERSION = '4.0'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
