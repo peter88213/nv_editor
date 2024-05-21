@@ -21,7 +21,6 @@ import sys
 from tkinter import messagebox
 import webbrowser
 
-from nveditorlib.configuration import Configuration
 from nveditorlib.nveditor_globals import APPLICATION
 from nveditorlib.nveditor_globals import ICON
 from nveditorlib.nveditor_globals import SECTION_PREFIX
@@ -44,16 +43,16 @@ SETTINGS = dict(
         paragraph_spacing=18,
         margin_x=40,
         margin_y=20,
-        )
+)
 OPTIONS = dict(
         live_wordcount=False,
-        )
+)
 
 
 class Plugin:
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '4.0'
+    API_VERSION = '4.1'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
@@ -77,7 +76,10 @@ class Plugin:
         except:
             configDir = '.'
         self.iniFile = f'{configDir}/editor.ini'
-        self.configuration = Configuration(SETTINGS, OPTIONS)
+        self.configuration = self._mdl.nvService.make_configuration(
+            settings=SETTINGS,
+            options=OPTIONS
+            )
         self.configuration.read(self.iniFile)
         self.kwargs = {}
         self.kwargs.update(self.configuration.settings)
