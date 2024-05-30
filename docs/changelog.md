@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v4.2.0
+
+- Refactor the code for better maintainability.
+
+Compatibility: novelibre v4.3 API
+Based on novxlib v4.1.0
+
 ### v4.1.0
 
 - Use a novelibre service factory method instead of importing the novxlib configuration module.

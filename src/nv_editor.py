@@ -26,6 +26,7 @@ from nveditorlib.nveditor_globals import ICON
 from nveditorlib.nveditor_globals import SECTION_PREFIX
 from nveditorlib.nveditor_globals import _
 from nveditorlib.section_editor import SectionEditor
+from nvlib.plugin.plugin_base import PluginBase
 import tkinter as tk
 
 SETTINGS = dict(
@@ -49,10 +50,10 @@ OPTIONS = dict(
 )
 
 
-class Plugin:
+class Plugin(PluginBase):
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '4.1'
+    API_VERSION = '4.3'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
@@ -64,6 +65,9 @@ class Plugin:
             model -- reference to the main model instance of the application.
             view -- reference to the main view instance of the application.
             controller -- reference to the main controller instance of the application.
+            prefs -- reference to the application's global dictionary with settings and options.
+        
+        Overrides the superclass method.
         """
         self._mdl = model
         self._ui = view
@@ -106,8 +110,38 @@ class Plugin:
         SectionEditor.colorMode = int(self.kwargs['color_mode'])
         SectionEditor.liveWordCount = self.kwargs['live_wordcount']
 
+    def on_close(self, event=None):
+        """Actions to be performed when a project is closed.
+        
+        Close all open section editor windows. 
+        Overrides the superclass method.
+        """
+        for scId in self.sectionEditors:
+            if self.sectionEditors[scId].isOpen:
+                self.sectionEditors[scId].on_quit()
+
+    def on_quit(self, event=None):
+        """Actions to be performed when novelibre is closed.
+        
+        Overrides the superclass method.
+        """
+        self.on_close()
+
+        #--- Save project specific configuration
+        self.kwargs['color_mode'] = SectionEditor.colorMode
+        self.kwargs['live_wordcount'] = SectionEditor.liveWordCount
+        for keyword in self.kwargs:
+            if keyword in self.configuration.options:
+                self.configuration.options[keyword] = self.kwargs[keyword]
+            elif keyword in self.configuration.settings:
+                self.configuration.settings[keyword] = self.kwargs[keyword]
+        self.configuration.write(self.iniFile)
+
     def open_node(self, event=None):
-        """Create a section editor window with a menu bar, a text box, and a status bar."""
+        """Create a section editor window with a menu bar, a text box, and a status bar.
+        
+        Overrides the superclass method.
+        """
         try:
             nodeId = self._ui.tv.tree.selection()[0]
             if nodeId.startswith(SECTION_PREFIX):
@@ -128,27 +162,4 @@ class Plugin:
         except IndexError:
             # Nothing selected
             pass
-
-    def on_close(self, event=None):
-        """Actions to be performed when a project is closed.
-        
-        Close all open section editor windows. 
-        """
-        for scId in self.sectionEditors:
-            if self.sectionEditors[scId].isOpen:
-                self.sectionEditors[scId].on_quit()
-
-    def on_quit(self, event=None):
-        """Actions to be performed when novelibre is closed."""
-        self.on_close()
-
-        #--- Save project specific configuration
-        self.kwargs['color_mode'] = SectionEditor.colorMode
-        self.kwargs['live_wordcount'] = SectionEditor.liveWordCount
-        for keyword in self.kwargs:
-            if keyword in self.configuration.options:
-                self.configuration.options[keyword] = self.kwargs[keyword]
-            elif keyword in self.configuration.settings:
-                self.configuration.settings[keyword] = self.kwargs[keyword]
-        self.configuration.write(self.iniFile)
 
