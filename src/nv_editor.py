@@ -58,14 +58,16 @@ class Plugin(PluginBase):
     URL = 'https://github.com/peter88213/nv_editor'
     _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
 
-    def install(self, model, view, controller, prefs):
+    def install(self, model, view, controller, prefs=None):
         """Add a submenu to the main menu.
         
         Positional arguments:
             model -- reference to the main model instance of the application.
             view -- reference to the main view instance of the application.
             controller -- reference to the main controller instance of the application.
-            prefs -- (deprecated) reference to the application's global dictionary with settings and options.
+
+        Optional arguments:
+            prefs -- deprecated. Please use controller.get_preferences() instead.
         
         Overrides the superclass method.
         """
