@@ -206,7 +206,10 @@ class SectionEditor(tk.Toplevel):
         self._statusBar.config(text=f'{wc} {_("words")} ({diff} {_("new")})')
 
     def _create_section(self, event=None):
-        """Create a new section after the currently edited section."""
+        """Create a new section after the currently edited section.
+        
+        On success, return the ID of the new section, otherwise return None.
+        """
         if self._ctrl.isLocked:
             messagebox.showinfo(
                 APPLICATION,
@@ -219,13 +222,19 @@ class SectionEditor(tk.Toplevel):
         self.lift()
         # Add a section after the currently edited section.
         thisNode = self._scId
+        sceneKind = self._mdl.novel.sections[self._scId].scene
+        if sceneKind == 1:
+            sceneKind = 2
+        elif sceneKind == 2:
+            sceneKind = 1
         newId = self._ctrl.add_section(
             targetNode=thisNode,
             scType=self._mdl.novel.sections[self._scId].scType,
-            scPacing=self._mdl.novel.sections[self._scId].scPacing,
+            scene=sceneKind,
             )
         # Go to the new section.
         self._load_next()
+        return newId
 
     def _apply_changes(self, event=None):
         """Transfer the editor content to the project, if modified."""
@@ -354,11 +363,16 @@ class SectionEditor(tk.Toplevel):
 
         # Add a new section.
         thisNode = self._scId
+        sceneKind = self._mdl.novel.sections[self._scId].scene
+        if sceneKind == 1:
+            sceneKind = 2
+        elif sceneKind == 2:
+            sceneKind = 1
         newId = self._ctrl.add_section(
             targetNode=thisNode,
             appendToPrev=True,
             scType=self._mdl.novel.sections[self._scId].scType,
-            scPacing=self._mdl.novel.sections[self._scId].scPacing,
+            scene=sceneKind,
             status=self._mdl.novel.sections[self._scId].status
             )
         if newId:
