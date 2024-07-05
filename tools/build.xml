@@ -33,8 +33,9 @@
 		<copy file="${test-path}/${plugin}.py" todir="${build-path}/${release}" />
 		<replace encoding="utf-8" file="${build-path}/${release}/${plugin}.py" token="@release" value="${version}" />
 		
-		<copy file="${source-path}/setup.pyw" todir="${build-path}/${release}" />		
-		<replace encoding="utf-8" file="${build-path}/${release}/setup.pyw" token="@release" value="${version}" />
+      <!--copy file="${source-path}/setup.pyw" todir="${build-path}/${release}" /-->     
+      <copy file="${source-path}/setuplib.py" todir="${build-path}/${release}" />     
+      <replace encoding="utf-8" file="${build-path}/${release}/setuplib.py" token="@release" value="${version}" />
 
 		<copy file="../LICENSE" todir="${build-path}/${release}" />	
 		<copy file="${docs-path}/usage.md" tofile="${build-path}/${release}/README.md" />
@@ -49,7 +50,16 @@
 			<fileset dir="../icons" />
 		</copy>
 		
-		<zip destfile="${dist-path}/${release}.zip" basedir="${build-path}" />
+      <!--zip destfile="${dist-path}/${release}.zip" basedir="${build-path}" /-->
+      
+      <exec executable="python" failonerror="true">
+         <arg value="-m"/>
+         <arg value="zipapp"/>
+         <arg value="-m=setuplib:main"/>
+         <arg value="-o=${dist-path}/${release}.pyzw"/>
+         <arg value="-c"/>
+         <arg value="${build-path}/${release}"/>
+      </exec>  
 		
 		<copy file="${docs-path}/template/README.md" overwrite="True" todir=".." />
 		<replace encoding="utf-8" file="../README.md" token="0.99.0" value="${version}" />
