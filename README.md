@@ -37,10 +37,20 @@ So if you don't know what "well-formed XML" means, this plugin might not be the 
 
 ## Download and install
 
-[Download the latest release (version 4.2.2)](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v4.2.2.pyzw)
+### Default: Executable Python zip archive
 
-- Extract the "nv_editor_v4.2.2" folder from the downloaded zipfile "nv_editor_v4.2.2.pyzw".
-- Move into this new folder and launch **setup.pyw**. This installs the plugin for the local user.
+Download the latest release [nv_editor_v4.2.2.pyzw](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v4.2.2.pyzw)
+
+- Launch *nv_editor_v4.2.2.pyzw* by double-clicking (Windows/Linux desktop),
+- or execute `python nv_editor_v4.2.2.pyzw` (Windows), resp. `python3 nv_editor_v4.2.2.pyzw` (Linux) on the command line.
+
+### Alternative: Zip file
+
+The package is also available in zip format: [nv_editor_v4.2.2.zip](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v4.2.2.zip)
+
+- Extract the *nv_editor_v4.2.2* folder from the downloaded zipfile "nv_editor_v4.2.2.zip".
+- Move into this new folder and launch *setup.pyw* by double-clicking (Windows/Linux desktop), 
+- or execute `python setup.pyw` (Windows), resp. `python3 setup.pyw` (Linux) on the command line.
 
 ---
 
@@ -48,7 +58,7 @@ So if you don't know what "well-formed XML" means, this plugin might not be the 
 
 ## Usage
 
-See the [instructions for use](docs/usage.md)
+See the [online manual](https://peter88213.github.io/nvhelp-en/nv_editor/)
 
 ---
 
