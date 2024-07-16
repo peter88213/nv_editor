@@ -4,7 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-import sys
+import platform
 from tkinter import messagebox
 from tkinter import ttk
 import webbrowser
@@ -114,7 +114,7 @@ class SectionEditor(tk.Toplevel):
         self._sectionMenu.add_command(label=_('Next'), command=self._load_next)
         self._sectionMenu.add_command(label=_('Previous'), command=self._load_prev)
         self._sectionMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
-        if sys.platform == 'win32':
+        if platform.system() == 'Windows':
             self._sectionMenu.add_command(label=_('Exit'), accelerator='Alt-F4', command=self.on_quit)
         else:
             self._sectionMenu.add_command(label=_('Quit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
@@ -157,7 +157,7 @@ class SectionEditor(tk.Toplevel):
         self.helpMenu.add_command(label=_('Online help'), command=lambda: webbrowser.open(HELP_URL))
 
         # Event bindings.
-        if sys.platform != 'win32':
+        if platform.system() != 'Windows':
             self._sectionEditor.bind(KEY_QUIT_PROGRAM[0], self.on_quit)
         self._sectionEditor.bind(KEY_APPLY_CHANGES[0], self._apply_changes)
         self._sectionEditor.bind(KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
