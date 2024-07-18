@@ -4,6 +4,12 @@
 
 ## Changelog
 
+### v4.2.3
+
+- Handle minimized window.
+
+Compatibility: novelibre v4.3 API
+
 ### v4.2.2
 
 - Fix a regression from v4.0 (novxlib API change not considered) 

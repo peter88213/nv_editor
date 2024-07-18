@@ -182,6 +182,8 @@ class SectionEditor(tk.Toplevel):
         
         Extends the superclass method.
         """
+        if self.state() == 'iconic':
+            self.state('normal')
         super().lift()
         self._sectionEditor.focus()
 
