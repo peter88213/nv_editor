@@ -122,10 +122,9 @@ class SectionEditor(tk.Toplevel):
         # Add a "View" Submenu to the editor window.
         self._viewMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('View'), menu=self._viewMenu)
-        self._viewMenu.add_command(label=COLOR_MODES[0][0], command=lambda: self._set_view_mode(mode=0))
-        self._viewMenu.add_command(label=COLOR_MODES[1][0], command=lambda: self._set_view_mode(mode=1))
-        self._viewMenu.add_command(label=COLOR_MODES[2][0], command=lambda: self._set_view_mode(mode=2))
-        # note: this can't be done with a loop because of the "lambda" evaluation at runtime
+        self._colorMode = tk.IntVar(value=SectionEditor.colorMode)
+        for i, cm in enumerate(COLOR_MODES):
+            self._viewMenu.add_radiobutton(label=cm[0], variable=self._colorMode, command=self._set_view_mode, value=i)
 
         # Add an "Edit" Submenu to the editor window.
         self._editMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -303,8 +302,8 @@ class SectionEditor(tk.Toplevel):
         self._sectionEditor['bg'] = COLOR_MODES[SectionEditor.colorMode][2]
         self._sectionEditor['insertbackground'] = COLOR_MODES[SectionEditor.colorMode][1]
 
-    def _set_view_mode(self, event=None, mode=0):
-        SectionEditor.colorMode = mode
+    def _set_view_mode(self, event=None):
+        SectionEditor.colorMode = self._colorMode.get()
         self._set_editor_colors()
 
     def _set_wc_mode(self, *args):
