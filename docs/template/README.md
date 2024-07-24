@@ -33,7 +33,7 @@ So if you don't know what "well-formed XML" means, this plugin might not be the 
 
 ## Requirements
 
-3- [novelibre](https://github.com/peter88213/novelibre/) version 4.3+
+3- [novelibre](https://github.com/peter88213/novelibre/) version 4.6+
 
 ## Download and install
 

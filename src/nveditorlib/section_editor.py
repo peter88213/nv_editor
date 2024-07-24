@@ -7,15 +7,14 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import platform
 from tkinter import messagebox
 from tkinter import ttk
-import webbrowser
 
 from nveditorlib.nveditor_globals import APPLICATION
 from nveditorlib.nveditor_globals import _
+from nveditorlib.nveditor_globals import open_help
 from nveditorlib.text_box import TextBox
 import tkinter as tk
 import xml.etree.ElementTree as ET
 
-HELP_URL = 'https://github.com/peter88213/nv_editor/usage'
 KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
 KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
 KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')
@@ -151,9 +150,10 @@ class SectionEditor(tk.Toplevel):
         # Help
         self.helpMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Help'), menu=self.helpMenu)
-        self.helpMenu.add_command(label=_('Online help'), command=lambda: webbrowser.open(HELP_URL))
+        self.helpMenu.add_command(label=_('Online help'), accelerator='F1', command=open_help)
 
         # Event bindings.
+        self.bind('<F1>', open_help)
         if platform.system() != 'Windows':
             self._sectionEditor.bind(KEY_QUIT_PROGRAM[0], self.on_quit)
         self._sectionEditor.bind(KEY_APPLY_CHANGES[0], self._apply_changes)

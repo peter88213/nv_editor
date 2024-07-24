@@ -19,12 +19,12 @@ import os
 from pathlib import Path
 import sys
 from tkinter import messagebox
-import webbrowser
 
 from nveditorlib.nveditor_globals import APPLICATION
 from nveditorlib.nveditor_globals import ICON
 from nveditorlib.nveditor_globals import SECTION_PREFIX
 from nveditorlib.nveditor_globals import _
+from nveditorlib.nveditor_globals import open_help
 from nveditorlib.section_editor import SectionEditor
 from nvlib.plugin.plugin_base import PluginBase
 import tkinter as tk
@@ -53,10 +53,9 @@ OPTIONS = dict(
 class Plugin(PluginBase):
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '4.3'
+    API_VERSION = '4.6'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
-    _HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
 
     def install(self, model, view, controller, prefs=None):
         """Add a submenu to the main menu.
@@ -96,7 +95,7 @@ class Plugin(PluginBase):
         self._ui.sectionMenu.add_command(label=_('Edit'), underline=0, command=self.open_node)
 
         # Add an entry to the Help menu.
-        self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=lambda: webbrowser.open(self._HELP_URL))
+        self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=open_help)
 
         # Set window icon.
         self.sectionEditors = {}
@@ -165,3 +164,5 @@ class Plugin(PluginBase):
             # Nothing selected
             pass
 
+    def _open_help(self, event=None):
+        open_help(HELP_PAGE)

@@ -4,6 +4,13 @@
 
 ## Changelog
 
+
+### v4.4.0
+
+- Provide context sensitive help via F1 key.
+
+Compatibility: novelibre v4.6 API
+
 ### v4.3.0
 
 - Provide radiobuttons for the color setting.
