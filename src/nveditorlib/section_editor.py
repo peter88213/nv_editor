@@ -42,7 +42,7 @@ class SectionEditor(tk.Toplevel):
         show_status(message=None) -- Display a message on the status bar.
         show_wordcount()-- Display the word count on the status bar.
     """
-    liveWordCount = False
+    liveWordCount = tk.BooleanVar(value=False)
     colorMode = 0
 
     def __init__(self, plugin, model, view, controller, scId, size, icon=None):
@@ -148,8 +148,7 @@ class SectionEditor(tk.Toplevel):
         self._wcMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Word count'), menu=self._wcMenu)
         self._wcMenu.add_command(label=_('Update'), accelerator=KEY_UPDATE_WORDCOUNT[1], command=self.show_wordcount)
-        self._liveWcOn = tk.BooleanVar(value=SectionEditor.liveWordCount)
-        self._wcMenu.add_checkbutton(label=_('Live update'), variable=self._liveWcOn, command=self._toggle_wc)
+        self._wcMenu.add_checkbutton(label=_('Live update'), variable=SectionEditor.liveWordCount, command=self._set_wc_mode)
 
         # Help
         self.helpMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -169,9 +168,7 @@ class SectionEditor(tk.Toplevel):
         self._sectionEditor.bind('<Return>', self._sectionEditor.new_paragraph)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
-        if SectionEditor.liveWordCount:
-            self._live_wc_on()
-
+        self._set_wc_mode()
         self.lift()
         self.isOpen = True
 
@@ -266,21 +263,6 @@ class SectionEditor(tk.Toplevel):
                     self._transfer_text(sectionText)
         return True
 
-    def _toggle_wc(self, *args):
-        if SectionEditor.liveWordCount:
-            self._live_wc_off()
-        else:
-            self._live_wc_on()
-
-    def _live_wc_off(self, event=None):
-        self.unbind('<KeyRelease>')
-        SectionEditor.liveWordCount = False
-
-    def _live_wc_on(self, event=None):
-        self.bind('<KeyRelease>', self.show_wordcount)
-        self.show_wordcount()
-        SectionEditor.liveWordCount = True
-
     def _load_next(self, event=None):
         """Load the next section in the tree."""
         if not self._apply_changes_after_asking():
@@ -324,6 +306,13 @@ class SectionEditor(tk.Toplevel):
     def _set_view_mode(self, event=None, mode=0):
         SectionEditor.colorMode = mode
         self._set_editor_colors()
+
+    def _set_wc_mode(self, *args):
+        if SectionEditor.liveWordCount.get():
+            self.bind('<KeyRelease>', self.show_wordcount)
+            self.show_wordcount()
+        else:
+            self.unbind('<KeyRelease>')
 
     def _split_section(self, event=None):
         """Split a section at the cursor position."""
