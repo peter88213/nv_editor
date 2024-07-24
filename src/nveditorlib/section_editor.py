@@ -43,7 +43,7 @@ class SectionEditor(tk.Toplevel):
         show_wordcount()-- Display the word count on the status bar.
     """
     liveWordCount = tk.BooleanVar(value=False)
-    colorMode = 0
+    colorMode = tk.IntVar(value=0)
 
     def __init__(self, plugin, model, view, controller, scId, size, icon=None):
         self._mdl = model
@@ -122,9 +122,8 @@ class SectionEditor(tk.Toplevel):
         # Add a "View" Submenu to the editor window.
         self._viewMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('View'), menu=self._viewMenu)
-        self._colorMode = tk.IntVar(value=SectionEditor.colorMode)
         for i, cm in enumerate(COLOR_MODES):
-            self._viewMenu.add_radiobutton(label=cm[0], variable=self._colorMode, command=self._set_view_mode, value=i)
+            self._viewMenu.add_radiobutton(label=cm[0], variable=SectionEditor.colorMode, command=self._set_editor_colors, value=i)
 
         # Add an "Edit" Submenu to the editor window.
         self._editMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -298,13 +297,10 @@ class SectionEditor(tk.Toplevel):
         self.show_wordcount()
 
     def _set_editor_colors(self):
-        self._sectionEditor['fg'] = COLOR_MODES[SectionEditor.colorMode][1]
-        self._sectionEditor['bg'] = COLOR_MODES[SectionEditor.colorMode][2]
-        self._sectionEditor['insertbackground'] = COLOR_MODES[SectionEditor.colorMode][1]
-
-    def _set_view_mode(self, event=None):
-        SectionEditor.colorMode = self._colorMode.get()
-        self._set_editor_colors()
+        cm = SectionEditor.colorMode.get()
+        self._sectionEditor['fg'] = COLOR_MODES[cm][1]
+        self._sectionEditor['bg'] = COLOR_MODES[cm][2]
+        self._sectionEditor['insertbackground'] = COLOR_MODES[cm][1]
 
     def _set_wc_mode(self, *args):
         if SectionEditor.liveWordCount.get():

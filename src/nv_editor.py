@@ -109,7 +109,7 @@ class Plugin(PluginBase):
             self._icon = None
 
         # Configure the editor box.
-        SectionEditor.colorMode = int(self.kwargs['color_mode'])
+        SectionEditor.colorMode.set(int(self.kwargs['color_mode']))
         SectionEditor.liveWordCount.set(self.kwargs['live_wordcount'])
 
     def on_close(self, event=None):
@@ -130,7 +130,7 @@ class Plugin(PluginBase):
         self.on_close()
 
         #--- Save project specific configuration
-        self.kwargs['color_mode'] = SectionEditor.colorMode
+        self.kwargs['color_mode'] = SectionEditor.colorMode.get()
         self.kwargs['live_wordcount'] = SectionEditor.liveWordCount.get()
         for keyword in self.kwargs:
             if keyword in self.configuration.options:
