@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### v4.3.0
+
+- Provide radiobuttons for the color setting.
+- Provide a checkbutton for the word count setting.
+
+Compatibility: novelibre v4.3 API
+
 ### v4.2.3
 
 - Handle minimized window.
