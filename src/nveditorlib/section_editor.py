@@ -148,8 +148,8 @@ class SectionEditor(tk.Toplevel):
         self._wcMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Word count'), menu=self._wcMenu)
         self._wcMenu.add_command(label=_('Update'), accelerator=KEY_UPDATE_WORDCOUNT[1], command=self.show_wordcount)
-        self._wcMenu.add_command(label=_('Enable live update'), command=self._live_wc_on)
-        self._wcMenu.add_command(label=_('Disable live update'), command=self._live_wc_off)
+        self._liveWcOn = tk.BooleanVar(value=SectionEditor.liveWordCount)
+        self._wcMenu.add_checkbutton(label=_('Live update'), variable=self._liveWcOn, command=self._toggle_wc)
 
         # Help
         self.helpMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -171,8 +171,6 @@ class SectionEditor(tk.Toplevel):
 
         if SectionEditor.liveWordCount:
             self._live_wc_on()
-        else:
-            self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
 
         self.lift()
         self.isOpen = True
@@ -268,16 +266,18 @@ class SectionEditor(tk.Toplevel):
                     self._transfer_text(sectionText)
         return True
 
+    def _toggle_wc(self, *args):
+        if SectionEditor.liveWordCount:
+            self._live_wc_off()
+        else:
+            self._live_wc_on()
+
     def _live_wc_off(self, event=None):
         self.unbind('<KeyRelease>')
-        self._wcMenu.entryconfig(_('Enable live update'), state='normal')
-        self._wcMenu.entryconfig(_('Disable live update'), state='disabled')
         SectionEditor.liveWordCount = False
 
     def _live_wc_on(self, event=None):
         self.bind('<KeyRelease>', self.show_wordcount)
-        self._wcMenu.entryconfig(_('Enable live update'), state='disabled')
-        self._wcMenu.entryconfig(_('Disable live update'), state='normal')
         self.show_wordcount()
         SectionEditor.liveWordCount = True
 

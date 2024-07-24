@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.2.3\n"
-"POT-Creation-Date: 2024-07-18 10:59:33\n"
-"PO-Revision-Date: 2024-07-18 10:59:33\n"
+"Project-Id-Version: unknown\n"
+"POT-Creation-Date: 2024-07-24 10:39:55\n"
+"PO-Revision-Date: 2024-07-24 10:40:01\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -55,9 +55,6 @@ msgstr "Ausschneiden"
 msgid "Dark mode"
 msgstr "Dunkler Modus"
 
-msgid "Disable live update"
-msgstr "Laufende Aktualisierung ausschalten"
-
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -66,9 +63,6 @@ msgstr "Editor-Plugin Online-Hilfe"
 
 msgid "Emphasis"
 msgstr "Betont"
-
-msgid "Enable live update"
-msgstr "Laufende Aktualisierung einschalten"
 
 msgid "Exit"
 msgstr "Beenden"
@@ -84,6 +78,9 @@ msgstr "Kursiv"
 
 msgid "Light mode"
 msgstr "Lichter Modus"
+
+msgid "Live update"
+msgstr "Laufende Aktualisierung"
 
 msgid "Move the text from the cursor position to the end into a new section"
 msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben"
