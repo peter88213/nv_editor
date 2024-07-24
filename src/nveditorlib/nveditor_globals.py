@@ -33,5 +33,5 @@ HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
 
 
 def open_help(event=None):
-    """Show the online help page specified by page."""
+    """Show the online help page specified by HELP_URL."""
     webbrowser.open(HELP_URL)
