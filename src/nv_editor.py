@@ -164,5 +164,3 @@ class Plugin(PluginBase):
             # Nothing selected
             pass
 
-    def _open_help(self, event=None):
-        open_help(HELP_PAGE)
