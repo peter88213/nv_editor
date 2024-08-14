@@ -12,10 +12,10 @@ import xml.etree.ElementTree as ET
 #--- Regular expressions for counting words and characters like in LibreOffice.
 # See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
 
-ADDITIONAL_WORD_LIMITS = re.compile('--|—|–|\<\/p\>')
+ADDITIONAL_WORD_LIMITS = re.compile(r'--|—|–|\<\/p\>')
 # this is to be replaced by spaces when counting words
 
-NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\<.+?\>')
+NO_WORD_LIMITS = re.compile(r'\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\<.+?\>')
 # this is to be replaced by empty strings when counting words
 
 
