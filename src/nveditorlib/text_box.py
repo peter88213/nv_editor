@@ -54,8 +54,8 @@ class TextBox(tk.Text):
             ET.fromstring(xmlText)
         except Exception as ex:
             issue, location = str(ex).split(':')
-            lineStr = re.search('line ([0-9]+)', location).group(1)
-            columnStr = re.search('column ([0-9]+)', location).group(1)
+            lineStr = re.search(r'line ([0-9]+)', location).group(1)
+            columnStr = re.search(r'column ([0-9]+)', location).group(1)
             column = int(columnStr) - 3
             self.mark_set('insert', f'{lineStr}.{column}')
             raise ValueError(f'{issue}: line {lineStr} column {column}')
