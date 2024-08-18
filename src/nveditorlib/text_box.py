@@ -5,13 +5,14 @@ For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import re
-import tkinter as tk
 from tkinter import ttk
+
+from novxlib.xml.xml_filter import strip_illegal_characters
+import tkinter as tk
 import xml.etree.ElementTree as ET
 
 #--- Regular expressions for counting words and characters like in LibreOffice.
 # See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
-
 ADDITIONAL_WORD_LIMITS = re.compile(r'--|—|–|\<\/p\>')
 # this is to be replaced by spaces when counting words
 
@@ -49,7 +50,8 @@ class TextBox(tk.Text):
                 setattr(self, m, getattr(self.frame, m))
 
     def check_validity(self):
-        xmlText = f'<a>{self.get("1.0", "end")}</a>'
+        text = strip_illegal_characters(self.get("1.0", "end"))
+        xmlText = f'<a>{text}</a>'
         try:
             ET.fromstring(xmlText)
         except Exception as ex:
@@ -68,7 +70,7 @@ class TextBox(tk.Text):
         text = self.get(start, end)
         text = text.strip(' \n')
         text = text.replace('\n', '')
-        return text
+        return strip_illegal_characters(text)
 
     def set_text(self, text):
         """Put text into the editor box and clear the undo/redo stack."""
