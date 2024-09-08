@@ -1,4 +1,5 @@
 /build/
+/build-ref/
 *.pyc
 *.bak
 /test/nv_editor.py
