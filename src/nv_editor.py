@@ -20,10 +20,10 @@ from pathlib import Path
 import sys
 from tkinter import messagebox
 
+from nveditorlib.nveditor_globals import _
 from nveditorlib.nveditor_globals import APPLICATION
 from nveditorlib.nveditor_globals import ICON
 from nveditorlib.nveditor_globals import SECTION_PREFIX
-from nveditorlib.nveditor_globals import _
 from nveditorlib.nveditor_globals import open_help
 from nveditorlib.section_editor import SectionEditor
 from nvlib.plugin.plugin_base import PluginBase

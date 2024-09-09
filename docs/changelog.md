@@ -5,6 +5,13 @@
 ## Changelog
 
 
+### Version 4.4.3
+
+- Refactor: Change import order for a quick start.
+
+Compatibility: novelibre 4.6 API
+Based on novxlib 4.6.3
+
 ### Version 4.4.2
 
 - Text box discarding illegal characters.
