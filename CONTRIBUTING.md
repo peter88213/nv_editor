@@ -73,13 +73,35 @@ If *novelibre* works fine with your translations, you can consider contributing 
 An easy way may be to put a posting in the [novelibre forum](https://github.com/peter88213/novelibre/discussions), appending your  `<your language code>.po` file. 
 
 
-
 ## Development
 
-- The plugin uses the [tkinter text widget](https://tkdocs.com/tutorial/text.html).
-- To enhance the editor's capabilities, modify the **TextBox** class.
-- A *novelyst* example for an enhanced text box can be found in the [novelyst_rich_editor](https://github.com/peter88213/novelyst_rich_editor) plugin.
+*nv_editor* depends on the [novxlib](https://github.com/peter88213/novxlib) and [editornv](https://github.com/peter88213/editornv) libraries which must be present in your file system. It is organized as an Eclipse PyDev project. The official release branch on GitHub is *main*.
 
+### Mandatory directory structure for building the plugin package
+
+```
+.
+├── novelibre/
+│   ├── i18n/
+│   ├── src/
+│   │   └── nvlib/
+│   └── tools/ 
+│       ├── msgfmt.py
+│       ├── inliner.py
+│       ├── package_builder.py
+│       ├── pgettext.py
+│       ├── translate_de.py
+│       └── translations.py
+├── novxlib/
+│   └── src/
+│       └── novxlib/
+└── nv_editor/
+    ├── i18n/
+    ├── src/
+	 │   └── nveditorlib/
+    └── tools/ 
+        └── build.py
+```
 
 ### Conventions
 
@@ -87,7 +109,11 @@ See https://github.com/peter88213/novxlib/blob/main/docs/conventions.md
 
 ## Development tools
 
-- [Python](https://python.org) version 3.10.
+- [Python](https://python.org) version 3.12.
+- **build.py** starts the building and packaging process.
+
+### Optional IDE
 - [Eclipse IDE](https://eclipse.org) with [PyDev](https://pydev.org) and *EGit*.
-- *Apache Ant* is used for building the application.
+- Apache Ant can be used for starting the **build.py** script.
+
 
