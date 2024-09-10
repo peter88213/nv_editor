@@ -4,25 +4,19 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-import platform
 from tkinter import messagebox
 from tkinter import ttk
 
+from nveditorlib.generic_keys import GenericKeys
+from nveditorlib.mac_keys import MacKeys
 from nveditorlib.nveditor_globals import APPLICATION
+from nveditorlib.nveditor_globals import PLATFORM
 from nveditorlib.nveditor_globals import _
 from nveditorlib.nveditor_globals import open_help
 from nveditorlib.text_box import TextBox
+from nveditorlib.windows_keys import WindowsKeys
 import tkinter as tk
 import xml.etree.ElementTree as ET
-
-KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
-KEY_APPLY_CHANGES = ('<Control-s>', 'Ctrl-S')
-KEY_UPDATE_WORDCOUNT = ('<F5>', 'F5')
-KEY_SPLIT_SCENE = ('<Control-Alt-s>', 'Ctrl-Alt-S')
-KEY_CREATE_SCENE = ('<Control-Alt-n>', 'Ctrl-Alt-N')
-KEY_ITALIC = ('<Control-i>', 'Ctrl-I')
-KEY_BOLD = ('<Control-b>', 'Ctrl-B')
-KEY_PLAIN = ('<Control-m>', 'Ctrl-M')
 
 COLOR_MODES = [
     (_('Bright mode'), 'black', 'white'),
@@ -51,6 +45,14 @@ class SectionEditor(tk.Toplevel):
         self._plugin = plugin
         self._section = self._mdl.novel.sections[scId]
         self._scId = scId
+
+        # Select platform specific keys.
+        if PLATFORM == 'win':
+            self.keys = WindowsKeys()
+        elif PLATFORM == 'mac':
+            self.keys = MacKeys()
+        else:
+            self.keys = GenericKeys()
 
         # Create an independent editor window.
         super().__init__()
@@ -112,11 +114,11 @@ class SectionEditor(tk.Toplevel):
         self._mainMenu.add_cascade(label=_('Section'), menu=self._sectionMenu)
         self._sectionMenu.add_command(label=_('Next'), command=self._load_next)
         self._sectionMenu.add_command(label=_('Previous'), command=self._load_prev)
-        self._sectionMenu.add_command(label=_('Apply changes'), accelerator=KEY_APPLY_CHANGES[1], command=self._apply_changes)
-        if platform.system() == 'Windows':
-            self._sectionMenu.add_command(label=_('Exit'), accelerator='Alt-F4', command=self.on_quit)
+        self._sectionMenu.add_command(label=_('Apply changes'), accelerator=self.keys.APPLY_CHANGES[1], command=self._apply_changes)
+        if PLATFORM == 'win':
+            self._sectionMenu.add_command(label=_('Exit'), accelerator=self.keys.QUIT_PROGRAM[1], command=self.on_quit)
         else:
-            self._sectionMenu.add_command(label=_('Quit'), accelerator=KEY_QUIT_PROGRAM[1], command=self.on_quit)
+            self._sectionMenu.add_command(label=_('Quit'), accelerator=self.keys.QUIT_PROGRAM[1], command=self.on_quit)
 
         # Add a "View" Submenu to the editor window.
         self._viewMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -131,20 +133,20 @@ class SectionEditor(tk.Toplevel):
         self._editMenu.add_command(label=_('Cut'), accelerator='Ctrl-X', command=lambda: self._sectionEditor.event_generate("<<Cut>>"))
         self._editMenu.add_command(label=_('Paste'), accelerator='Ctrl-V', command=lambda: self._sectionEditor.event_generate("<<Paste>>"))
         self._editMenu.add_separator()
-        self._editMenu.add_command(label=_('Split at cursor position'), accelerator=KEY_SPLIT_SCENE[1], command=self._split_section)
-        self._editMenu.add_command(label=_('Create section'), accelerator=KEY_CREATE_SCENE[1], command=self._create_section)
+        self._editMenu.add_command(label=_('Split at cursor position'), accelerator=self.keys.SPLIT_SCENE[1], command=self._split_section)
+        self._editMenu.add_command(label=_('Create section'), accelerator=self.keys.CREATE_SCENE[1], command=self._create_section)
 
         # Add a "Format" Submenu to the editor window.
         self._formatMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Format'), menu=self._formatMenu)
-        self._formatMenu.add_command(label=_('Emphasis'), accelerator=KEY_ITALIC[1], command=self._sectionEditor.emphasis)
-        self._formatMenu.add_command(label=_('Strong emphasis'), accelerator=KEY_BOLD[1], command=self._sectionEditor.strong_emphasis)
-        self._formatMenu.add_command(label=_('Plain'), accelerator=KEY_PLAIN[1], command=self._sectionEditor.plain)
+        self._formatMenu.add_command(label=_('Emphasis'), accelerator=self.keys.ITALIC[1], command=self._sectionEditor.emphasis)
+        self._formatMenu.add_command(label=_('Strong emphasis'), accelerator=self.keys.BOLD[1], command=self._sectionEditor.strong_emphasis)
+        self._formatMenu.add_command(label=_('Plain'), accelerator=self.keys.PLAIN[1], command=self._sectionEditor.plain)
 
         # Add a "Word count" Submenu to the editor window.
         self._wcMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Word count'), menu=self._wcMenu)
-        self._wcMenu.add_command(label=_('Update'), accelerator=KEY_UPDATE_WORDCOUNT[1], command=self.show_wordcount)
+        self._wcMenu.add_command(label=_('Update'), accelerator=self.keys.UPDATE_WORDCOUNT[1], command=self.show_wordcount)
         self._wcMenu.add_checkbutton(label=_('Live update'), variable=SectionEditor.liveWordCount, command=self._set_wc_mode)
 
         # Help
@@ -154,15 +156,15 @@ class SectionEditor(tk.Toplevel):
 
         # Event bindings.
         self.bind('<F1>', open_help)
-        if platform.system() != 'Windows':
-            self._sectionEditor.bind(KEY_QUIT_PROGRAM[0], self.on_quit)
-        self._sectionEditor.bind(KEY_APPLY_CHANGES[0], self._apply_changes)
-        self._sectionEditor.bind(KEY_UPDATE_WORDCOUNT[0], self.show_wordcount)
-        self._sectionEditor.bind(KEY_SPLIT_SCENE[0], self._split_section)
-        self._sectionEditor.bind(KEY_CREATE_SCENE[0], self._create_section)
-        self._sectionEditor.bind(KEY_ITALIC[0], self._sectionEditor.emphasis)
-        self._sectionEditor.bind(KEY_BOLD[0], self._sectionEditor.strong_emphasis)
-        self._sectionEditor.bind(KEY_PLAIN[0], self._sectionEditor.plain)
+        if PLATFORM != 'win':
+            self._sectionEditor.bind(self.keys.QUIT_PROGRAM[0], self.on_quit)
+        self._sectionEditor.bind(self.keys.APPLY_CHANGES[0], self._apply_changes)
+        self._sectionEditor.bind(self.keys.UPDATE_WORDCOUNT[0], self.show_wordcount)
+        self._sectionEditor.bind(self.keys.SPLIT_SCENE[0], self._split_section)
+        self._sectionEditor.bind(self.keys.CREATE_SCENE[0], self._create_section)
+        self._sectionEditor.bind(self.keys.ITALIC[0], self._sectionEditor.emphasis)
+        self._sectionEditor.bind(self.keys.BOLD[0], self._sectionEditor.strong_emphasis)
+        self._sectionEditor.bind(self.keys.PLAIN[0], self._sectionEditor.plain)
         self._sectionEditor.bind('<Return>', self._sectionEditor.new_paragraph)
         self.protocol("WM_DELETE_WINDOW", self.on_quit)
 
