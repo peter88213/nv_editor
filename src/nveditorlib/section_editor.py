@@ -129,9 +129,9 @@ class SectionEditor(tk.Toplevel):
         # Add an "Edit" Submenu to the editor window.
         self._editMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Edit'), menu=self._editMenu)
-        self._editMenu.add_command(label=_('Copy'), accelerator='Ctrl-C', command=lambda: self._sectionEditor.event_generate("<<Copy>>"))
-        self._editMenu.add_command(label=_('Cut'), accelerator='Ctrl-X', command=lambda: self._sectionEditor.event_generate("<<Cut>>"))
-        self._editMenu.add_command(label=_('Paste'), accelerator='Ctrl-V', command=lambda: self._sectionEditor.event_generate("<<Paste>>"))
+        self._editMenu.add_command(label=_('Copy'), accelerator=self.keys.COPY[1], command=lambda: self._sectionEditor.event_generate("<<Copy>>"))
+        self._editMenu.add_command(label=_('Cut'), accelerator=self.keys.CUT[1], command=lambda: self._sectionEditor.event_generate("<<Cut>>"))
+        self._editMenu.add_command(label=_('Paste'), accelerator=self.keys.PASTE[1], command=lambda: self._sectionEditor.event_generate("<<Paste>>"))
         self._editMenu.add_separator()
         self._editMenu.add_command(label=_('Split at cursor position'), accelerator=self.keys.SPLIT_SCENE[1], command=self._split_section)
         self._editMenu.add_command(label=_('Create section'), accelerator=self.keys.CREATE_SCENE[1], command=self._create_section)
@@ -152,10 +152,10 @@ class SectionEditor(tk.Toplevel):
         # Help
         self.helpMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Help'), menu=self.helpMenu)
-        self.helpMenu.add_command(label=_('Online help'), accelerator='F1', command=open_help)
+        self.helpMenu.add_command(label=_('Online help'), accelerator=self.keys.OPEN_HELP[1], command=open_help)
 
         # Event bindings.
-        self.bind('<F1>', open_help)
+        self.bind(self.keys.OPEN_HELP[0], open_help)
         if PLATFORM != 'win':
             self._sectionEditor.bind(self.keys.QUIT_PROGRAM[0], self.on_quit)
         self._sectionEditor.bind(self.keys.APPLY_CHANGES[0], self._apply_changes)

@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.5.0\n"
-"POT-Creation-Date: 2024-09-10 22:05:58\n"
-"PO-Revision-Date: 2024-09-10 22:05:58\n"
+"Project-Id-Version: 4.5.1\n"
+"POT-Creation-Date: 2024-09-11 18:10:15\n"
+"PO-Revision-Date: 2024-09-11 18:10:15\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -48,6 +48,9 @@ msgstr "Kopieren"
 
 msgid "Create section"
 msgstr "Abschnitt erzeugen"
+
+msgid "Ctrl"
+msgstr "Strg"
 
 msgid "Cut"
 msgstr "Ausschneiden"
