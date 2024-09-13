@@ -7,7 +7,6 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import gettext
 import locale
 import os
-import platform
 import sys
 import webbrowser
 
@@ -31,15 +30,6 @@ PLUGIN = f'{APPLICATION} plugin v@release'
 ICON = 'eLogo32'
 SECTION_PREFIX = 'sc'
 HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
-
-if platform.system() == 'Windows':
-    PLATFORM = 'win'
-elif platform.system() in ('Linux', 'FreeBSD'):
-    PLATFORM = 'ix'
-elif platform.system() == 'Darwin':
-    PLATFORM = 'mac'
-else:
-    PLATFORM = ''
 
 
 def open_help(event=None):

@@ -7,11 +7,11 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 from tkinter import messagebox
 from tkinter import ttk
 
-from nveditorlib.key_definitions import KEYS
 from nveditorlib.nveditor_globals import APPLICATION
-from nveditorlib.nveditor_globals import PLATFORM
 from nveditorlib.nveditor_globals import _
 from nveditorlib.nveditor_globals import open_help
+from nveditorlib.platform_settings import KEYS
+from nveditorlib.platform_settings import PLATFORM
 from nveditorlib.text_box import TextBox
 import tkinter as tk
 import xml.etree.ElementTree as ET
