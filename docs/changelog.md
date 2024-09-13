@@ -5,18 +5,27 @@
 ## Changelog
 
 
+### Version 4.5.2
+
+- Refactor the event bindings.
+
+Compatibility: novelibre 4.6 API
+Based on novxlib 4.6.4
+
 ### Version 4.5.1
 
 - Translate more accelerators.
 - Provide shortcuts and key bindings for Mac OS.
 - Automatically resize the setup window.
 
+Compatibility: novelibre 4.6 API
 Based on novxlib 4.6.4
 
 ### Version 4.5.0
 
 - Provide shortcuts and key bindings for Mac OS.
 
+Compatibility: novelibre 4.6 API
 Based on novxlib 4.6.3
 
 ### Version 4.4.3

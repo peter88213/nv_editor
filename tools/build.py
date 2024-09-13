@@ -12,7 +12,7 @@ import sys
 sys.path.insert(0, f'{os.getcwd()}/../../novelibre/tools')
 from package_builder import PackageBuilder
 
-VERSION = '4.5.1'
+VERSION = '4.5.2'
 
 
 class PluginBuilder(PackageBuilder):
