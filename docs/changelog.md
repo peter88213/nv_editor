@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 4.5.3
+
+Refactor:
+- Move platform selector and keyboard settings into the new platform_settings module.
+
+Compatibility: novelibre 4.6 API
+Based on novxlib 4.6.4
+
 ### Version 4.5.2
 
 - Refactor the event bindings.
