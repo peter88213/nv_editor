@@ -20,33 +20,33 @@ from pathlib import Path
 import sys
 from tkinter import messagebox
 
-from nveditorlib.nveditor_globals import _
+from nveditorlib.editor_window import EditorWindow
 from nveditorlib.nveditor_globals import APPLICATION
 from nveditorlib.nveditor_globals import ICON
 from nveditorlib.nveditor_globals import SECTION_PREFIX
+from nveditorlib.nveditor_globals import _
 from nveditorlib.nveditor_globals import open_help
-from nveditorlib.section_editor import SectionEditor
 from nvlib.plugin.plugin_base import PluginBase
 import tkinter as tk
 
 SETTINGS = dict(
-        window_geometry='600x800',
-        color_mode=0,
-        color_fg_bright='white',
-        color_bg_bright='black',
-        color_fg_light='antique white',
-        color_bg_light='black',
-        color_fg_dark='light grey',
-        color_bg_dark='gray20',
-        font_family='Courier',
-        font_size=12,
-        line_spacing=6,
-        paragraph_spacing=18,
-        margin_x=40,
-        margin_y=20,
+        ed_win_geometry='600x800',
+        ed_color_mode=0,
+        ed_color_fg_bright='white',
+        ed_color_bg_bright='black',
+        ed_color_fg_light='antique white',
+        ed_color_bg_light='black',
+        ed_color_fg_dark='light grey',
+        ed_color_bg_dark='gray20',
+        ed_font_family='Courier',
+        ed_font_size=12,
+        ed_line_spacing=4,
+        ed_paragraph_spacing=4,
+        ed_margin_x=40,
+        ed_margin_y=20,
 )
 OPTIONS = dict(
-        live_wordcount=False,
+        ed_live_wordcount=False,
 )
 
 
@@ -108,8 +108,16 @@ class Plugin(PluginBase):
             self._icon = None
 
         # Configure the editor box.
-        SectionEditor.colorMode.set(int(self.kwargs['color_mode']))
-        SectionEditor.liveWordCount.set(self.kwargs['live_wordcount'])
+        EditorWindow.colorMode = tk.IntVar(
+            value=int(self.kwargs['ed_color_mode'])
+            )
+        EditorWindow.liveWordCount = tk.BooleanVar(
+            value=self.kwargs['ed_live_wordcount']
+            )
+
+        # Set Key bindings.
+        self._ui.tv.tree.bind('<Double-1>', self.open_node)
+        self._ui.tv.tree.bind('<Return>', self.open_node)
 
     def on_close(self, event=None):
         """Actions to be performed when a project is closed.
@@ -129,8 +137,8 @@ class Plugin(PluginBase):
         self.on_close()
 
         #--- Save project specific configuration
-        self.kwargs['color_mode'] = SectionEditor.colorMode.get()
-        self.kwargs['live_wordcount'] = SectionEditor.liveWordCount.get()
+        self.kwargs['ed_color_mode'] = EditorWindow.colorMode.get()
+        self.kwargs['ed_live_wordcount'] = EditorWindow.liveWordCount.get()
         for keyword in self.kwargs:
             if keyword in self.configuration.options:
                 self.configuration.options[keyword] = self.kwargs[keyword]
@@ -158,7 +166,7 @@ class Plugin(PluginBase):
                     self.sectionEditors[nodeId].lift()
                     return
 
-                self.sectionEditors[nodeId] = SectionEditor(self, self._mdl, self._ui, self._ctrl, nodeId, self.kwargs['window_geometry'], icon=self._icon)
+                self.sectionEditors[nodeId] = EditorWindow(self, self._mdl, self._ui, self._ctrl, nodeId, self.kwargs['ed_win_geometry'], icon=self._icon)
 
         except IndexError:
             # Nothing selected
