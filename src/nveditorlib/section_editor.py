@@ -10,8 +10,8 @@ from tkinter import ttk
 from nveditorlib.nveditor_globals import APPLICATION
 from nveditorlib.nveditor_globals import _
 from nveditorlib.nveditor_globals import open_help
-from nveditorlib.platform_settings import KEYS
-from nveditorlib.platform_settings import PLATFORM
+from nveditorlib.platform.platform_settings import KEYS
+from nveditorlib.platform.platform_settings import PLATFORM
 from nveditorlib.text_box import TextBox
 import tkinter as tk
 import xml.etree.ElementTree as ET
