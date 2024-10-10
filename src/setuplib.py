@@ -38,6 +38,17 @@ def extract_tree(sourceDir, targetDir):
                 z.extract(file, targetDir)
 
 
+def fix_ini(iniFile):
+    if not os.path.isfile(iniFile):
+        return
+
+    with open(iniFile, 'r') as f:
+        text = f.read()
+    if 'ed_color_bg_bright = black' in text:
+        output('Removing outdated configuration file ...')
+        os.remove(iniFile)
+
+
 def cp_tree(sourceDir, targetDir):
     copytree(sourceDir, f'{targetDir}/{sourceDir}', dirs_exist_ok=True)
 
@@ -88,6 +99,9 @@ def main(zipped=True):
         output('Copying icons ...')
         copy_tree('icons', applicationDir)
         output(f'Sucessfully installed "{PLUGIN}" at "{os.path.normpath(pluginDir)}"')
+
+        # Remove the configuration file, if outdated.
+        fix_ini(f'{applicationDir}/config/editor.ini')
     else:
         output(f'ERROR: Cannot find a novelibre installation at "{applicationDir}"')
 
