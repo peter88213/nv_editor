@@ -92,7 +92,7 @@ class Plugin(PluginBase):
 
         # Add the "Edit" command to novelibre's "Section" menu.
         self._ui.sectionMenu.add_separator()
-        self._ui.sectionMenu.add_command(label=_('Edit'), underline=0, command=self.open_node)
+        self._ui.sectionMenu.add_command(label=_('Edit'), underline=0, command=self.open_editor_window)
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=open_help)
@@ -116,8 +116,13 @@ class Plugin(PluginBase):
             )
 
         # Set Key bindings.
-        self._ui.tv.tree.bind('<Double-1>', self.open_node)
-        self._ui.tv.tree.bind('<Return>', self.open_node)
+        self._ui.tv.tree.bind('<Double-1>', self.open_editor_window)
+        self._ui.tv.tree.bind('<Return>', self.open_editor_window)
+
+    def close_editor_window(self, nodeId):
+        if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
+            self.sectionEditors[nodeId].on_quit()
+            del self.sectionEditors[nodeId]
 
     def on_close(self, event=None):
         """Actions to be performed when a project is closed.
@@ -146,7 +151,7 @@ class Plugin(PluginBase):
                 self.configuration.settings[keyword] = self.kwargs[keyword]
         self.configuration.write(self.iniFile)
 
-    def open_node(self, event=None):
+    def open_editor_window(self, event=None):
         """Create a section editor window with a menu bar, a text box, and a status bar.
         
         Overrides the superclass method.
@@ -166,7 +171,15 @@ class Plugin(PluginBase):
                     self.sectionEditors[nodeId].lift()
                     return
 
-                self.sectionEditors[nodeId] = EditorWindow(self, self._mdl, self._ui, self._ctrl, nodeId, self.kwargs['ed_win_geometry'], icon=self._icon)
+                self.sectionEditors[nodeId] = EditorWindow(
+                    self,
+                    self._mdl,
+                    self._ui,
+                    self._ctrl,
+                    nodeId,
+                    self.kwargs['ed_win_geometry'],
+                    icon=self._icon
+                    )
 
         except IndexError:
             # Nothing selected

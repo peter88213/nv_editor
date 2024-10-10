@@ -5,6 +5,13 @@
 ## Changelog
 
 
+### Version 4.5.4
+
+- Prevent the same section from being loaded in more than one editor window at the same time. 
+
+Compatibility: novelibre 4.6 API
+Based on novxlib 4.7.1
+
 ### Version 4.5.3
 
 Refactor:
