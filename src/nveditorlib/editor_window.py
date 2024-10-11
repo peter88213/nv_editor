@@ -192,7 +192,7 @@ class EditorWindow(tk.Toplevel):
             return 'break'
             # keeping the editor window open due to an XML error to be fixed before saving
 
-        self._manager.kwargs['ed_window_geometry'] = self.winfo_geometry()
+        self._manager.kwargs['ed_win_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False
 

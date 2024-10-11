@@ -119,6 +119,9 @@ class Plugin(PluginBase):
         self._ui.tv.tree.bind('<Double-1>', self.open_editor_window)
         self._ui.tv.tree.bind('<Return>', self.open_editor_window)
 
+        # Register to be refreshed when a section is deleted.
+        self._mdl.register_client(self)
+
     def close_editor_window(self, nodeId):
         if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
             self.sectionEditors[nodeId].on_quit()
@@ -185,3 +188,7 @@ class Plugin(PluginBase):
             # Nothing selected
             pass
 
+    def refresh(self):
+        for scId in list(self.sectionEditors):
+            if not scId in self._mdl.novel.sections:
+                self.close_editor_window(scId)

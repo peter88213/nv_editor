@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 4.6.1
+
+- Closing an editor window when the corresponding section is deleted.
+- Fix a regression from version 4.5.4 where the geometry information is lost on closing the editor window.
+
+Compatibility: novelibre 4.6 API
+Based on novxlib 4.7.1
+
 ### Version 4.6.0
 
 - Reading the editor color settings from the configuration file.
