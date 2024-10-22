@@ -42,18 +42,18 @@ class EditorWindow(tk.Toplevel):
         self.colorModes = [
             (
                 _('Bright mode'),
-                manager.kwargs['ed_color_fg_bright'],
-                manager.kwargs['ed_color_bg_bright'],
+                manager.kwargs['color_fg_bright'],
+                manager.kwargs['color_bg_bright'],
                 ),
             (
                 _('Light mode'),
-                manager.kwargs['ed_color_fg_light'],
-                manager.kwargs['ed_color_bg_light'],
+                manager.kwargs['color_fg_light'],
+                manager.kwargs['color_bg_light'],
                 ),
             (
                 _('Dark mode'),
-                manager.kwargs['ed_color_fg_dark'],
-                manager.kwargs['ed_color_bg_dark'],
+                manager.kwargs['color_fg_dark'],
+                manager.kwargs['color_bg_dark'],
                 ),
             ]
         # (name, foreground, background) tuples for color modes.
@@ -80,12 +80,12 @@ class EditorWindow(tk.Toplevel):
             wrap='word',
             undo=True,
             autoseparators=True,
-            spacing1=self._manager.kwargs['ed_paragraph_spacing'],
-            spacing2=self._manager.kwargs['ed_line_spacing'],
+            spacing1=self._manager.kwargs['paragraph_spacing'],
+            spacing2=self._manager.kwargs['line_spacing'],
             maxundo=-1,
-            padx=self._manager.kwargs['ed_margin_x'],
-            pady=self._manager.kwargs['ed_margin_y'],
-            font=(self._manager.kwargs['ed_font_family'], self._manager.kwargs['ed_font_size']),
+            padx=self._manager.kwargs['margin_x'],
+            pady=self._manager.kwargs['margin_y'],
+            font=(self._manager.kwargs['font_family'], self._manager.kwargs['font_size']),
             )
         self._sectionEditor.pack(expand=True, fill='both')
         self._sectionEditor.pack_propagate(0)
@@ -192,7 +192,7 @@ class EditorWindow(tk.Toplevel):
             return 'break'
             # keeping the editor window open due to an XML error to be fixed before saving
 
-        self._manager.kwargs['ed_win_geometry'] = self.winfo_geometry()
+        self._manager.kwargs['win_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False
 

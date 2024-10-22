@@ -29,26 +29,6 @@ from nveditorlib.nveditor_globals import open_help
 from nvlib.plugin.plugin_base import PluginBase
 import tkinter as tk
 
-SETTINGS = dict(
-        ed_win_geometry='600x800',
-        ed_color_mode=0,
-        ed_color_bg_bright='white',
-        ed_color_fg_bright='black',
-        ed_color_bg_light='antique white',
-        ed_color_fg_light='black',
-        ed_color_bg_dark='gray20',
-        ed_color_fg_dark='light grey',
-        ed_font_family='Courier',
-        ed_font_size=12,
-        ed_line_spacing=4,
-        ed_paragraph_spacing=4,
-        ed_margin_x=40,
-        ed_margin_y=20,
-)
-OPTIONS = dict(
-        ed_live_wordcount=False,
-)
-
 
 class Plugin(PluginBase):
     """novelibre multi-section "plain text" editor plugin class."""
@@ -56,6 +36,28 @@ class Plugin(PluginBase):
     API_VERSION = '4.6'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
+
+    INI_FILENAME = 'editor.ini'
+    INI_FILEPATH = '.novx/config'
+    SETTINGS = dict(
+            win_geometry='600x800',
+            color_mode=0,
+            color_bg_bright='white',
+            color_fg_bright='black',
+            color_bg_light='antique white',
+            color_fg_light='black',
+            color_bg_dark='gray20',
+            color_fg_dark='light grey',
+            font_family='Courier',
+            font_size=12,
+            line_spacing=4,
+            paragraph_spacing=4,
+            margin_x=40,
+            margin_y=20,
+    )
+    OPTIONS = dict(
+            live_wordcount=False,
+    )
 
     def install(self, model, view, controller, prefs=None):
         """Add a submenu to the main menu.
@@ -77,13 +79,13 @@ class Plugin(PluginBase):
         #--- Load configuration.
         try:
             homeDir = str(Path.home()).replace('\\', '/')
-            configDir = f'{homeDir}/.novx/config'
+            configDir = f'{homeDir}/{self.INI_FILEPATH}'
         except:
             configDir = '.'
-        self.iniFile = f'{configDir}/editor.ini'
+        self.iniFile = f'{configDir}/{self.INI_FILENAME}'
         self.configuration = self._mdl.nvService.make_configuration(
-            settings=SETTINGS,
-            options=OPTIONS
+            settings=self.SETTINGS,
+            options=self.OPTIONS
             )
         self.configuration.read(self.iniFile)
         self.kwargs = {}
@@ -109,10 +111,10 @@ class Plugin(PluginBase):
 
         # Configure the editor box.
         EditorWindow.colorMode = tk.IntVar(
-            value=int(self.kwargs['ed_color_mode'])
+            value=int(self.kwargs['color_mode'])
             )
         EditorWindow.liveWordCount = tk.BooleanVar(
-            value=self.kwargs['ed_live_wordcount']
+            value=self.kwargs['live_wordcount']
             )
 
         # Set Key bindings.
@@ -145,8 +147,8 @@ class Plugin(PluginBase):
         self.on_close()
 
         #--- Save project specific configuration
-        self.kwargs['ed_color_mode'] = EditorWindow.colorMode.get()
-        self.kwargs['ed_live_wordcount'] = EditorWindow.liveWordCount.get()
+        self.kwargs['color_mode'] = EditorWindow.colorMode.get()
+        self.kwargs['live_wordcount'] = EditorWindow.liveWordCount.get()
         for keyword in self.kwargs:
             if keyword in self.configuration.options:
                 self.configuration.options[keyword] = self.kwargs[keyword]
@@ -180,7 +182,7 @@ class Plugin(PluginBase):
                     self._ui,
                     self._ctrl,
                     nodeId,
-                    self.kwargs['ed_win_geometry'],
+                    self.kwargs['win_geometry'],
                     icon=self._icon
                     )
 
