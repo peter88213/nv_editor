@@ -40,23 +40,23 @@ class Plugin(PluginBase):
     INI_FILENAME = 'editor.ini'
     INI_FILEPATH = '.novx/config'
     SETTINGS = dict(
-            win_geometry='600x800',
-            color_mode=0,
-            color_bg_bright='white',
-            color_fg_bright='black',
-            color_bg_light='antique white',
-            color_fg_light='black',
-            color_bg_dark='gray20',
-            color_fg_dark='light grey',
-            font_family='Courier',
-            font_size=12,
-            line_spacing=4,
-            paragraph_spacing=4,
-            margin_x=40,
-            margin_y=20,
+        win_geometry='600x800',
+        color_mode=0,
+        color_bg_bright='white',
+        color_fg_bright='black',
+        color_bg_light='antique white',
+        color_fg_light='black',
+        color_bg_dark='gray20',
+        color_fg_dark='light grey',
+        font_family='Courier',
+        font_size=12,
+        line_spacing=4,
+        paragraph_spacing=4,
+        margin_x=40,
+        margin_y=20,
     )
     OPTIONS = dict(
-            live_wordcount=False,
+        live_wordcount=False,
     )
 
     def install(self, model, view, controller, prefs=None):
