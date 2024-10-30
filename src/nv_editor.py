@@ -21,7 +21,7 @@ import sys
 from tkinter import messagebox
 
 from nveditorlib.editor_window import EditorWindow
-from nveditorlib.nveditor_globals import APPLICATION
+from nveditorlib.nveditor_globals import FEATURE
 from nveditorlib.nveditor_globals import ICON
 from nveditorlib.nveditor_globals import SECTION_PREFIX
 from nveditorlib.nveditor_globals import _
@@ -169,7 +169,7 @@ class Plugin(PluginBase):
 
                 # A section is selected
                 if self._ctrl.isLocked:
-                    messagebox.showinfo(APPLICATION, _('Cannot edit sections, because the project is locked.'))
+                    messagebox.showinfo(FEATURE, _('Cannot edit sections, because the project is locked.'))
                     return
 
                 if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:

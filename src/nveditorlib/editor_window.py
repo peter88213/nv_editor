@@ -8,7 +8,7 @@ from tkinter import messagebox
 from tkinter import ttk
 
 from nveditorlib.editor_box import EditorBox
-from nveditorlib.nveditor_globals import APPLICATION
+from nveditorlib.nveditor_globals import FEATURE
 from nveditorlib.nveditor_globals import _
 from nveditorlib.nveditor_globals import open_help
 from nveditorlib.platform.platform_settings import KEYS
@@ -213,7 +213,7 @@ class EditorWindow(tk.Toplevel):
         """
         if self._ctrl.isLocked:
             messagebox.showinfo(
-                APPLICATION,
+                FEATURE,
                 _('Cannot create sections, because the project is locked.'),
                 parent=self
                 )
@@ -256,7 +256,7 @@ class EditorWindow(tk.Toplevel):
         sectionText = self._sectionEditor.get_text()
         if sectionText or self._section.sectionContent:
             if self._section.sectionContent != sectionText:
-                if messagebox.askyesno(APPLICATION, _('Apply section changes?'), parent=self):
+                if messagebox.askyesno(FEATURE, _('Apply section changes?'), parent=self):
                     try:
                         self._sectionEditor.check_validity()
                     except ValueError as ex:
@@ -321,7 +321,7 @@ class EditorWindow(tk.Toplevel):
 
         if self._ctrl.isLocked:
             messagebox.showinfo(
-                APPLICATION,
+                FEATURE,
                 _('Cannot split the section, because the project is locked.'),
                 parent=self
                 )
@@ -338,7 +338,7 @@ class EditorWindow(tk.Toplevel):
             return
 
         if messagebox.askyesno(
-            APPLICATION,
+            FEATURE,
             f'{_("Move the text from the cursor position to the end into a new section")}?',
             parent=self
             ):
@@ -392,7 +392,7 @@ class EditorWindow(tk.Toplevel):
 
         if self._ctrl.isLocked:
             if messagebox.askyesno(
-                APPLICATION,
+                FEATURE,
                 _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'),
                 parent=self
                 ):

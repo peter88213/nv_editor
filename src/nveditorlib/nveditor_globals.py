@@ -25,8 +25,7 @@ except:
     def _(message):
         return message
 
-APPLICATION = _('Section Editor')
-PLUGIN = f'{APPLICATION} plugin v@release'
+FEATURE = _('Section Editor')
 ICON = 'eLogo32'
 SECTION_PREFIX = 'sc'
 HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
