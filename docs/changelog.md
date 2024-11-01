@@ -4,6 +4,18 @@
 
 ## Changelog
 
+### Version 4.6.2
+
+- Change the message window title.
+- Simplify the word counting algorithm.
+
+Refactor the code for better maintainability:
+
+- Replace global constants with class constants.
+- Restore the names of settings and options from version 4.5.3.
+
+Compatibility: novelibre 4.6 API
+Based on novxlib 5.0.0
 
 ### Version 4.6.1
 
