@@ -59,7 +59,7 @@ class Plugin(PluginBase):
         live_wordcount=False,
     )
 
-    def install(self, model, view, controller, prefs=None):
+    def install(self, model, view, controller):
         """Add a submenu to the main menu.
         
         Positional arguments:
