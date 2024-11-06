@@ -122,7 +122,7 @@ class Plugin(PluginBase):
         self._ui.tv.tree.bind('<Return>', self.open_editor_window)
 
         # Register to be refreshed when a section is deleted.
-        self._mdl.register_client(self)
+        self._mdl.add_observer(self)
 
     def close_editor_window(self, nodeId):
         if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
