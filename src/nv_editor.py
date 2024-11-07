@@ -162,7 +162,7 @@ class Plugin(PluginBase):
         Overrides the superclass method.
         """
         try:
-            nodeId = self._ui.tv.tree.selection()[0]
+            nodeId = self._ui.selectedNode
             if nodeId.startswith(SECTION_PREFIX):
                 if self._mdl.novel.sections[nodeId].scType > 1:
                     return
