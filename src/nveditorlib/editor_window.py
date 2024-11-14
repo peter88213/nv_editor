@@ -70,7 +70,7 @@ class EditorWindow(tk.Toplevel):
 
         '''
         # Add a button bar to the editor window.
-        self._buttonBar = tk.Frame(self)
+        self._buttonBar = ttk.Frame(self)
         self._buttonBar.pack(expand=False, fill='both')
         '''
 
