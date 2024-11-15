@@ -28,7 +28,7 @@ except:
 FEATURE = _('Section Editor')
 ICON = 'eLogo32'
 SECTION_PREFIX = 'sc'
-HELP_URL = f'https://peter88213.github.io/{_("nvhelp-en")}/nv_editor/'
+HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_editor/'
 
 
 def open_help(event=None):
