@@ -26,7 +26,7 @@ from nveditorlib.nveditor_globals import ICON
 from nveditorlib.nveditor_globals import SECTION_PREFIX
 from nveditorlib.nveditor_globals import _
 from nveditorlib.nveditor_globals import open_help
-from nvlib.plugin.plugin_base import PluginBase
+from nvlib.controller.plugin.plugin_base import PluginBase
 import tkinter as tk
 
 

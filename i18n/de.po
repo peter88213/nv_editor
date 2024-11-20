@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.6.2\n"
-"POT-Creation-Date: 2024-11-01 06:21:08\n"
-"PO-Revision-Date: 2024-11-01 06:21:08\n"
+"Project-Id-Version: 5.0.0\n"
+"POT-Creation-Date: 2024-11-20 14:35:41\n"
+"PO-Revision-Date: 2024-11-20 14:35:41\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -127,11 +127,11 @@ msgstr "Ansicht"
 msgid "Word count"
 msgstr "Wortzählung"
 
+msgid "https://peter88213.github.io/nvhelp-en"
+msgstr "https://peter88213.github.io/nvhelp-de"
+
 msgid "new"
 msgstr "neu"
-
-msgid "nvhelp-en"
-msgstr "nvhelp-de"
 
 msgid "words"
 msgstr "Wörter"
