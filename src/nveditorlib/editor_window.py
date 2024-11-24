@@ -228,7 +228,7 @@ class EditorWindow(tk.Toplevel):
             sceneKind = 2
         elif sceneKind == 2:
             sceneKind = 1
-        newId = self._ctrl.add_section(
+        newId = self._ctrl.add_new_section(
             targetNode=thisNode,
             scType=self._mdl.novel.sections[self._scId].scType,
             scene=sceneKind,
@@ -354,7 +354,7 @@ class EditorWindow(tk.Toplevel):
             sceneKind = 2
         elif sceneKind == 2:
             sceneKind = 1
-        newId = self._ctrl.add_section(
+        newId = self._ctrl.add_new_section(
             targetNode=thisNode,
             appendToPrev=True,
             scType=self._mdl.novel.sections[self._scId].scType,

@@ -81,7 +81,7 @@ class Plugin(PluginBase):
         except:
             configDir = '.'
         self.iniFile = f'{configDir}/{self.INI_FILENAME}'
-        self.configuration = self._mdl.nvService.make_configuration(
+        self.configuration = self._mdl.nvService.new_configuration(
             settings=self.SETTINGS,
             options=self.OPTIONS
             )
