@@ -18,9 +18,8 @@ GNU General Public License for more details.
 import os
 from pathlib import Path
 import sys
-from tkinter import messagebox
 
-from nveditorlib.editor_window import EditorWindow
+from nveditorlib.editor_view import EditorView
 from nveditorlib.nveditor_globals import FEATURE
 from nveditorlib.nveditor_globals import ICON
 from nveditorlib.nveditor_globals import SECTION_PREFIX
@@ -108,10 +107,10 @@ class Plugin(PluginBase):
             self._icon = None
 
         # Configure the editor box.
-        EditorWindow.colorMode = tk.IntVar(
+        EditorView.colorMode = tk.IntVar(
             value=int(self.kwargs['color_mode'])
             )
-        EditorWindow.liveWordCount = tk.BooleanVar(
+        EditorView.liveWordCount = tk.BooleanVar(
             value=self.kwargs['live_wordcount']
             )
 
@@ -145,8 +144,8 @@ class Plugin(PluginBase):
         self.on_close()
 
         #--- Save project specific configuration
-        self.kwargs['color_mode'] = EditorWindow.colorMode.get()
-        self.kwargs['live_wordcount'] = EditorWindow.liveWordCount.get()
+        self.kwargs['color_mode'] = EditorView.colorMode.get()
+        self.kwargs['live_wordcount'] = EditorView.liveWordCount.get()
         for keyword in self.kwargs:
             if keyword in self.configuration.options:
                 self.configuration.options[keyword] = self.kwargs[keyword]
@@ -167,14 +166,14 @@ class Plugin(PluginBase):
 
                 # A section is selected
                 if self._ctrl.isLocked:
-                    messagebox.showinfo(FEATURE, _('Cannot edit sections, because the project is locked.'))
+                    self._ui.show_info(_('Cannot edit sections, because the project is locked.'), title=FEATURE)
                     return
 
                 if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
                     self.sectionEditors[nodeId].lift()
                     return
 
-                self.sectionEditors[nodeId] = EditorWindow(
+                self.sectionEditors[nodeId] = EditorView(
                     self,
                     self._mdl,
                     self._ui,
