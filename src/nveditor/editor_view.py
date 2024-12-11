@@ -27,32 +27,32 @@ class EditorView(tk.Toplevel, EditorViewCtrl):
     colorMode = None
     # to be overwritten by the client with tk.IntVar()
 
-    def __init__(self, mainCtrl, model, view, controller, scId, size, icon=None):
-        self.initialize_controller(model, view, controller, scId)
-        self.mainCtrl = mainCtrl
+    def __init__(self, model, view, controller, scId, service, icon=None):
+        self.initialize_controller(model, view, controller, scId, service)
+        self.prefs = service.prefs
 
         self.colorModes = [
             (
                 _('Bright mode'),
-                self.mainCtrl.kwargs['color_fg_bright'],
-                self.mainCtrl.kwargs['color_bg_bright'],
+                self.prefs['color_fg_bright'],
+                self.prefs['color_bg_bright'],
                 ),
             (
                 _('Light mode'),
-                self.mainCtrl.kwargs['color_fg_light'],
-                self.mainCtrl.kwargs['color_bg_light'],
+                self.prefs['color_fg_light'],
+                self.prefs['color_bg_light'],
                 ),
             (
                 _('Dark mode'),
-                self.mainCtrl.kwargs['color_fg_dark'],
-                self.mainCtrl.kwargs['color_bg_dark'],
+                self.prefs['color_fg_dark'],
+                self.prefs['color_bg_dark'],
                 ),
             ]
         # (name, foreground, background) tuples for color modes.
 
         # Create an independent editor window.
         super().__init__()
-        self.geometry(size)
+        self.geometry(self.prefs['win_geometry'])
         if icon:
             self.iconphoto(False, icon)
 
@@ -72,12 +72,12 @@ class EditorView(tk.Toplevel, EditorViewCtrl):
             wrap='word',
             undo=True,
             autoseparators=True,
-            spacing1=self.mainCtrl.kwargs['paragraph_spacing'],
-            spacing2=self.mainCtrl.kwargs['line_spacing'],
+            spacing1=self.prefs['paragraph_spacing'],
+            spacing2=self.prefs['line_spacing'],
             maxundo=-1,
-            padx=self.mainCtrl.kwargs['margin_x'],
-            pady=self.mainCtrl.kwargs['margin_y'],
-            font=(self.mainCtrl.kwargs['font_family'], self.mainCtrl.kwargs['font_size']),
+            padx=self.prefs['margin_x'],
+            pady=self.prefs['margin_y'],
+            font=(self.prefs['font_family'], self.prefs['font_size']),
             )
         self.sectionEditor.pack(expand=True, fill='both')
         self.sectionEditor.pack_propagate(0)
@@ -184,7 +184,7 @@ class EditorView(tk.Toplevel, EditorViewCtrl):
             return 'break'
             # keeping the editor window open due to an XML error to be fixed before saving
 
-        self.mainCtrl.kwargs['win_geometry'] = self.winfo_geometry()
+        self.prefs['win_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False
 

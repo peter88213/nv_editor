@@ -22,10 +22,11 @@ class EditorViewCtrl(SubController):
     colorMode = None
     # to be overwritten by the client with tk.IntVar()
 
-    def initialize_controller(self, model, view, controller, scId):
+    def initialize_controller(self, model, view, controller, scId, service):
         super().initialize_controller(model, view, controller)
         self._section = self._mdl.novel.sections[scId]
         self._scId = scId
+        self.service = service
 
     def open_help(self, event=None):
         NveditorHelp.open_help_page()
@@ -38,6 +39,9 @@ class EditorViewCtrl(SubController):
 
     def _apply_changes(self, event=None):
         """Transfer the editor content to the project, if modified."""
+        if not self._scId in self._mdl.novel.sections:
+            return
+
         try:
             self.sectionEditor.check_validity()
         except ValueError as ex:
@@ -56,6 +60,9 @@ class EditorViewCtrl(SubController):
 
     def _apply_changes_after_asking(self, event=None):
         """Transfer the editor content to the project, if modified. Ask first."""
+        if not self._scId in self._mdl.novel.sections:
+            return True
+
         sectionText = self.sectionEditor.get_text()
         if sectionText or self._section.sectionContent:
             if self._section.sectionContent != sectionText:
@@ -117,8 +124,8 @@ class EditorViewCtrl(SubController):
         nextNode = self._ui.tv.next_node(self._scId)
         if nextNode:
             self._ui.tv.go_to_node(nextNode)
-            self.mainCtrl.close_editor_window(self._scId)
-            self.mainCtrl.open_editor_window()
+            self.service.close_editor_window(self._scId)
+            self.service.open_editor_window()
 
     def _load_prev(self, event=None):
         """Load the previous section in the tree."""
@@ -128,8 +135,8 @@ class EditorViewCtrl(SubController):
         prevNode = self._ui.tv.prev_node(self._scId)
         if prevNode:
             self._ui.tv.go_to_node(prevNode)
-            self.mainCtrl.close_editor_window(self._scId)
-            self.mainCtrl.open_editor_window()
+            self.service.close_editor_window(self._scId)
+            self.service.open_editor_window()
 
     def _load_section(self):
         """Load the section content into the text editor."""

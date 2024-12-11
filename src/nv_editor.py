@@ -19,13 +19,11 @@ import os
 from pathlib import Path
 import sys
 
-from nveditor.editor_view import EditorView
-from nveditor.nveditor_globals import FEATURE
+from nveditor.editor_service import EditorService
 from nveditor.nveditor_globals import ICON
 from nveditor.nveditor_help import NveditorHelp
 from nveditor.nveditor_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
-from nvlib.novx_globals import SECTION_PREFIX
 import tkinter as tk
 
 
@@ -66,9 +64,6 @@ class Plugin(PluginBase):
             view -- reference to the main view instance of the application.
             controller -- reference to the main controller instance of the application.
 
-        Optional arguments:
-            prefs -- deprecated. Please use controller.get_preferences() instead.
-        
         Extends the superclass method.
         """
         super().install(model, view, controller)
@@ -85,9 +80,9 @@ class Plugin(PluginBase):
             options=self.OPTIONS
             )
         self.configuration.read(self.iniFile)
-        self.kwargs = {}
-        self.kwargs.update(self.configuration.settings)
-        self.kwargs.update(self.configuration.options)
+        self.prefs = {}
+        self.prefs.update(self.configuration.settings)
+        self.prefs.update(self.configuration.options)
 
         # Add the "Edit" command to novelibre's "Section" menu.
         self._ui.sectionMenu.add_separator()
@@ -97,34 +92,19 @@ class Plugin(PluginBase):
         self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=self.open_help)
 
         # Set window icon.
-        self.sectionEditors = {}
         try:
             path = os.path.dirname(sys.argv[0])
             if not path:
                 path = '.'
-            self._icon = tk.PhotoImage(file=f'{path}/icons/{ICON}.png')
+            icon = tk.PhotoImage(file=f'{path}/icons/{ICON}.png')
         except:
-            self._icon = None
-
-        # Configure the editor box.
-        EditorView.colorMode = tk.IntVar(
-            value=int(self.kwargs['color_mode'])
-            )
-        EditorView.liveWordCount = tk.BooleanVar(
-            value=self.kwargs['live_wordcount']
-            )
+            icon = None
 
         # Set Key bindings.
         self._ui.tv.tree.bind('<Double-1>', self.open_editor_window)
         self._ui.tv.tree.bind('<Return>', self.open_editor_window)
 
-        # Register to be refreshed when a section is deleted.
-        self._mdl.add_observer(self)
-
-    def close_editor_window(self, nodeId):
-        if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
-            self.sectionEditors[nodeId].on_quit()
-            del self.sectionEditors[nodeId]
+        self.editorService = EditorService(model, view, controller, icon, self.prefs)
 
     def on_close(self, event=None):
         """Actions to be performed when a project is closed.
@@ -132,65 +112,26 @@ class Plugin(PluginBase):
         Close all open section editor windows. 
         Overrides the superclass method.
         """
-        for scId in self.sectionEditors:
-            if self.sectionEditors[scId].isOpen:
-                self.sectionEditors[scId].on_quit()
+        self.editorService.on_close()
 
     def on_quit(self, event=None):
         """Actions to be performed when novelibre is closed.
         
         Overrides the superclass method.
         """
-        self.on_close()
+        self.editorService.on_quit()
 
         #--- Save project specific configuration
-        self.kwargs['color_mode'] = EditorView.colorMode.get()
-        self.kwargs['live_wordcount'] = EditorView.liveWordCount.get()
-        for keyword in self.kwargs:
+        for keyword in self.prefs:
             if keyword in self.configuration.options:
-                self.configuration.options[keyword] = self.kwargs[keyword]
+                self.configuration.options[keyword] = self.prefs[keyword]
             elif keyword in self.configuration.settings:
-                self.configuration.settings[keyword] = self.kwargs[keyword]
+                self.configuration.settings[keyword] = self.prefs[keyword]
         self.configuration.write(self.iniFile)
 
     def open_editor_window(self, event=None):
-        """Create a section editor window with a menu bar, a text box, and a status bar.
-        
-        Overrides the superclass method.
-        """
-        try:
-            nodeId = self._ui.selectedNode
-            if nodeId.startswith(SECTION_PREFIX):
-                if self._mdl.novel.sections[nodeId].scType > 1:
-                    return
-
-                # A section is selected
-                if self._ctrl.isLocked:
-                    self._ui.show_info(_('Cannot edit sections, because the project is locked.'), title=FEATURE)
-                    return
-
-                if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
-                    self.sectionEditors[nodeId].lift()
-                    return
-
-                self.sectionEditors[nodeId] = EditorView(
-                    self,
-                    self._mdl,
-                    self._ui,
-                    self._ctrl,
-                    nodeId,
-                    self.kwargs['win_geometry'],
-                    icon=self._icon
-                    )
-
-        except IndexError:
-            # Nothing selected
-            pass
+        self.editorService.open_editor_window()
 
     def open_help(self, event=None):
         NveditorHelp.open_help_page()
 
-    def refresh(self):
-        for scId in list(self.sectionEditors):
-            if not scId in self._mdl.novel.sections:
-                self.close_editor_window(scId)

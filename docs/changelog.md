@@ -4,13 +4,16 @@
 
 ## Changelog
 
-### Version 5.0.2
+### Version 5.0.3
+
+Bugfix:
+- No longer try saving editor changes although the corresponding section is deleted.
 
 Library update:
 - Refactor the code for better maintainability.
 
 API: 5.0
-Based on novelibre 5.0.12
+Based on novelibre 5.0.26
 
 ### Version 4.6.2
 
