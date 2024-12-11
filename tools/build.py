@@ -18,7 +18,7 @@ VERSION = '5.0.2'
 class PluginBuilder(PackageBuilder):
 
     PRJ_NAME = 'nv_editor'
-    LOCAL_LIB = 'nveditorlib'
+    LOCAL_LIB = 'nveditor'
     GERMAN_TRANSLATION = True
 
     def __init__(self, version):

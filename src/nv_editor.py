@@ -19,13 +19,13 @@ import os
 from pathlib import Path
 import sys
 
-from nveditorlib.editor_view import EditorView
-from nveditorlib.nveditor_globals import FEATURE
-from nveditorlib.nveditor_globals import ICON
-from nveditorlib.nveditor_globals import SECTION_PREFIX
-from nveditorlib.nveditor_globals import _
-from nveditorlib.nveditor_globals import open_help
+from nveditor.editor_view import EditorView
+from nveditor.nveditor_globals import FEATURE
+from nveditor.nveditor_globals import ICON
+from nveditor.nveditor_help import NveditorHelp
+from nveditor.nveditor_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
+from nvlib.novx_globals import SECTION_PREFIX
 import tkinter as tk
 
 
@@ -94,7 +94,7 @@ class Plugin(PluginBase):
         self._ui.sectionMenu.add_command(label=_('Edit'), underline=0, command=self.open_editor_window)
 
         # Add an entry to the Help menu.
-        self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=open_help)
+        self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=self.open_help)
 
         # Set window icon.
         self.sectionEditors = {}
@@ -186,6 +186,9 @@ class Plugin(PluginBase):
         except IndexError:
             # Nothing selected
             pass
+
+    def open_help(self, event=None):
+        NveditorHelp.open_help_page()
 
     def refresh(self):
         for scId in list(self.sectionEditors):

@@ -5,8 +5,9 @@ For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from mvclib.controller.sub_controller import SubController
-from nveditorlib.nveditor_globals import FEATURE
-from nveditorlib.nveditor_globals import _
+from nveditor.nveditor_globals import FEATURE
+from nveditor.nveditor_help import NveditorHelp
+from nveditor.nveditor_locale import _
 import xml.etree.ElementTree as ET
 
 
@@ -25,6 +26,9 @@ class EditorViewCtrl(SubController):
         super().initialize_controller(model, view, controller)
         self._section = self._mdl.novel.sections[scId]
         self._scId = scId
+
+    def open_help(self, event=None):
+        NveditorHelp.open_help_page()
 
     def show_wordcount(self, event=None):
         """Display the word count on the status bar."""

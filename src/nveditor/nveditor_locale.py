@@ -1,4 +1,4 @@
-"""Provide global variables and functions.
+"""Locale settings for nv_editor.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
@@ -8,7 +8,6 @@ import gettext
 import locale
 import os
 import sys
-import webbrowser
 
 # Initialize localization.
 LOCALE_PATH = f'{os.path.dirname(sys.argv[0])}/locale/'
@@ -25,12 +24,3 @@ except:
     def _(message):
         return message
 
-FEATURE = _('Section Editor')
-ICON = 'eLogo32'
-SECTION_PREFIX = 'sc'
-HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_editor/'
-
-
-def open_help(event=None):
-    """Show the online help page specified by HELP_URL."""
-    webbrowser.open(HELP_URL)

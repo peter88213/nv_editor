@@ -6,9 +6,9 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import platform
 
-from nveditorlib.platform.generic_keys import GenericKeys
-from nveditorlib.platform.mac_keys import MacKeys
-from nveditorlib.platform.windows_keys import WindowsKeys
+from nveditor.platform.generic_keys import GenericKeys
+from nveditor.platform.mac_keys import MacKeys
+from nveditor.platform.windows_keys import WindowsKeys
 
 if platform.system() == 'Windows':
     PLATFORM = 'win'

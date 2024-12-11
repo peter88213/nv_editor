@@ -6,12 +6,11 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from tkinter import ttk
 
-from nveditorlib.editor_box import EditorBox
-from nveditorlib.editor_view_ctrl import EditorViewCtrl
-from nveditorlib.nveditor_globals import _
-from nveditorlib.nveditor_globals import open_help
-from nveditorlib.platform.platform_settings import KEYS
-from nveditorlib.platform.platform_settings import PLATFORM
+from nveditor.editor_box import EditorBox
+from nveditor.editor_view_ctrl import EditorViewCtrl
+from nveditor.nveditor_locale import _
+from nveditor.platform.platform_settings import KEYS
+from nveditor.platform.platform_settings import PLATFORM
 import tkinter as tk
 
 
@@ -149,10 +148,10 @@ class EditorView(tk.Toplevel, EditorViewCtrl):
         # Help
         self.helpMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(label=_('Help'), menu=self.helpMenu)
-        self.helpMenu.add_command(label=_('Online help'), accelerator=KEYS.OPEN_HELP[1], command=open_help)
+        self.helpMenu.add_command(label=_('Online help'), accelerator=KEYS.OPEN_HELP[1], command=self.open_help)
 
         # Event bindings.
-        self.bind(KEYS.OPEN_HELP[0], open_help)
+        self.bind(KEYS.OPEN_HELP[0], self.open_help)
         if PLATFORM != 'win':
             self.sectionEditor.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
         self.sectionEditor.bind(KEYS.APPLY_CHANGES[0], self._apply_changes)
