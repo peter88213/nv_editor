@@ -1,7 +1,7 @@
 """Provide a service class for editor window management.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/editor_service
+For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import os
