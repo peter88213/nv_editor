@@ -1,11 +1,16 @@
 """Provide a service class for editor window management.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/
+For further information see https://github.com/peter88213/editor_service
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
+import os
+from pathlib import Path
+import sys
 from mvclib.controller.sub_controller import SubController
 from mvclib.view.observer import Observer
+from nveditor.nveditor_globals import ICON
+from nveditor.nveditor_locale import _
 from nveditor.editor_view import EditorView
 from nveditor.nveditor_globals import FEATURE
 from nvlib.novx_globals import SECTION_PREFIX
@@ -13,11 +18,55 @@ import tkinter as tk
 
 
 class EditorService(SubController, Observer):
+    INI_FILENAME = 'editor.ini'
+    INI_FILEPATH = '.novx/config'
+    SETTINGS = dict(
+        win_geometry='600x800',
+        color_mode=0,
+        color_bg_bright='white',
+        color_fg_bright='black',
+        color_bg_light='antique white',
+        color_fg_light='black',
+        color_bg_dark='gray20',
+        color_fg_dark='light grey',
+        font_family='Courier',
+        font_size=12,
+        line_spacing=4,
+        paragraph_spacing=4,
+        margin_x=40,
+        margin_y=20,
+    )
+    OPTIONS = dict(
+        live_wordcount=False,
+    )
 
-    def __init__(self, model, view, controller, icon, prefs):
+    def __init__(self, model, view, controller):
         super().initialize_controller(model, view, controller)
-        self.icon = icon
-        self.prefs = prefs
+
+        #--- Load configuration.
+        try:
+            homeDir = str(Path.home()).replace('\\', '/')
+            configDir = f'{homeDir}/{self.INI_FILEPATH}'
+        except:
+            configDir = '.'
+        self.iniFile = f'{configDir}/{self.INI_FILENAME}'
+        self.configuration = self._mdl.nvService.new_configuration(
+            settings=self.SETTINGS,
+            options=self.OPTIONS
+            )
+        self.configuration.read(self.iniFile)
+        self.prefs = {}
+        self.prefs.update(self.configuration.settings)
+        self.prefs.update(self.configuration.options)
+
+        # Set window icon.
+        try:
+            path = os.path.dirname(sys.argv[0])
+            if not path:
+                path = '.'
+            self.icon = tk.PhotoImage(file=f'{path}/icons/{ICON}.png')
+        except:
+            self.icon = None
 
         # Register to be refreshed when a section is deleted.
         self._mdl.add_observer(self)
@@ -51,6 +100,14 @@ class EditorService(SubController, Observer):
         self.on_close()
         self.prefs['color_mode'] = EditorView.colorMode.get()
         self.prefs['live_wordcount'] = EditorView.liveWordCount.get()
+
+        #--- Save configuration
+        for keyword in self.prefs:
+            if keyword in self.configuration.options:
+                self.configuration.options[keyword] = self.prefs[keyword]
+            elif keyword in self.configuration.settings:
+                self.configuration.settings[keyword] = self.prefs[keyword]
+        self.configuration.write(self.iniFile)
 
     def open_editor_window(self):
         """Create a section editor window with a menu bar, a text box, and a status bar.
