@@ -77,7 +77,7 @@ class EditorView(tk.Toplevel, EditorViewCtrl):
             maxundo=-1,
             padx=self.prefs['margin_x'],
             pady=self.prefs['margin_y'],
-            font=(self.prefs['font_family'], self.prefs['font_size']),
+            # font=(self.prefs['font_family'], self.prefs['font_size']),
             )
         self.sectionEditor.pack(expand=True, fill='both')
         self.sectionEditor.pack_propagate(0)

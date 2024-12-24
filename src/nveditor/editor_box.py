@@ -5,6 +5,7 @@ For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import re
+from tkinter import font as tkFont
 from tkinter import ttk
 
 from nveditor.editor_view_parser import EditorViewParser
@@ -25,8 +26,18 @@ class EditorBox(tk.Text):
     """A text editor widget for novelibre raw markup."""
     _TAGS = ('em', 'strong')
     # Supported tags.
+
     XML_TAG = 'xmlTag'
+    COMMENT_TAG = 'commentTag'
+    COMMENT_XML_TAG = 'commentXmlTag'
+    NOTE_TAG = 'noteTag'
+    NOTE_XML_TAG = 'noteXmlTag'
+    EM_TAG = 'emTag'
+    STRONG_TAG = 'strongTag'
+
     COLOR_XML_TAG = 'cornflower blue'
+    COLOR_COMMENT_TAG = 'lemon chiffon'
+    COLOR_NOTE_TAG = 'bisque'
 
     def __init__(self, master=None, **kw):
         """Copied from tkinter.scrolledtext and modified (use ttk widgets).
@@ -55,8 +66,39 @@ class EditorBox(tk.Text):
         self.tag_configure(self.XML_TAG,
                            foreground=self.COLOR_XML_TAG,
                            )
+        defaultFont = tkFont.nametofont(self.cget('font'))
+        italicFont = tkFont.Font(**defaultFont.configure())
+        italicFont.configure(slant='italic')
+        self.tag_configure(self.EM_TAG,
+                           font=italicFont,
+                           )
+        boldFont = tkFont.Font(**defaultFont.configure())
+        boldFont.configure(weight='bold')
+        self.tag_configure(self.STRONG_TAG,
+                           font=boldFont,
+                           )
+        self.tag_configure(self.COMMENT_TAG,
+                           background=self.COLOR_COMMENT_TAG,
+                           )
+        self.tag_configure(self.COMMENT_XML_TAG,
+                           foreground=self.COLOR_XML_TAG,
+                           background=self.COLOR_COMMENT_TAG,
+                           )
+        self.tag_configure(self.NOTE_TAG,
+                           background=self.COLOR_NOTE_TAG,
+                           )
+        self.tag_configure(self.NOTE_XML_TAG,
+                           foreground=self.COLOR_XML_TAG,
+                           background=self.COLOR_NOTE_TAG,
+                           )
         self._contentParser = EditorViewParser()
         self._contentParser.xmlTag = self.XML_TAG
+        self._contentParser.emTag = self.EM_TAG
+        self._contentParser.strongTag = self.STRONG_TAG
+        self._contentParser.commentTag = self.COMMENT_TAG
+        self._contentParser.commentXmlTag = self.COMMENT_XML_TAG
+        self._contentParser.noteTag = self.NOTE_TAG
+        self._contentParser.noteXmlTag = self.NOTE_XML_TAG
 
     def check_validity(self):
         text = strip_illegal_characters(self.get("1.0", "end"))
