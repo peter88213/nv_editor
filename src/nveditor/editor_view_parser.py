@@ -15,23 +15,12 @@ class EditorViewParser(sax.ContentHandler):
         super().__init__()
         self.textTag = ''
         self.xmlTag = ''
-        self.emTag = ''
-        self.strongTag = ''
-        self.commentTag = ''
-        self.commentXmlTag = ''
-        self.noteTag = ''
-        self.noteXmlTag = ''
-        self.showTags = True
         self.update = False
 
         self.taggedText = None
         # tagged text, assembled by the parser
 
         self._list = None
-        self._comment = None
-        self._note = None
-        self._em = None
-        self._strong = None
 
     def feed(self, xmlString):
         """Feed a string file to the parser.
@@ -41,10 +30,6 @@ class EditorViewParser(sax.ContentHandler):
         """
         self.taggedText = []
         self._list = False
-        self._comment = False
-        self._note = False
-        self._em = False
-        self._strong = False
         if xmlString:
             sax.parseString(f'<content>{xmlString}</content>', self)
 
@@ -54,14 +39,6 @@ class EditorViewParser(sax.ContentHandler):
         Overrides the xml.sax.ContentHandler method             
         """
         tag = self.textTag
-        if self._em:
-            tag = self.emTag
-        elif self._strong:
-            tag = self.strongTag
-        if self._comment:
-            tag = self.commentTag
-        elif self._note:
-            tag = self.noteTag
         self.taggedText.append((content, tag))
 
     def endElement(self, name):
@@ -71,26 +48,13 @@ class EditorViewParser(sax.ContentHandler):
         """
         tag = self.xmlTag
         suffix = ''
-        if self._comment:
-            tag = self.commentXmlTag
-        elif self._note:
-            tag = self.noteXmlTag
         if name == 'p' and not self._list:
             suffix = '\n'
-        elif name == 'em':
-            self._em = False
-        elif name == 'strong':
-            self._strong = False
         elif name in ('li', 'creator', 'date', 'note-citation'):
             suffix = '\n'
         elif name == 'ul':
             self._list = False
-            if self.showTags:
-                suffix = '\n'
-        elif name == 'comment':
-            self._comment = False
-        elif name == 'note':
-            self._note = False
+            suffix = '\n'
         if self.update:
             self.taggedText.append((f'</{name}>', tag))
         else:
@@ -107,27 +71,11 @@ class EditorViewParser(sax.ContentHandler):
             attributes = f'{attributes} {attrKey}="{attrValue}"'
         tag = self.xmlTag
         suffix = ''
-        if name == 'em':
-            self._em = True
-        elif name == 'strong':
-            self._strong = True
-        elif name == 'ul':
+        if name == 'ul':
             self._list = True
-            if self.showTags:
-                suffix = '\n'
+            suffix = '\n'
         elif name == 'comment':
-            self._comment = True
             suffix = '\n'
         elif name == 'note':
-            self._note = True
             suffix = '\n'
-        elif name == 'li' and not self.showTags:
-            suffix = f'{self.BULLET} '
-        if self._comment:
-            tag = self.commentXmlTag
-        elif self._note:
-            tag = self.noteXmlTag
-        if self.showTags:
-            self.taggedText.append((f'<{name}{attributes}>{suffix}', tag))
-        else:
-            self.taggedText.append((suffix, tag))
+        self.taggedText.append((f'<{name}{attributes}>{suffix}', tag))
