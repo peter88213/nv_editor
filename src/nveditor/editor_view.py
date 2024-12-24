@@ -156,7 +156,7 @@ class EditorView(tk.Toplevel, EditorViewCtrl):
             self.sectionEditor.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
         self.sectionEditor.bind(KEYS.APPLY_CHANGES[0], self._apply_changes)
         self.sectionEditor.bind(KEYS.UPDATE_WORDCOUNT[0], self.show_wordcount)
-        self.sectionEditor.bind('<space>', self.sectionEditor.update_highlighting)
+        self.sectionEditor.bind('<space>', self.sectionEditor.colorize)
         self.sectionEditor.bind(KEYS.SPLIT_SCENE[0], self._split_section)
         self.sectionEditor.bind(KEYS.CREATE_SCENE[0], self._create_section)
         self.sectionEditor.bind(KEYS.ITALIC[0], self.sectionEditor.emphasis)

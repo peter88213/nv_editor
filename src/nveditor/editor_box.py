@@ -7,7 +7,6 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import re
 from tkinter import ttk
 
-from nveditor.editor_view_parser import EditorViewParser
 from nvlib.model.xml.xml_filter import strip_illegal_characters
 import tkinter as tk
 import xml.etree.ElementTree as ET
@@ -55,8 +54,6 @@ class EditorBox(tk.Text):
         self.tag_configure(self.XML_TAG,
                            foreground=self.COLOR_XML_TAG,
                            )
-        self._contentParser = EditorViewParser()
-        self._contentParser.xmlTag = self.XML_TAG
 
     def check_validity(self):
         text = strip_illegal_characters(self.get("1.0", "end"))
@@ -77,16 +74,6 @@ class EditorBox(tk.Text):
     def clear(self):
         self.delete('1.0', 'end')
 
-    def get_tagged_text(self, text, update):
-        """Return the whole novel as a list of (text, tag) tuples."""
-
-        # Build a list of (text, tag) tuples for the section.
-        taggedText = []
-        textTag = ''
-        textTuples = self._convert_from_novx(text, textTag, update)
-        taggedText.extend(textTuples)
-        return taggedText
-
     def get_text(self, start='1.0', end='end'):
         """Return the whole text from the editor box."""
         text = self.get(start, end)
@@ -94,17 +81,12 @@ class EditorBox(tk.Text):
         text = text.replace('\n', '')
         return strip_illegal_characters(text)
 
-    def update_highlighting(self, event=None):
+    def colorize(self, event=None):
         startIndex = self.index('insert')
-        try:
-            taggedText = self.get_tagged_text(self.get('1.0', 'end'), True)
-        except:
-            return
-
-        self.clear()
-        for entry in taggedText:
-            text, tag = entry
-            self.insert('end', text, tag)
+        lines = self.get('1.0', 'end').split('\n')
+        for i, line in enumerate(lines):
+            for xmlTag in re.finditer('<.*?>', line):
+                self.tag_add(self.XML_TAG, f'{i}.{xmlTag.start()}', f'{i}.{xmlTag.end()}')
         self.mark_set('insert', startIndex)
 
     def set_text(self, text):
@@ -112,15 +94,12 @@ class EditorBox(tk.Text):
         startIndex = len("<p>")
         if not text:
             text = '<p></p>'
-
-        # Send the (text, tag) tuples to the text box.
-        for entry in self.get_tagged_text(text, False):
-            text, tag = entry
-            self.insert('end', text, tag)
-
+        text = text.replace('</p>', '</p>\n')
+        self.insert('end', text)
         self.edit_reset()
         # this is to prevent the user from clearing the box with Ctrl-Z
         self.mark_set('insert', f'1.{startIndex}')
+        self.colorize()
 
     def count_words(self):
         """Return the word count."""
@@ -147,7 +126,7 @@ class EditorBox(tk.Text):
     def new_paragraph(self, event=None):
         """Insert an opening/closing pair of paragraph tags."""
         self.insert('insert', '</p>\n<p>')
-        self.update_highlighting()
+        self.colorize()
         return 'break'
 
     def _convert_from_novx(self, text, textTag, update):
