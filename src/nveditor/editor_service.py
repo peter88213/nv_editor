@@ -10,6 +10,7 @@ import sys
 
 from mvclib.controller.sub_controller import SubController
 from mvclib.view.observer import Observer
+from nveditor.editor_box import EditorBox
 from nveditor.editor_view import EditorView
 from nveditor.nveditor_globals import FEATURE
 from nveditor.nveditor_globals import ICON
@@ -30,6 +31,7 @@ class EditorService(SubController, Observer):
         color_fg_light='black',
         color_bg_dark='gray20',
         color_fg_dark='light grey',
+        color_xml_tag='cornflower blue',
         font_family='Courier',
         font_size=12,
         line_spacing=4,
@@ -79,6 +81,7 @@ class EditorService(SubController, Observer):
         EditorView.liveWordCount = tk.BooleanVar(
             value=self.prefs['live_wordcount']
             )
+        EditorBox.COLOR_XML_TAG = self.prefs['color_xml_tag']
 
         self.sectionEditors = {}
         # editor windows
