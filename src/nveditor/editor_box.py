@@ -82,7 +82,9 @@ class EditorBox(tk.Text):
         return strip_illegal_characters(text)
 
     def colorize(self, event=None):
-        for i in range(int(self.index('end-1c').split('.')[0])):
+        """Colorize the XML tags."""
+        self.tag_remove(self.XML_TAG, '1.0', 'end')
+        for i in range(int(self.index('end').split('.')[0])):
             line = self.get(f'{i}.0', f'{i}.0 lineend')
             for xmlTag in re.finditer('<.*?>', line):
                 self.tag_add(self.XML_TAG, f'{i}.{xmlTag.start()}', f'{i}.{xmlTag.end()}')
@@ -169,6 +171,7 @@ class EditorBox(tk.Text):
             for tag in self._TAGS:
                 text = self._remove_format(text, tag)
             self._replace_selected(text)
+        self.colorize()
 
     def _replace_selected(self, text):
         """Replace the selected passage with text; keep the selection."""

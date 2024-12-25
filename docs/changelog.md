@@ -4,6 +4,14 @@
 
 ## Changelog
 
+
+### Version 5.1.0
+
+Colorizing XML tags.
+
+API: 5.0
+Based on novelibre 5.1.3
+
 ### Version 5.0.5
 
 Bugfix:

@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.5\n"
-"POT-Creation-Date: 2024-12-17 12:18:35\n"
-"PO-Revision-Date: 2024-12-17 12:18:35\n"
+"Project-Id-Version: 5.1.0\n"
+"POT-Creation-Date: 2024-12-25 17:56:50\n"
+"PO-Revision-Date: 2024-12-25 17:56:50\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -84,6 +84,12 @@ msgstr "Lichter Modus"
 
 msgid "Live update"
 msgstr "Laufende Aktualisierung"
+
+msgid "Major Character"
+msgstr "Hauptfigur"
+
+msgid "Minor Character"
+msgstr "Nebenfigur"
 
 msgid "Move the text from the cursor position to the end into a new section"
 msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben"
