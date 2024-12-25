@@ -82,12 +82,10 @@ class EditorBox(tk.Text):
         return strip_illegal_characters(text)
 
     def colorize(self, event=None):
-        startIndex = self.index('insert')
-        lines = self.get('1.0', 'end').split('\n')
-        for i, line in enumerate(lines):
+        for i in range(int(self.index('end-1c').split('.')[0])):
+            line = self.get(f'{i}.0', f'{i}.0 lineend')
             for xmlTag in re.finditer('<.*?>', line):
                 self.tag_add(self.XML_TAG, f'{i}.{xmlTag.start()}', f'{i}.{xmlTag.end()}')
-        self.mark_set('insert', startIndex)
 
     def set_text(self, text):
         """Put text into the editor box and clear the undo/redo stack."""
