@@ -10,7 +10,7 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
 
 *nv_editor* is a plugin providing a "plain text" section editor. 
 
-![Screenshot](docs/Screenshots/screen01.png)
+![Screenshot](docs/Screenshots/screen02.png)
 
 ## Features
 
