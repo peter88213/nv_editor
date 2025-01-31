@@ -4,10 +4,10 @@ Copyright (c) 2025 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from mvclib.controller.sub_controller import SubController
 from nveditor.nveditor_globals import FEATURE
 from nveditor.nveditor_help import NveditorHelp
 from nveditor.nveditor_locale import _
+from nvlib.controller.sub_controller import SubController
 import xml.etree.ElementTree as ET
 
 

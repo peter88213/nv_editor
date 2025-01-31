@@ -8,13 +8,13 @@ import os
 from pathlib import Path
 import sys
 
-from mvclib.controller.sub_controller import SubController
-from mvclib.view.observer import Observer
 from nveditor.editor_box import EditorBox
 from nveditor.editor_view import EditorView
 from nveditor.nveditor_globals import FEATURE
 from nveditor.nveditor_globals import ICON
 from nveditor.nveditor_locale import _
+from nvlib.controller.sub_controller import SubController
+from nvlib.gui.observer import Observer
 from nvlib.novx_globals import SECTION_PREFIX
 import tkinter as tk
 
