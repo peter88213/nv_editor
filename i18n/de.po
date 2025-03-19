@@ -1,11 +1,11 @@
 # nv_editor Dictionary (English-German)
-# Copyright (C) 2022 Peter Triesberger
+# Copyright (C) 2025 Peter Triesberger
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.1.1\n"
-"POT-Creation-Date: 2024-12-26 00:51:52\n"
-"PO-Revision-Date: 2024-12-26 00:51:52\n"
+"Project-Id-Version: 5.2.0\n"
+"POT-Creation-Date: 2025-03-19 22:25:57\n"
+"PO-Revision-Date: 2025-03-19 22:25:57\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,8 @@ msgstr "Abschnitte können nicht erzeugt werden werden, weil das Projekt gesperr
 msgid "Cannot edit sections, because the project is locked."
 msgstr "Abschnitte können nicht bearbeitet werden werden, weil das Projekt gesperrt ist."
 
-msgid "Cannot split the section at the cursor position."
-msgstr "Der Abschnitt kann an der Cursorposition nicht geteilt werden."
+msgid "Cannot split the section at the cursor position"
+msgstr "Der Abschnitt kann an der Cursorposition nicht geteilt werden"
 
 msgid "Cannot split the section, because the project is locked."
 msgstr "Der Abschnitt kann nicht geteilt werden, weil das Projekt gesperrt ist."
@@ -75,6 +75,9 @@ msgstr "Format"
 
 msgid "Help"
 msgstr "Hilfe"
+
+msgid "Invalid changes"
+msgstr "Ungültige Änderungen"
 
 msgid "Italic"
 msgstr "Kursiv"

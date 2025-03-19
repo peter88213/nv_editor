@@ -46,8 +46,8 @@ class EditorViewCtrl(SubController):
             self.sectionEditor.check_validity()
         except ValueError as ex:
             self._ui.show_error(
-                str(ex),
-                title=FEATURE,
+                message=_('Invalid changes'),
+                detail=str(ex),
                 parent=self
                 )
             self.lift()
@@ -75,8 +75,8 @@ class EditorViewCtrl(SubController):
                         self.sectionEditor.check_validity()
                     except ValueError as ex:
                         self._ui.show_error(
-                            str(ex),
-                            title=FEATURE,
+                            message=_('Invalid changes'),
+                            detail=str(ex),
                             parent=self
                             )
                         self.lift()
@@ -152,8 +152,8 @@ class EditorViewCtrl(SubController):
             self.sectionEditor.check_validity()
         except ValueError as ex:
             self._ui.show_error(
-                str(ex),
-                title=FEATURE,
+                message=_('Invalid changes'),
+                detail=str(ex),
                 parent=self
                 )
             self.lift()
@@ -174,8 +174,7 @@ class EditorViewCtrl(SubController):
             ET.fromstring(f"<a>{self.sectionEditor.get('insert', 'end')}</a>")
         except:
             self._ui.show_error(
-                _('Cannot split the section at the cursor position.'),
-                title=FEATURE,
+                message=_('Cannot split the section at the cursor position'),
                 parent=self
                 )
             self.lift()
@@ -224,15 +223,13 @@ class EditorViewCtrl(SubController):
             self._load_next()
 
     def _transfer_text(self, sectionText):
-        """Transfer the changed editor content to the section, if possible.
-        
-        """
+        """Transfer the changed editor content to the section, if possible."""
         try:
             self.sectionEditor.check_validity()
         except ValueError as ex:
             self._ui.show_error(
-                str(ex),
-                title=FEATURE,
+                message=_('Invalid changes'),
+                detail=str(ex),
                 parent=self
                 )
             self.lift()

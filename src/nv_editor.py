@@ -24,7 +24,7 @@ from nvlib.controller.plugin.plugin_base import PluginBase
 class Plugin(PluginBase):
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.0'
+    API_VERSION = '5.17'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
 

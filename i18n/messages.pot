@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.1.1\n"
-"POT-Creation-Date: 2024-12-26 00:51:52\n"
+"Project-Id-Version: 5.2.0\n"
+"POT-Creation-Date: 2025-03-19 22:25:57\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Cannot edit sections, because the project is locked."
 msgstr ""
 
-msgid "Cannot split the section at the cursor position."
+msgid "Cannot split the section at the cursor position"
 msgstr ""
 
 msgid "Cannot split the section, because the project is locked."
@@ -75,6 +75,9 @@ msgid "Format"
 msgstr ""
 
 msgid "Help"
+msgstr ""
+
+msgid "Invalid changes"
 msgstr ""
 
 msgid "Italic"
