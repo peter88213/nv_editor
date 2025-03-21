@@ -126,7 +126,11 @@ class EditorService(SubController, Observer):
 
                 # A section is selected
                 if self._ctrl.isLocked:
-                    self._ui.show_info(_('Cannot edit sections, because the project is locked.'), title=FEATURE)
+                    self._ui.show_info(
+                        message=_('Cannot edit sections'),
+                        detail=f"{_('The project is locked')}.",
+                        title=FEATURE
+                        )
                     return
 
                 if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:

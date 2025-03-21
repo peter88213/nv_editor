@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.2.0\n"
-"POT-Creation-Date: 2025-03-19 22:25:57\n"
-"PO-Revision-Date: 2025-03-19 22:25:57\n"
+"Project-Id-Version: 5.2.1\n"
+"POT-Creation-Date: 2025-03-21 19:20:57\n"
+"PO-Revision-Date: 2025-03-21 19:20:57\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -25,20 +25,20 @@ msgstr "Fett"
 msgid "Bright mode"
 msgstr "Heller Modus"
 
-msgid "Cannot apply section changes, because the project is locked.\nUnlock and apply changes?"
-msgstr "Das Projekt ist gesperrt.\nEntsperren und Änderungen übernehmen.?"
+msgid "Cannot apply section changes as long as the project is locked."
+msgstr "Abschnittsänderungen können nicht übernommen werden, so lange das Projekt gesperrt ist."
 
-msgid "Cannot create sections, because the project is locked."
-msgstr "Abschnitte können nicht erzeugt werden werden, weil das Projekt gesperrt ist."
+msgid "Cannot create section"
+msgstr "Kann Abschnitt nicht erzeugen"
 
-msgid "Cannot edit sections, because the project is locked."
-msgstr "Abschnitte können nicht bearbeitet werden werden, weil das Projekt gesperrt ist."
+msgid "Cannot edit sections"
+msgstr "Abschnitte können nicht bearbeitet werden"
+
+msgid "Cannot split the section"
+msgstr "Der Abschnitt kann nicht geteilt werden"
 
 msgid "Cannot split the section at the cursor position"
 msgstr "Der Abschnitt kann an der Cursorposition nicht geteilt werden"
-
-msgid "Cannot split the section, because the project is locked."
-msgstr "Der Abschnitt kann nicht geteilt werden, weil das Projekt gesperrt ist."
 
 msgid "Close"
 msgstr "Schließen"
@@ -94,8 +94,8 @@ msgstr "Hauptfigur"
 msgid "Minor Character"
 msgstr "Nebenfigur"
 
-msgid "Move the text from the cursor position to the end into a new section"
-msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben"
+msgid "Move the text from the cursor position to the end into a new section?"
+msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben?"
 
 msgid "Next"
 msgstr "Vor"
@@ -126,6 +126,15 @@ msgstr "An der Cursorposition teilen"
 
 msgid "Strong emphasis"
 msgstr "Stark betont"
+
+msgid "The project is locked"
+msgstr "Das Projekt ist gesperrt"
+
+msgid "The result would not be well-formed XML"
+msgstr "Das Ergebnis wäre kein wohlgeformtes XML"
+
+msgid "Unlock and apply changes?"
+msgstr "Entsperren und Änderungen übernehmen?"
 
 msgid "Update"
 msgstr "Aktualisieren"

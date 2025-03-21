@@ -67,7 +67,7 @@ class EditorViewCtrl(SubController):
         if sectionText or self._section.sectionContent:
             if self._section.sectionContent != sectionText:
                 if self._ui.ask_yes_no(
-                    _('Apply section changes?'),
+                    message=_('Apply section changes?'),
                     title=FEATURE,
                     parent=self
                     ):
@@ -92,7 +92,8 @@ class EditorViewCtrl(SubController):
         """
         if self._ctrl.isLocked:
             self._ui.show_info(
-                _('Cannot create sections, because the project is locked.'),
+                message=_('Cannot create section'),
+                detail=f"{_('The project is locked')}.",
                 title=FEATURE,
                 parent=self
                 )
@@ -161,7 +162,8 @@ class EditorViewCtrl(SubController):
 
         if self._ctrl.isLocked:
             self._ui.show_info(
-                _('Cannot split the section, because the project is locked.'),
+                message=_('Cannot split the section'),
+                detail=f"{_('The project is locked')}.",
                 title=FEATURE,
                 parent=self
                 )
@@ -175,13 +177,14 @@ class EditorViewCtrl(SubController):
         except:
             self._ui.show_error(
                 message=_('Cannot split the section at the cursor position'),
+                detail=f"{_('The result would not be well-formed XML')}.",
                 parent=self
                 )
             self.lift()
             return
 
         if self._ui.ask_yes_no(
-            f'{_("Move the text from the cursor position to the end into a new section")}?',
+            message=_('Move the text from the cursor position to the end into a new section?'),
             title=FEATURE,
             parent=self
             ):
@@ -237,7 +240,8 @@ class EditorViewCtrl(SubController):
 
         if self._ctrl.isLocked:
             if self._ui.ask_yes_no(
-                _('Cannot apply section changes, because the project is locked.\nUnlock and apply changes?'),
+                message=_('Unlock and apply changes?'),
+                detail=_('Cannot apply section changes as long as the project is locked.'),
                 title=FEATURE,
                 parent=self
                 ):

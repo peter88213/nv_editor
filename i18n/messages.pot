@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.2.0\n"
-"POT-Creation-Date: 2025-03-19 22:25:57\n"
+"Project-Id-Version: 5.2.1\n"
+"POT-Creation-Date: 2025-03-21 19:20:57\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -26,19 +26,19 @@ msgstr ""
 msgid "Bright mode"
 msgstr ""
 
-msgid "Cannot apply section changes, because the project is locked.\nUnlock and apply changes?"
+msgid "Cannot apply section changes as long as the project is locked."
 msgstr ""
 
-msgid "Cannot create sections, because the project is locked."
+msgid "Cannot create section"
 msgstr ""
 
-msgid "Cannot edit sections, because the project is locked."
+msgid "Cannot edit sections"
+msgstr ""
+
+msgid "Cannot split the section"
 msgstr ""
 
 msgid "Cannot split the section at the cursor position"
-msgstr ""
-
-msgid "Cannot split the section, because the project is locked."
 msgstr ""
 
 msgid "Close"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "Minor Character"
 msgstr ""
 
-msgid "Move the text from the cursor position to the end into a new section"
+msgid "Move the text from the cursor position to the end into a new section?"
 msgstr ""
 
 msgid "Next"
@@ -126,6 +126,15 @@ msgid "Split at cursor position"
 msgstr ""
 
 msgid "Strong emphasis"
+msgstr ""
+
+msgid "The project is locked"
+msgstr ""
+
+msgid "The result would not be well-formed XML"
+msgstr ""
+
+msgid "Unlock and apply changes?"
 msgstr ""
 
 msgid "Update"
