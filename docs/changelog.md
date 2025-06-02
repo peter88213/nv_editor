@@ -5,6 +5,13 @@
 ## Changelog
 
 
+### Version 5.2.2
+
+- Making sure that the editor window position doesn't change when reopening.
+
+API: 5.17
+Based on novelibre 5.24.3
+
 ### Version 5.2.1
 
 - Updated the messaging.
