@@ -52,6 +52,7 @@ class EditorView(tk.Toplevel, EditorViewCtrl):
 
         # Create an independent editor window.
         super().__init__()
+        self.geometry(self.prefs['win_geometry'])
         if icon:
             self.iconphoto(False, icon)
 
