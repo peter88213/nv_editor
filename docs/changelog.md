@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.3.0
+
+- Refactored the code for better maintainability:
+  Reintegrated the controller mixin class into the view class.
+
+API: 5.17
+Based on novelibre 5.26.1
+
 ### Version 5.2.3
 
 - Prevent flickering when opening the window.

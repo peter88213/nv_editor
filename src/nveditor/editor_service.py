@@ -57,8 +57,8 @@ class EditorService(SubController, Observer):
         self.iniFile = f'{configDir}/{self.INI_FILENAME}'
         self.configuration = self._mdl.nvService.new_configuration(
             settings=self.SETTINGS,
-            options=self.OPTIONS
-            )
+            options=self.OPTIONS,
+        )
         self.configuration.read(self.iniFile)
         self.prefs = {}
         self.prefs.update(self.configuration.settings)
@@ -78,28 +78,28 @@ class EditorService(SubController, Observer):
 
         # Configure the editor box.
         EditorView.colorMode = tk.IntVar(
-            value=int(self.prefs['color_mode'])
-            )
+            value=int(self.prefs['color_mode']),
+        )
         EditorView.liveWordCount = tk.BooleanVar(
-            value=self.prefs['live_wordcount']
-            )
+            value=self.prefs['live_wordcount'],
+        )
         EditorBox.COLOR_XML_TAG = self.prefs['color_xml_tag']
 
-        self.sectionEditors = {}
+        self._sectionEditors = {}
         # editor windows
         # key: str -- Section ID
         # value:  reference to the EditorView instance
 
     def close_editor_window(self, nodeId):
-        if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
-            self.sectionEditors[nodeId].on_quit()
-            del self.sectionEditors[nodeId]
+        if nodeId in self._sectionEditors and self._sectionEditors[nodeId].isOpen:
+            self._sectionEditors[nodeId].on_quit()
+            del self._sectionEditors[nodeId]
 
     def on_close(self):
         """Close all open section editor windows."""
-        for scId in self.sectionEditors:
-            if self.sectionEditors[scId].isOpen:
-                self.sectionEditors[scId].on_quit()
+        for scId in self._sectionEditors:
+            if self._sectionEditors[scId].isOpen:
+                self._sectionEditors[scId].on_quit()
 
     def on_quit(self):
         """Save project specific configuration."""
@@ -116,9 +116,9 @@ class EditorService(SubController, Observer):
         self.configuration.write(self.iniFile)
 
     def open_editor_window(self):
-        """Create a section editor window with a menu bar, a text box, and a status bar.
+        """Create a section editor window 
         
-        Overrides the superclass method.
+        with a menu bar, a text box, and a status bar.
         """
         try:
             nodeId = self._ui.selectedNode
@@ -131,22 +131,24 @@ class EditorService(SubController, Observer):
                     self._ui.show_info(
                         message=_('Cannot edit sections'),
                         detail=f"{_('The project is locked')}.",
-                        title=FEATURE
-                        )
+                        title=FEATURE,
+                    )
                     return
 
-                if nodeId in self.sectionEditors and self.sectionEditors[nodeId].isOpen:
-                    self.sectionEditors[nodeId].lift()
+                if (nodeId in self._sectionEditors
+                    and self._sectionEditors[nodeId].isOpen
+                ):
+                    self._sectionEditors[nodeId].lift()
                     return
 
-                self.sectionEditors[nodeId] = EditorView(
+                self._sectionEditors[nodeId] = EditorView(
                     self._mdl,
                     self._ui,
                     self._ctrl,
                     nodeId,
                     self,
                     icon=self.icon
-                    )
+                )
 
         except IndexError:
             # Nothing selected
@@ -157,7 +159,7 @@ class EditorService(SubController, Observer):
         
         Overrides the superclass method.
         """
-        for scId in list(self.sectionEditors):
+        for scId in list(self._sectionEditors):
             if not scId in self._mdl.novel.sections:
-                self.sectionEditors[scId].on_quit()
-                del self.sectionEditors[scId]
+                self._sectionEditors[scId].on_quit()
+                del self._sectionEditors[scId]

@@ -32,9 +32,9 @@ class Plugin(PluginBase):
         """Add a submenu to the main menu.
         
         Positional arguments:
-            model -- reference to the main model instance of the application.
-            view -- reference to the main view instance of the application.
-            controller -- reference to the main controller instance of the application.
+            model -- reference to the main model instance.
+            view -- reference to the main view instance.
+            controller -- reference to the main controller instance.
 
         Extends the superclass method.
         """
@@ -43,14 +43,21 @@ class Plugin(PluginBase):
 
         # Add the "Edit" command to novelibre's "Section" menu.
         self._ui.sectionMenu.add_separator()
-        self._ui.sectionMenu.add_command(label=_('Edit'), underline=0, command=self.open_editor_window)
+        self._ui.sectionMenu.add_command(
+            label=_('Edit'),
+            underline=0,
+            command=self._open_editor_window,
+        )
 
         # Add an entry to the Help menu.
-        self._ui.helpMenu.add_command(label=_('Editor plugin Online help'), command=self.open_help)
+        self._ui.helpMenu.add_command(
+            label=_('Editor plugin Online help'),
+            command=self._open_help,
+        )
 
         # Set Key bindings.
-        self._ui.tv.tree.bind('<Double-1>', self.open_editor_window)
-        self._ui.tv.tree.bind('<Return>', self.open_editor_window)
+        self._ui.tv.tree.bind('<Double-1>', self._open_editor_window)
+        self._ui.tv.tree.bind('<Return>', self._open_editor_window)
 
     def on_close(self, event=None):
         """Actions to be performed when a project is closed.
@@ -67,9 +74,9 @@ class Plugin(PluginBase):
         """
         self.editorService.on_quit()
 
-    def open_editor_window(self, event=None):
+    def _open_editor_window(self, event=None):
         self.editorService.open_editor_window()
 
-    def open_help(self, event=None):
+    def _open_help(self, event=None):
         NveditorHelp.open_help_page()
 
