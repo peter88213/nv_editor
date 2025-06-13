@@ -32,9 +32,9 @@ class Plugin(PluginBase):
         """Add a submenu to the main menu.
         
         Positional arguments:
-            model -- reference to the main model instance.
-            view -- reference to the main view instance.
-            controller -- reference to the main controller instance.
+            model -- reference to the novelibre main model instance.
+            view -- reference to the novelibre main view instance.
+            controller -- reference to the novelibre main controller instance.
 
         Extends the superclass method.
         """
