@@ -24,7 +24,7 @@ from nvlib.controller.plugin.plugin_base import PluginBase
 class Plugin(PluginBase):
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.17'
+    API_VERSION = '5.27'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
 
@@ -59,6 +59,9 @@ class Plugin(PluginBase):
         self._ui.tv.tree.bind('<Double-1>', self._open_editor_window)
         self._ui.tv.tree.bind('<Return>', self._open_editor_window)
 
+    def lock(self):
+        self._ui.sectionMenu.entryconfig(_('Edit'), state='disabled')
+
     def on_close(self, event=None):
         """Actions to be performed when a project is closed.
         
@@ -73,6 +76,9 @@ class Plugin(PluginBase):
         Overrides the superclass method.
         """
         self.editorService.on_quit()
+
+    def unlock(self):
+        self._ui.sectionMenu.entryconfig(_('Edit'), state='normal')
 
     def _open_editor_window(self, event=None):
         self.editorService.open_editor_window()
