@@ -91,9 +91,12 @@ class EditorService(SubController, Observer):
         # value:  reference to the EditorView instance
 
     def close_editor_window(self, nodeId):
-        if nodeId in self._sectionEditors and self._sectionEditors[nodeId].isOpen:
-            self._sectionEditors[nodeId].on_quit()
+        try:
+            if self._sectionEditors[nodeId].isOpen:
+                self._sectionEditors[nodeId].on_quit()
             del self._sectionEditors[nodeId]
+        except KeyError:
+            pass
 
     def on_close(self):
         """Close all open section editor windows."""
@@ -163,7 +166,4 @@ class EditorService(SubController, Observer):
             if not scId in self._mdl.novel.sections:
                 if self._sectionEditors[scId].isOpen:
                     self._sectionEditors[scId].on_quit()
-                    print('Ah')
-                else:
-                    print('Au!')
                 del self._sectionEditors[scId]

@@ -5,7 +5,7 @@
 ## Changelog
 
 
-### Version 5.4.1
+### Version 5.4.2
 
 - Fixed a bug where an unhandled exception is raised when deleting a section which was previously edited. 
 

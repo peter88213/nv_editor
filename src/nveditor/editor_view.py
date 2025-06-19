@@ -405,7 +405,7 @@ class EditorView(tk.Toplevel, SubController):
         nextNode = self._ui.tv.next_node(self._scId)
         if nextNode:
             self._ui.tv.go_to_node(nextNode)
-            self._service.close_editor_window(self._scId)
+            self._request_closing()
             self._service.open_editor_window()
 
     def _load_prev(self, event=None):
@@ -416,7 +416,7 @@ class EditorView(tk.Toplevel, SubController):
         prevNode = self._ui.tv.prev_node(self._scId)
         if prevNode:
             self._ui.tv.go_to_node(prevNode)
-            self._service.close_editor_window(self._scId)
+            self._request_closing()
             self._service.open_editor_window()
 
     def _load_section(self):
