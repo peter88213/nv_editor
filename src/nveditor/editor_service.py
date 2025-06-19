@@ -161,5 +161,9 @@ class EditorService(SubController, Observer):
         """
         for scId in list(self._sectionEditors):
             if not scId in self._mdl.novel.sections:
-                self._sectionEditors[scId].on_quit()
+                if self._sectionEditors[scId].isOpen:
+                    self._sectionEditors[scId].on_quit()
+                    print('Ah')
+                else:
+                    print('Au!')
                 del self._sectionEditors[scId]

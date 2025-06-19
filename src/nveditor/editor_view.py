@@ -95,7 +95,7 @@ class EditorView(tk.Toplevel, SubController):
 
         # Add buttons to the bottom line.
         ttk.Button(self, text=_('Next'), command=self._load_next).pack(side='right')
-        ttk.Button(self, text=_('Close'), command=self.on_quit).pack(side='right')
+        ttk.Button(self, text=_('Close'), command=self._request_closing).pack(side='right')
         ttk.Button(self, text=_('Previous'), command=self._load_prev).pack(side='right')
 
         # Load the section content into the text editor.
@@ -118,9 +118,9 @@ class EditorView(tk.Toplevel, SubController):
         self._sectionMenu.add_command(label=_('Previous'), command=self._load_prev)
         self._sectionMenu.add_command(label=_('Apply changes'), accelerator=KEYS.APPLY_CHANGES[1], command=self._apply_changes)
         if PLATFORM == 'win':
-            self._sectionMenu.add_command(label=_('Exit'), accelerator=KEYS.QUIT_PROGRAM[1], command=self.on_quit)
+            self._sectionMenu.add_command(label=_('Exit'), accelerator=KEYS.QUIT_PROGRAM[1], command=self._request_closing)
         else:
-            self._sectionMenu.add_command(label=_('Quit'), accelerator=KEYS.QUIT_PROGRAM[1], command=self.on_quit)
+            self._sectionMenu.add_command(label=_('Quit'), accelerator=KEYS.QUIT_PROGRAM[1], command=self._request_closing)
 
         # Add a "View" Submenu to the editor window.
         self._viewMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -159,7 +159,7 @@ class EditorView(tk.Toplevel, SubController):
         # Event bindings.
         self.bind(KEYS.OPEN_HELP[0], self._open_help)
         if PLATFORM != 'win':
-            self._sectionEditor.bind(KEYS.QUIT_PROGRAM[0], self.on_quit)
+            self._sectionEditor.bind(KEYS.QUIT_PROGRAM[0], self._request_closing)
         self._sectionEditor.bind(KEYS.APPLY_CHANGES[0], self._apply_changes)
         self._sectionEditor.bind(KEYS.UPDATE_WORDCOUNT[0], self._show_wordcount)
         self._sectionEditor.bind('<space>', self._sectionEditor.colorize)
@@ -169,7 +169,7 @@ class EditorView(tk.Toplevel, SubController):
         self._sectionEditor.bind(KEYS.BOLD[0], self._sectionEditor.strong_emphasis)
         self._sectionEditor.bind(KEYS.PLAIN[0], self._sectionEditor.plain)
         self._sectionEditor.bind('<Return>', self._sectionEditor.new_paragraph)
-        self.protocol("WM_DELETE_WINDOW", self.on_quit)
+        self.protocol("WM_DELETE_WINDOW", self._request_closing)
 
         self._set_wc_mode()
         self.lift()
@@ -309,6 +309,10 @@ class EditorView(tk.Toplevel, SubController):
 
     def _open_help(self, event=None):
         NveditorHelp.open_help_page()
+
+    def _request_closing(self, event=None):
+        self._service.close_editor_window(self._scId)
+        # making sure the service removes this instance from the list
 
     def _set_editor_colors(self):
         cm = EditorView.colorMode.get()
