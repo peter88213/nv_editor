@@ -42,18 +42,18 @@ class EditorView(tk.Toplevel, SubController):
                 _('Bright mode'),
                 self._service.prefs['color_fg_bright'],
                 self._service.prefs['color_bg_bright'],
-                ),
+            ),
             (
                 _('Light mode'),
                 self._service.prefs['color_fg_light'],
                 self._service.prefs['color_bg_light'],
-                ),
+            ),
             (
                 _('Dark mode'),
                 self._service.prefs['color_fg_dark'],
                 self._service.prefs['color_bg_dark'],
-                ),
-            ]
+            ),
+        ]
         # (name, foreground, background) tuples for color modes.
 
         # Create an independent editor window.
@@ -83,7 +83,10 @@ class EditorView(tk.Toplevel, SubController):
             maxundo=-1,
             padx=self._service.prefs['margin_x'],
             pady=self._service.prefs['margin_y'],
-            font=(self._service.prefs['font_family'], self._service.prefs['font_size']),
+            font=(
+                self._service.prefs['font_family'],
+                self._service.prefs['font_size'],
+            ),
         )
         self._sectionEditor.pack(expand=True, fill='both')
         self._sectionEditor.pack_propagate(0)
@@ -94,9 +97,21 @@ class EditorView(tk.Toplevel, SubController):
         self._statusBar.pack(expand=False, side='left')
 
         # Add buttons to the bottom line.
-        ttk.Button(self, text=_('Next'), command=self._load_next).pack(side='right')
-        ttk.Button(self, text=_('Close'), command=self._request_closing).pack(side='right')
-        ttk.Button(self, text=_('Previous'), command=self._load_prev).pack(side='right')
+        ttk.Button(
+            self,
+            text=_('Next'),
+            command=self._load_next,
+        ).pack(side='right')
+        ttk.Button(
+            self,
+            text=_('Close'),
+            command=self._request_closing,
+        ).pack(side='right')
+        ttk.Button(
+            self,
+            text=_('Previous'),
+            command=self._load_prev,
+        ).pack(side='right')
 
         # Load the section content into the text editor.
         self._load_section()
@@ -104,57 +119,160 @@ class EditorView(tk.Toplevel, SubController):
         #--- Configure the user interface.
         '''
         # Add buttons to the button bar.
-        tk.Button(self._buttonBar, text=_('Copy'), command=lambda: self._sectionEditor.event_generate("<<Copy>>")).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Cut'), command=lambda: self._sectionEditor.event_generate("<<Cut>>")).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Paste'), command=lambda: self._sectionEditor.event_generate("<<Paste>>")).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Italic'), command=self._sectionEditor.emphasis).pack(side='left')
-        tk.Button(self._buttonBar, text=_('Bold'), command=self._sectionEditor.strong_emphasis).pack(side='left')
+        tk.Button(
+            self._buttonBar, 
+            text=_('Copy'), 
+            command=lambda: self._sectionEditor.event_generate("<<Copy>>"),
+        ).pack(side='left')
+        tk.Button(
+            self._buttonBar, 
+            text=_('Cut'), 
+            command=lambda: self._sectionEditor.event_generate("<<Cut>>"),
+        ).pack(side='left')
+        tk.Button(
+            self._buttonBar, 
+            text=_('Paste'), 
+            command=lambda: self._sectionEditor.event_generate("<<Paste>>"),
+        ).pack(side='left')
+        tk.Button(
+            self._buttonBar, 
+            text=_('Italic'), 
+            command=self._sectionEditor.emphasis,
+        ).pack(side='left')
+        tk.Button(
+            self._buttonBar, 
+            text=_('Bold'), 
+            command=self._sectionEditor.strong_emphasis).pack(side='left'),
         '''
 
         # Add a "Section" Submenu to the editor window.
         self._sectionMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('Section'), menu=self._sectionMenu)
-        self._sectionMenu.add_command(label=_('Next'), command=self._load_next)
-        self._sectionMenu.add_command(label=_('Previous'), command=self._load_prev)
-        self._sectionMenu.add_command(label=_('Apply changes'), accelerator=KEYS.APPLY_CHANGES[1], command=self._apply_changes)
+        self._mainMenu.add_cascade(
+            label=_('Section'),
+            menu=self._sectionMenu,
+        )
+        self._sectionMenu.add_command(
+            label=_('Next'),
+            command=self._load_next,
+        )
+        self._sectionMenu.add_command(
+            label=_('Previous'),
+            command=self._load_prev,
+        )
+        self._sectionMenu.add_command(
+            label=_('Apply changes'),
+            accelerator=KEYS.APPLY_CHANGES[1],
+            command=self._apply_changes,
+        )
         if PLATFORM == 'win':
-            self._sectionMenu.add_command(label=_('Exit'), accelerator=KEYS.QUIT_PROGRAM[1], command=self._request_closing)
+            self._sectionMenu.add_command(
+                label=_('Exit'),
+                accelerator=KEYS.QUIT_PROGRAM[1],
+                command=self._request_closing,
+            )
         else:
-            self._sectionMenu.add_command(label=_('Quit'), accelerator=KEYS.QUIT_PROGRAM[1], command=self._request_closing)
+            self._sectionMenu.add_command(
+                label=_('Quit'),
+                accelerator=KEYS.QUIT_PROGRAM[1],
+                command=self._request_closing,
+            )
 
         # Add a "View" Submenu to the editor window.
         self._viewMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('View'), menu=self._viewMenu)
+        self._mainMenu.add_cascade(
+            label=_('View'),
+            menu=self._viewMenu,
+        )
         for i, cm in enumerate(self.colorModes):
-            self._viewMenu.add_radiobutton(label=cm[0], variable=EditorView.colorMode, command=self._set_editor_colors, value=i)
+            self._viewMenu.add_radiobutton(
+                label=cm[0],
+                variable=EditorView.colorMode,
+                command=self._set_editor_colors,
+                value=i,
+            )
 
         # Add an "Edit" Submenu to the editor window.
         self._editMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('Edit'), menu=self._editMenu)
-        self._editMenu.add_command(label=_('Copy'), accelerator=KEYS.COPY[1], command=lambda: self._sectionEditor.event_generate("<<Copy>>"))
-        self._editMenu.add_command(label=_('Cut'), accelerator=KEYS.CUT[1], command=lambda: self._sectionEditor.event_generate("<<Cut>>"))
-        self._editMenu.add_command(label=_('Paste'), accelerator=KEYS.PASTE[1], command=lambda: self._sectionEditor.event_generate("<<Paste>>"))
+        self._mainMenu.add_cascade(
+            label=_('Edit'),
+            menu=self._editMenu,
+        )
+        self._editMenu.add_command(
+            label=_('Copy'),
+            accelerator=KEYS.COPY[1],
+            command=lambda: self._sectionEditor.event_generate("<<Copy>>"),
+        )
+        self._editMenu.add_command(
+            label=_('Cut'), accelerator=KEYS.CUT[1],
+            command=lambda: self._sectionEditor.event_generate("<<Cut>>"),
+        )
+        self._editMenu.add_command(
+            label=_('Paste'),
+            accelerator=KEYS.PASTE[1],
+            command=lambda: self._sectionEditor.event_generate("<<Paste>>"),
+        )
         self._editMenu.add_separator()
-        self._editMenu.add_command(label=_('Split at cursor position'), accelerator=KEYS.SPLIT_SCENE[1], command=self._split_section)
-        self._editMenu.add_command(label=_('Create section'), accelerator=KEYS.CREATE_SCENE[1], command=self._create_section)
+        self._editMenu.add_command(
+            label=_('Split at cursor position'),
+            accelerator=KEYS.SPLIT_SCENE[1],
+            command=self._split_section,
+        )
+        self._editMenu.add_command(
+            label=_('Create section'),
+            accelerator=KEYS.CREATE_SCENE[1],
+            command=self._create_section,
+        )
 
         # Add a "Format" Submenu to the editor window.
         self._formatMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('Format'), menu=self._formatMenu)
-        self._formatMenu.add_command(label=_('Emphasis'), accelerator=KEYS.ITALIC[1], command=self._sectionEditor.emphasis)
-        self._formatMenu.add_command(label=_('Strong emphasis'), accelerator=KEYS.BOLD[1], command=self._sectionEditor.strong_emphasis)
-        self._formatMenu.add_command(label=_('Plain'), accelerator=KEYS.PLAIN[1], command=self._sectionEditor.plain)
+        self._mainMenu.add_cascade(
+            label=_('Format'),
+            menu=self._formatMenu,
+        )
+        self._formatMenu.add_command(
+            label=_('Emphasis'),
+            accelerator=KEYS.ITALIC[1],
+            command=self._sectionEditor.emphasis,
+        )
+        self._formatMenu.add_command(
+            label=_('Strong emphasis'),
+            accelerator=KEYS.BOLD[1],
+            command=self._sectionEditor.strong_emphasis,
+        )
+        self._formatMenu.add_command(
+            label=_('Plain'),
+            accelerator=KEYS.PLAIN[1],
+            command=self._sectionEditor.plain,
+        )
 
         # Add a "Word count" Submenu to the editor window.
         self._wcMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('Word count'), menu=self._wcMenu)
-        self._wcMenu.add_command(label=_('Update'), accelerator=KEYS.UPDATE_WORDCOUNT[1], command=self._show_wordcount)
-        self._wcMenu.add_checkbutton(label=_('Live update'), variable=EditorView.liveWordCount, command=self._set_wc_mode)
+        self._mainMenu.add_cascade(
+            label=_('Word count'),
+            menu=self._wcMenu,
+        )
+        self._wcMenu.add_command(
+            label=_('Update'),
+            accelerator=KEYS.UPDATE_WORDCOUNT[1],
+            command=self._show_wordcount,
+        )
+        self._wcMenu.add_checkbutton(
+            label=_('Live update'),
+            variable=EditorView.liveWordCount,
+            command=self._set_wc_mode,
+        )
 
         # Help
         self._helpMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(label=_('Help'), menu=self._helpMenu)
-        self._helpMenu.add_command(label=_('Online help'), accelerator=KEYS.OPEN_HELP[1], command=self._open_help)
+        self._mainMenu.add_cascade(
+            label=_('Help'),
+            menu=self._helpMenu,
+        )
+        self._helpMenu.add_command(
+            label=_('Online help'),
+            accelerator=KEYS.OPEN_HELP[1],
+            command=self._open_help,
+        )
 
         # Event bindings.
         self.bind(KEYS.OPEN_HELP[0], self._open_help)
@@ -193,7 +311,8 @@ class EditorView(tk.Toplevel, SubController):
         """Exit the editor. Apply changes, if possible."""
         if not self._apply_changes_after_asking():
             return 'break'
-            # keeping the editor window open due to an XML error to be fixed before saving
+            # keeping the editor window open
+            # due to malformed XML to be fixed before saving
 
         self._service.prefs['win_geometry'] = self.winfo_geometry()
         self.destroy()
@@ -302,7 +421,12 @@ class EditorView(tk.Toplevel, SubController):
 
     def _load_section(self):
         # Load the section content into the text editor.
-        self.title(f'{self._section.title} - {self._mdl.novel.title}, {_("Section")} ID {self._scId}')
+        self.title(
+            (
+                f'{self._section.title} - {self._mdl.novel.title}'
+                f', {_("Section")} ID {self._scId}'
+            )
+        )
         self._sectionEditor.set_text(self._section.sectionContent)
         self._initialWc = self._sectionEditor.count_words()
         self._show_wordcount()

@@ -5,15 +5,17 @@
 ## Changelog
 
 
-### Version 5.4.0
+### Version 5.4.1
+
+- Fixed a bug where an unhandled exception is raised when deleting a section which was previously edited. 
 
 Update for novelibre 5.27.
 
-- Disabling menu entry on lock.
+- Disabling the novelibre "Section" > "Edit" menu entry on lock.
 - Processing Section.viewpoint.
 
 API: 5.27
-Based on novelibre 5.27.0
+Based on novelibre 5.27.3
 
 
 ### Version 5.3.0
