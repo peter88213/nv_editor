@@ -11,12 +11,15 @@ from nvlib.model.xml.xml_filter import strip_illegal_characters
 import tkinter as tk
 import xml.etree.ElementTree as ET
 
-#--- Regular expressions for counting words and characters like in LibreOffice.
-# See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
+# Regular expressions for counting words and characters like in LibreOffice.
+# See: https://help.libreoffice.org/latest/en-GB/text/
+# swriter/guide/words_count.html
 ADDITIONAL_WORD_LIMITS = re.compile(r'--|—|–|\<\/p\>')
 # this is to be replaced by spaces when counting words
 
-NO_WORD_LIMITS = re.compile(r'\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\<.+?\>')
+NO_WORD_LIMITS = re.compile(
+    r'\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\<.+?\>'
+)
 # this is to be replaced by empty strings when counting words
 
 
@@ -44,7 +47,11 @@ class EditorBox(tk.Text):
         # Copy geometry methods of self.frame without overriding Text
         # methods -- hack!
         text_meths = vars(tk.Text).keys()
-        methods = vars(tk.Pack).keys() | vars(tk.Grid).keys() | vars(tk.Place).keys()
+        methods = (
+            vars(tk.Pack).keys()
+            | vars(tk.Grid).keys()
+            | vars(tk.Place).keys()
+        )
         methods = methods.difference(text_meths)
 
         for m in methods:
@@ -87,7 +94,11 @@ class EditorBox(tk.Text):
         for i in range(int(self.index('end').split('.')[0])):
             line = self.get(f'{i}.0', f'{i}.0 lineend')
             for xmlTag in re.finditer('<.*?>', line):
-                self.tag_add(self.XML_TAG, f'{i}.{xmlTag.start()}', f'{i}.{xmlTag.end()}')
+                self.tag_add(
+                    self.XML_TAG,
+                    f'{i}.{xmlTag.start()}',
+                    f'{i}.{xmlTag.end()}',
+                )
 
     def set_text(self, text):
         """Put text into the editor box and clear the undo/redo stack."""
@@ -109,12 +120,18 @@ class EditorBox(tk.Text):
         return len(text.split())
 
     def emphasis(self, event=None):
-        """Make the selection emphasized, or begin with emphasized input."""
+        """Make the selection emphasized.
+        
+        Or begin with emphasized input.
+        """
         self._set_format(tag='em')
         return 'break'
 
     def strong_emphasis(self, event=None):
-        """Make the selection strongly emphasized, or begin with strongly emphasized input."""
+        """Make the selection strongly emphasized.
+        
+        Or begin with strongly emphasized input.
+        """
         self._set_format(tag='strong')
         return 'break'
 
@@ -191,7 +208,10 @@ class EditorBox(tk.Text):
                 if start >= 0:
                     end = text.find(f'</{tag}>')
                     if  start < end:
-                        text = f'{text[:start]}{text[start + len(tag) +2:end]}{text[end + len(tag) + 3:]}'
+                        text = (
+                            f'{text[:start]}{text[start + len(tag) +2:end]}'
+                            f'{text[end + len(tag) + 3:]}'
+                        )
                     else:
                         finished = True
                 else:

@@ -21,7 +21,8 @@ class EditorView(tk.Toplevel, SubController):
     """A pop-up window with a menu bar, a text box, and a status bar.
     
     Public instance methods:
-        lift() -- Bring window to the foreground and set the focus to the editor box.
+        lift() -- Bring window to the foreground 
+                  and set the focus to the editor box.
         on_quit() -- Exit the editor. Apply changes, if possible.
     """
     liveWordCount = None
@@ -277,16 +278,46 @@ class EditorView(tk.Toplevel, SubController):
         # Event bindings.
         self.bind(KEYS.OPEN_HELP[0], self._open_help)
         if PLATFORM != 'win':
-            self._sectionEditor.bind(KEYS.QUIT_PROGRAM[0], self._request_closing)
-        self._sectionEditor.bind(KEYS.APPLY_CHANGES[0], self._apply_changes)
-        self._sectionEditor.bind(KEYS.UPDATE_WORDCOUNT[0], self._show_wordcount)
-        self._sectionEditor.bind('<space>', self._sectionEditor.colorize)
-        self._sectionEditor.bind(KEYS.SPLIT_SCENE[0], self._split_section)
-        self._sectionEditor.bind(KEYS.CREATE_SCENE[0], self._create_section)
-        self._sectionEditor.bind(KEYS.ITALIC[0], self._sectionEditor.emphasis)
-        self._sectionEditor.bind(KEYS.BOLD[0], self._sectionEditor.strong_emphasis)
-        self._sectionEditor.bind(KEYS.PLAIN[0], self._sectionEditor.plain)
-        self._sectionEditor.bind('<Return>', self._sectionEditor.new_paragraph)
+            self._sectionEditor.bind(
+                KEYS.QUIT_PROGRAM[0],
+                self._request_closing
+            )
+        self._sectionEditor.bind(
+            KEYS.APPLY_CHANGES[0],
+            self._apply_changes
+        )
+        self._sectionEditor.bind(
+            KEYS.UPDATE_WORDCOUNT[0],
+            self._show_wordcount
+        )
+        self._sectionEditor.bind(
+            '<space>',
+            self._sectionEditor.colorize
+        )
+        self._sectionEditor.bind(
+            KEYS.SPLIT_SCENE[0],
+            self._split_section
+        )
+        self._sectionEditor.bind(
+            KEYS.CREATE_SCENE[0],
+            self._create_section
+        )
+        self._sectionEditor.bind(
+            KEYS.ITALIC[0],
+            self._sectionEditor.emphasis
+        )
+        self._sectionEditor.bind(
+            KEYS.BOLD[0],
+            self._sectionEditor.strong_emphasis
+        )
+        self._sectionEditor.bind(
+            KEYS.PLAIN[0],
+            self._sectionEditor.plain
+        )
+        self._sectionEditor.bind(
+            '<Return>',
+            self._sectionEditor.new_paragraph
+        )
         self.protocol("WM_DELETE_WINDOW", self._request_closing)
 
         self._set_wc_mode()
@@ -520,8 +551,12 @@ class EditorView(tk.Toplevel, SubController):
             )
         if newId:
 
-            # Cut the actual section's content from the cursor position to the end.
-            newContent = self._sectionEditor.get_text('insert', 'end').strip(' \n')
+            # Cut the actual section's content from the cursor position
+            # to the end.
+            newContent = self._sectionEditor.get_text(
+                'insert',
+                'end'
+            ).strip(' \n')
             self._sectionEditor.delete('insert', 'end')
             self._apply_changes()
 
@@ -529,7 +564,9 @@ class EditorView(tk.Toplevel, SubController):
             self._mdl.novel.sections[newId].sectionContent = newContent
 
             # Copy the viewpoint character.
-            self._mdl.novel.sections[newId].viewpoint = self._mdl.novel.sections[self._scId].viewpoint
+            self._mdl.novel.sections[
+                newId].viewpoint = self._mdl.novel.sections[
+                    self._scId].viewpoint
 
             # Go to the new section.
             self._load_next()
