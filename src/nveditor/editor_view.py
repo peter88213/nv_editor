@@ -564,9 +564,9 @@ class EditorView(tk.Toplevel, SubController):
             self._mdl.novel.sections[newId].sectionContent = newContent
 
             # Copy the viewpoint character.
-            self._mdl.novel.sections[
-                newId].viewpoint = self._mdl.novel.sections[
-                    self._scId].viewpoint
+            self._mdl.novel.sections[newId].viewpoint = (
+                self._mdl.novel.sections[self._scId].viewpoint
+            )
 
             # Go to the new section.
             self._load_next()
