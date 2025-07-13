@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.5.0
+
+- Added/changed icons.
+
+API: 5.27
+Based on novelibre 5.29.7
+
+
 ### Version 5.4.2
 
 - Fixed a bug where an unhandled exception is raised when deleting a section which was previously edited. 

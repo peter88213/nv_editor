@@ -4,7 +4,7 @@
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_editor/)
 
 
-# ![E](icons/eLogo32.png) nv_editor
+# ![E](icons/editor.png) nv_editor
 
 The [novelibre](https://github.com/peter88213/novelibre/) Python program helps authors organize novels.  
 
@@ -76,7 +76,7 @@ See the [online manual](https://peter88213.github.io/nvhelp-en/nv_editor/)
 
 ## Credits
 
-- The logo is made using the free *Pusab* font by Ryoichi Tsunekawa, [Flat-it](http://flat-it.com/).
+- The icons are based on the [Eva Icons](https://akveo.github.io/eva-icons/#/), published under the [MIT License](http://www.opensource.org/licenses/mit-license.php). The original black and white icons were colored for this plugin by the maintainer. 
 
 ## License
 

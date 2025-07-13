@@ -7,5 +7,5 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 from nveditor.nveditor_locale import _
 
 FEATURE = _('Section Editor')
-ICON = 'eLogo32'
+ICON = 'editor'
 
