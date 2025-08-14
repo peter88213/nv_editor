@@ -16,6 +16,8 @@ from pathlib import Path
 PLUGIN = 'nv_editor.py'
 VERSION = ' @release'
 
+pyz = os.path.dirname(__file__)
+
 
 def extract_file(sourceFile, targetDir):
     with zipfile.ZipFile(pyz) as z:
@@ -44,9 +46,6 @@ def cp_tree(sourceDir, targetDir):
     copytree(sourceDir, f'{targetDir}/{sourceDir}', dirs_exist_ok=True)
 
 
-pyz = os.path.dirname(__file__)
-
-
 def main(zipped=True):
     if zipped:
         copy_file = extract_file
@@ -60,13 +59,13 @@ def main(zipped=True):
     os.chdir(scriptDir)
 
     print(f'*** Installing {PLUGIN} {VERSION} ***')
-
-    # Install the plugin.
     homePath = str(Path.home()).replace('\\', '/')
     applicationDir = f'{homePath}/.novx'
     if os.path.isdir(applicationDir):
         pluginDir = f'{applicationDir}/plugin'
         os.makedirs(pluginDir, exist_ok=True)
+
+        # Install the plugin.
         print(f'Copying "{PLUGIN}" ...')
         copy_file(PLUGIN, pluginDir)
 
@@ -95,4 +94,5 @@ def main(zipped=True):
                 f'at "{os.path.normpath(applicationDir)}".'
             )
         )
+
     input('Press any key to quit.')
