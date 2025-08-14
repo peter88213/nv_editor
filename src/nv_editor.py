@@ -27,7 +27,7 @@ import tkinter as tk
 class Plugin(PluginBase):
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.27'
+    API_VERSION = '5.30'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
 

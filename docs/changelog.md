@@ -5,7 +5,7 @@
 ## Changelog
 
 
-### Version 5.6.0
+### Version 5.6.1
 
 - Using novelibre's word counter strategy.
 
