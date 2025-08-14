@@ -12,23 +12,9 @@ import os
 import sys
 import zipfile
 from pathlib import Path
-try:
-    from tkinter import *
-except ModuleNotFoundError:
-    input(
-        (
-            'The tkinter module is missing. '
-            'Please install the tk support package for your python3 version.'
-        )
-    )
-    sys.exit(1)
 
 PLUGIN = 'nv_editor.py'
 VERSION = ' @release'
-
-root = Tk()
-processInfo = Label(root, text='')
-message = []
 
 
 def extract_file(sourceFile, targetDir):
@@ -50,7 +36,7 @@ def fix_ini(iniFile):
     with open(iniFile, 'r') as f:
         text = f.read()
     if 'color_bg_bright = black' in text:
-        output('Removing outdated configuration file ...')
+        print('Removing outdated configuration file ...')
         os.remove(iniFile)
 
 
@@ -59,11 +45,6 @@ def cp_tree(sourceDir, targetDir):
 
 
 pyz = os.path.dirname(__file__)
-
-
-def output(text):
-    message.append(text)
-    processInfo.config(text=('\n').join(message))
 
 
 def main(zipped=True):
@@ -78,14 +59,7 @@ def main(zipped=True):
     scriptDir = os.path.dirname(scriptPath)
     os.chdir(scriptDir)
 
-    # Open a tk window.
-    root.title('Setup')
-    output(f'*** Installing {PLUGIN}{VERSION} ***\n')
-    header = Label(root, text='')
-    header.pack(padx=5, pady=5)
-
-    # Prepare the messaging area.
-    processInfo.pack(padx=5, pady=5)
+    print(f'*** Installing {PLUGIN} {VERSION} ***')
 
     # Install the plugin.
     homePath = str(Path.home()).replace('\\', '/')
@@ -93,19 +67,19 @@ def main(zipped=True):
     if os.path.isdir(applicationDir):
         pluginDir = f'{applicationDir}/plugin'
         os.makedirs(pluginDir, exist_ok=True)
-        output(f'Copying "{PLUGIN}" ...')
+        print(f'Copying "{PLUGIN}" ...')
         copy_file(PLUGIN, pluginDir)
 
         # Install the localization files.
-        output('Copying locale ...')
+        print('Copying locale ...')
         copy_tree('locale', applicationDir)
 
         # Install the icon files.
-        output('Copying icons ...')
+        print('Copying icons ...')
         copy_tree('icons', applicationDir)
 
         # Show a success message.
-        output(
+        print(
             (
                 f'Sucessfully installed "{PLUGIN}" '
                 f'at "{os.path.normpath(pluginDir)}".'
@@ -115,13 +89,10 @@ def main(zipped=True):
         # Remove the configuration file, if outdated.
         fix_ini(f'{applicationDir}/config/editor.ini')
     else:
-        output(
+        print(
             (
                 'ERROR: Cannot find a novelibre installation '
                 f'at "{os.path.normpath(applicationDir)}".'
             )
         )
-    root.quitButton = Button(text="Quit", command=quit)
-    root.quitButton.config(height=1, width=30)
-    root.quitButton.pack(padx=5, pady=5)
-    root.mainloop()
+    input('Press any key to quit.')
