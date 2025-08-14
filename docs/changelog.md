@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.6.0
+
+- Using novelibre's word counter strategy.
+
+API: 5.30
+Based on novelibre 5.30.0
+
+
 ### Version 5.5.0
 
 - Added/changed icons.

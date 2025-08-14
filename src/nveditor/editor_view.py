@@ -37,6 +37,7 @@ class EditorView(tk.Toplevel, SubController):
         self._scId = scId
         self._service = service
         self._section = self._mdl.novel.sections[scId]
+        self.wordCounter = self._mdl.nvService.get_word_counter()
 
         self.colorModes = [
             (
@@ -459,7 +460,10 @@ class EditorView(tk.Toplevel, SubController):
             )
         )
         self._sectionEditor.set_text(self._section.sectionContent)
-        self._initialWc = self._sectionEditor.count_words()
+        self._initialWc = self.wordCounter.get_word_count(
+            self._sectionEditor.get('1.0', 'end')
+        )
+
         self._show_wordcount()
 
     def _open_help(self, event=None):
@@ -484,7 +488,9 @@ class EditorView(tk.Toplevel, SubController):
 
     def _show_wordcount(self, event=None):
         # Display the word count on the status bar.
-        wc = self._sectionEditor.count_words()
+        wc = self.wordCounter.get_word_count(
+            self._sectionEditor.get('1.0', 'end')
+        )
         diff = wc - self._initialWc
         self._statusBar.config(text=f'{wc} {_("words")} ({diff} {_("new")})')
 

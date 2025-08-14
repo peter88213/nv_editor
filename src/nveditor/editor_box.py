@@ -11,17 +11,6 @@ from nvlib.model.xml.xml_filter import strip_illegal_characters
 import tkinter as tk
 import xml.etree.ElementTree as ET
 
-# Regular expressions for counting words and characters like in LibreOffice.
-# See: https://help.libreoffice.org/latest/en-GB/text/
-# swriter/guide/words_count.html
-ADDITIONAL_WORD_LIMITS = re.compile(r'--|—|–|\<\/p\>')
-# this is to be replaced by spaces when counting words
-
-NO_WORD_LIMITS = re.compile(
-    r'\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\<.+?\>'
-)
-# this is to be replaced by empty strings when counting words
-
 
 class EditorBox(tk.Text):
     """A text editor widget for novelibre raw markup."""
@@ -111,13 +100,6 @@ class EditorBox(tk.Text):
         # this is to prevent the user from clearing the box with Ctrl-Z
         self.mark_set('insert', f'1.{startIndex}')
         self.colorize()
-
-    def count_words(self):
-        """Return the word count."""
-        text = self.get('1.0', 'end')
-        text = ADDITIONAL_WORD_LIMITS.sub(' ', text)
-        text = NO_WORD_LIMITS.sub('', text)
-        return len(text.split())
 
     def emphasis(self, event=None):
         """Make the selection emphasized.
