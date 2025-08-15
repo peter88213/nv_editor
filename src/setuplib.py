@@ -6,12 +6,12 @@ Copyright (c) 2025 Peter Triesberger
 For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from shutil import copytree
-from shutil import copy2
 import os
+from pathlib import Path
+from shutil import copy2
+from shutil import copytree
 import sys
 import zipfile
-from pathlib import Path
 
 PLUGIN = 'nv_editor.py'
 VERSION = ' @release'
@@ -31,6 +31,10 @@ def extract_tree(sourceDir, targetDir):
                 z.extract(file, targetDir)
 
 
+def cp_tree(sourceDir, targetDir):
+    copytree(sourceDir, f'{targetDir}/{sourceDir}', dirs_exist_ok=True)
+
+
 def fix_ini(iniFile):
     if not os.path.isfile(iniFile):
         return
@@ -40,10 +44,6 @@ def fix_ini(iniFile):
     if 'color_bg_bright = black' in text:
         print('Removing outdated configuration file ...')
         os.remove(iniFile)
-
-
-def cp_tree(sourceDir, targetDir):
-    copytree(sourceDir, f'{targetDir}/{sourceDir}', dirs_exist_ok=True)
 
 
 def main(zipped=True):
@@ -79,20 +79,16 @@ def main(zipped=True):
 
         # Show a success message.
         print(
-            (
-                f'Sucessfully installed "{PLUGIN}" '
-                f'at "{os.path.normpath(pluginDir)}".'
-            )
+            f'Sucessfully installed "{PLUGIN}" '
+            f'at "{os.path.normpath(pluginDir)}".'
         )
 
         # Remove the configuration file, if outdated.
         fix_ini(f'{applicationDir}/config/editor.ini')
     else:
         print(
-            (
-                'ERROR: Cannot find a novelibre installation '
-                f'at "{os.path.normpath(applicationDir)}".'
-            )
+            'ERROR: Cannot find a novelibre installation '
+            f'at "{os.path.normpath(applicationDir)}".'
         )
 
     input('Press any key to quit.')
