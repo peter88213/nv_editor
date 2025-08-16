@@ -8,7 +8,7 @@ A simple [novelibre](https://github.com/peter88213/novelibre/) multi-section edi
 
 # Installation
 
-If [novelibre](https://github.com/peter88213/novelibre/) is installed, the setup script *setup.pyw* installs the *nv_editor* plugin in the *novelibre* plugin directory.
+If [novelibre](https://github.com/peter88213/novelibre/) is installed, the setup script *setup.py* installs the *nv_editor* plugin in the *novelibre* plugin directory.
 
 The plugin adds an **Edit** entry to the *novelibre* **Section** menu, and an **Editor plugin Online help** entry to the **Help** menu.  
 
