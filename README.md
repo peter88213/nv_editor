@@ -41,13 +41,13 @@ So if you don't know what "well-formed XML" means, this plugin might not be the 
 
 Download the latest release [nv_editor_v5.6.1.pyz](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v5.6.1.pyz)
 
-- Launch *nv_editor_v5.6.1.pyz* by double-clicking (Windows/Linux desktop),
+- Launch *nv_editor_v5.6.1.pyz* by double-clicking (Windows desktop),
 - or execute `python nv_editor_v5.6.1.pyz` (Windows), resp. `python3 nv_editor_v5.6.1.pyz` (Linux) on the command line.
 
 #### Important
 
 Many web browsers recognize the download as an executable file and offer to open it immediately. 
-This starts the installation.
+This starts the installation under Windows.
 
 However, depending on your security settings, your browser may 
 initially  refuse  to download the executable file. 
