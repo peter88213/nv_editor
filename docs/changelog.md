@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.7.0
+
+- Using the menu methods provided with novelibre 5.44.
+
+API: 5.44
+Based on novelibre 5.44.3
+
+
 ### Version 5.6.1
 
 - Using novelibre's word counter strategy.

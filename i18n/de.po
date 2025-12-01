@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.6.1\n"
+"Project-Id-Version: 5.7.0\n"
 "POT-Creation-Date: 2025-08-16 15:11:37\n"
-"PO-Revision-Date: 2025-08-16 15:11:37\n"
+"PO-Revision-Date: 2025-12-01 18:14:37\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,9 @@ msgstr "Änderungen übernehmen"
 
 msgid "Apply section changes?"
 msgstr "Änderungen am Abschnitt übernehmen?"
+
+msgid "Bio"
+msgstr "Biographie"
 
 msgid "Bold"
 msgstr "Fett"
@@ -45,6 +48,9 @@ msgstr "Der Abschnitt kann nicht geteilt werden"
 
 msgid "Cannot split the section at the cursor position"
 msgstr "Der Abschnitt kann an der Cursorposition nicht geteilt werden"
+
+msgid "Characterization"
+msgstr "Charakterisierung"
 
 msgid "Close"
 msgstr "Schließen"
@@ -79,11 +85,17 @@ msgstr "Editor-Plugin Online-Hilfe"
 msgid "Emphasis"
 msgstr "Betont"
 
+msgid "Ending"
+msgstr "Ende"
+
 msgid "Exit"
 msgstr "Beenden"
 
 msgid "Format"
 msgstr "Format"
+
+msgid "Goals"
+msgstr "Ziele"
 
 msgid "Help"
 msgstr "Hilfe"
@@ -115,14 +127,23 @@ msgstr "Vor"
 msgid "Online help"
 msgstr "Online-Hilfe"
 
+msgid "Opening"
+msgstr "Eröffnung"
+
 msgid "Outline"
 msgstr "Gliederung"
 
 msgid "Paste"
 msgstr "Einfügen"
 
+msgid "Peak emotional moment"
+msgstr "Emotionaler Höhepunkt"
+
 msgid "Plain"
 msgstr "Unformatiert"
+
+msgid "Plot progress"
+msgstr "Handlungsfortschritt"
 
 msgid "Previous"
 msgstr "Zurück"
@@ -160,6 +181,9 @@ msgstr "Ansicht"
 msgid "Word count"
 msgstr "Wortzählung"
 
+msgid "World building"
+msgstr "Weltenbau"
+
 msgid "https://peter88213.github.io/nvhelp-en"
 msgstr "https://peter88213.github.io/nvhelp-de"
 
@@ -168,4 +192,3 @@ msgstr "neu"
 
 msgid "words"
 msgstr "Wörter"
-
