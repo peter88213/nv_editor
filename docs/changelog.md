@@ -5,12 +5,13 @@
 ## Changelog
 
 
-### Version 5.7.0
+### Version 5.7.1
 
+- Appending linefeeds to headings as supported with novelibre 5.44.4.
 - Using the menu methods provided with novelibre 5.44.
 
 API: 5.44
-Based on novelibre 5.44.3
+Based on novelibre 5.44.4
 
 
 ### Version 5.6.1

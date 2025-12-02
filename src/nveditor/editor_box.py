@@ -94,7 +94,8 @@ class EditorBox(tk.Text):
         startIndex = len("<p>")
         if not text:
             text = '<p></p>'
-        text = text.replace('</p>', '</p>\n')
+        for tag in ('p', 'h5', 'h6', 'h7', 'h8', 'h9'):
+            text = text.replace(f'</{tag}>', f'</{tag}>\n')
         self.insert('end', text)
         self.edit_reset()
         # this is to prevent the user from clearing the box with Ctrl-Z
