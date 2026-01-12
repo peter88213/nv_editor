@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.8.0
+
+- Refactored the code for better maintainability.
+
+API: 5.50
+Based on novelibre 5.50.0
+
+
 ### Version 5.7.1
 
 - Appending linefeeds to headings as supported with novelibre 5.44.4.
