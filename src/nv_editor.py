@@ -57,6 +57,17 @@ class Plugin(PluginBase):
         )
         self._ui.sectionMenu.disableOnLock.append(label)
 
+        # Add the "Edit" command to novelibre's section context menu.
+        self._ui.sectionContextMenu.add_separator()
+        self._ui.sectionContextMenu.add_command(
+            label=label,
+            image=self._icon,
+            compound='left',
+            underline=0,
+            command=self._open_editor_window,
+        )
+        self._ui.sectionContextMenu.disableOnLock.append(label)
+
         # Add an entry to the Help menu.
         label = _('Editor plugin Online help')
         self._ui.helpMenu.add_command(
@@ -67,8 +78,8 @@ class Plugin(PluginBase):
         )
 
         #--- Set Key bindings.
-        self._ui.tv.tree.bind('<Double-1>', self._open_editor_window)
-        self._ui.tv.tree.bind('<Return>', self._open_editor_window)
+        # self._ui.tv.tree.bind('<Double-1>', self._open_editor_window)
+        # self._ui.tv.tree.bind('<Return>', self._open_editor_window)
 
     def on_close(self, event=None):
         self.editorService.on_close()

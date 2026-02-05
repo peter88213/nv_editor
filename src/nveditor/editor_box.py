@@ -129,19 +129,6 @@ class EditorBox(tk.Text):
         self.colorize()
         return 'break'
 
-    def _convert_from_novx(self, text, textTag, update):
-        """Return a section's content as a list of (text, tag) tuples.
-        
-        Positional arguments:
-            text: str -- a section's xml text.
-            textTag: str -- default tag used for body text.
-            update: Boolean -- If True, just update sysntax highlighting.
-        """
-        self._contentParser.textTag = textTag
-        self._contentParser.update = update
-        self._contentParser.feed(text)
-        return self._contentParser.taggedText[1:-1]
-
     def _set_format(self, event=None, tag=''):
         """Insert an opening/closing pair of novelibre markup tags."""
         if tag:

@@ -5,6 +5,16 @@
 ## Changelog
 
 
+### Version 5.9.0
+
+- Adding an "Edit" entry to the section context menu.
+- The editor is no longer opened by double-clicking on a section or pressing the Enter key.
+- Removed dead code. 
+
+API: 5.50
+Based on novelibre 5.51.2
+
+
 ### Version 5.8.0
 
 - Refactored the code for better maintainability.
