@@ -216,12 +216,12 @@ class EditorView(tk.Toplevel, SubController):
         self._editMenu.add_separator()
         self._editMenu.add_command(
             label=_('Split at cursor position'),
-            accelerator=KEYS.SPLIT_SCENE[1],
+            accelerator=KEYS.SPLIT_SECTION[1],
             command=self._split_section,
         )
         self._editMenu.add_command(
             label=_('Create section'),
-            accelerator=KEYS.CREATE_SCENE[1],
+            accelerator=KEYS.CREATE_SECTION[1],
             command=self._create_section,
         )
 
@@ -296,11 +296,11 @@ class EditorView(tk.Toplevel, SubController):
             self._sectionEditor.colorize
         )
         self._sectionEditor.bind(
-            KEYS.SPLIT_SCENE[0],
+            KEYS.SPLIT_SECTION[0],
             self._split_section
         )
         self._sectionEditor.bind(
-            KEYS.CREATE_SCENE[0],
+            KEYS.CREATE_SECTION[0],
             self._create_section
         )
         self._sectionEditor.bind(
