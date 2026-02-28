@@ -11,8 +11,8 @@ class MacKeys(GenericKeys):
 
     APPLY_CHANGES = ('<Command-s>', 'Cmd-S')
     BOLD = ('<Command-b>', 'Cmd-B')
-    CREATE_SECTION = ('<Command-Alt-n>', 'Cmd-Alt-N')
+    CREATE_SECTION = ('<Command-Option-n>', 'Cmd-Option-N')
     ITALIC = ('<Command-i>', 'Cmd-I')
     PLAIN = ('<Command-m>', 'Cmd-M')
     QUIT_PROGRAM = ('<Command-q>', 'Cmd-Q')
-    SPLIT_SECTION = ('<Command-Alt-s>', 'Cmd-Alt-S')
+    SPLIT_SECTION = ('<Command-Option-s>', 'Cmd-Option-S')
