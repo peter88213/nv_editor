@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.9.1
+
+- Mac keys: Replaced "Alt" with "Option".
+- Minor refactoring. 
+
+API: 5.50
+Based on novelibre 5.53.4
+
+
 ### Version 5.9.0
 
 - Adding an "Edit" entry to the section context menu.
