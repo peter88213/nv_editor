@@ -134,7 +134,7 @@ class EditorBox(tk.Text):
         if tag:
             # Toggle format as specified by tag.
             if self.tag_ranges('sel'):
-                text = self.get(tk.SEL_FIRST, tk.SEL_LAST)
+                text = self.get('sel.first', 'sel.last')
                 if text.startswith(f'<{tag}>'):
                     if text.endswith(f'</{tag}>'):
                         # The selection is already formatted: Remove markup.
@@ -154,7 +154,7 @@ class EditorBox(tk.Text):
                 self.mark_set('insert', f'insert-{len(endTag)}c')
         elif self.tag_ranges('sel'):
             # Remove all markup from the selection.
-            text = self.get(tk.SEL_FIRST, tk.SEL_LAST)
+            text = self.get('sel.first', 'sel.last')
             for tag in self._TAGS:
                 text = self._remove_format(text, tag)
             self._replace_selected(text)
@@ -162,8 +162,8 @@ class EditorBox(tk.Text):
 
     def _replace_selected(self, text):
         """Replace the selected passage with text; keep the selection."""
-        self.mark_set('insert', tk.SEL_FIRST)
-        self.delete(tk.SEL_FIRST, tk.SEL_LAST)
+        self.mark_set('insert', 'sel.first')
+        self.delete('sel.first', 'sel.last')
         selFirst = self.index('insert')
         self.insert('insert', text)
         selLast = self.index('insert')
