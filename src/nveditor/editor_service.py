@@ -39,9 +39,7 @@ class EditorService(SubController, Observer):
         margin_x=40,
         margin_y=20,
     )
-    OPTIONS = dict(
-        live_wordcount=False,
-    )
+    OPTIONS = {}
 
     def __init__(self, model, view, controller):
         self._mdl = model
@@ -73,6 +71,11 @@ class EditorService(SubController, Observer):
         except:
             self.icon = None
 
+        self._sectionEditors = {}
+        # editor windows
+        # key: str -- Section ID
+        # value:  reference to the EditorView instance
+
         # Register to be refreshed when a section is deleted.
         self._mdl.add_observer(self)
 
@@ -80,15 +83,7 @@ class EditorService(SubController, Observer):
         EditorView.colorMode = tk.IntVar(
             value=int(self.prefs['color_mode']),
         )
-        EditorView.liveWordCount = tk.BooleanVar(
-            value=self.prefs['live_wordcount'],
-        )
         EditorBox.COLOR_XML_TAG = self.prefs['color_xml_tag']
-
-        self._sectionEditors = {}
-        # editor windows
-        # key: str -- Section ID
-        # value:  reference to the EditorView instance
 
     def close_editor_window(self, nodeId):
         try:
@@ -108,7 +103,6 @@ class EditorService(SubController, Observer):
         """Save project specific configuration."""
         self.on_close()
         self.prefs['color_mode'] = EditorView.colorMode.get()
-        self.prefs['live_wordcount'] = EditorView.liveWordCount.get()
 
         #--- Save configuration
         for keyword in self.prefs:

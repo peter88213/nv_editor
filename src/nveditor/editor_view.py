@@ -25,8 +25,6 @@ class EditorView(tk.Toplevel, SubController):
                   and set the focus to the editor box.
         on_quit() -- Exit the editor. Apply changes, if possible.
     """
-    liveWordCount = None
-    # to be overwritten by the client with tk.BooleanVar()
     colorMode = None
     # to be overwritten by the client with tk.IntVar()
 
@@ -37,7 +35,6 @@ class EditorView(tk.Toplevel, SubController):
         self._scId = scId
         self._service = service
         self._section = self._mdl.novel.sections[scId]
-        self.wordCounter = self._mdl.nvService.get_word_counter()
 
         self.colorModes = [
             (
@@ -67,12 +64,6 @@ class EditorView(tk.Toplevel, SubController):
         # Add a main menu bar to the editor window.
         self._mainMenu = tk.Menu(self)
         self.config(menu=self._mainMenu)
-
-        '''
-        # Add a button bar to the editor window.
-        self._buttonBar = ttk.Frame(self)
-        self._buttonBar.pack(expand=False, fill='both')
-        '''
 
         # Add a text editor with scrollbar to the editor window.
         self._sectionEditor = EditorBox(
@@ -119,33 +110,6 @@ class EditorView(tk.Toplevel, SubController):
         self._load_section()
 
         #--- Configure the user interface.
-        '''
-        # Add buttons to the button bar.
-        tk.Button(
-            self._buttonBar, 
-            text=_('Copy'), 
-            command=lambda: self._sectionEditor.event_generate("<<Copy>>"),
-        ).pack(side='left')
-        tk.Button(
-            self._buttonBar, 
-            text=_('Cut'), 
-            command=lambda: self._sectionEditor.event_generate("<<Cut>>"),
-        ).pack(side='left')
-        tk.Button(
-            self._buttonBar, 
-            text=_('Paste'), 
-            command=lambda: self._sectionEditor.event_generate("<<Paste>>"),
-        ).pack(side='left')
-        tk.Button(
-            self._buttonBar, 
-            text=_('Italic'), 
-            command=self._sectionEditor.emphasis,
-        ).pack(side='left')
-        tk.Button(
-            self._buttonBar, 
-            text=_('Bold'), 
-            command=self._sectionEditor.strong_emphasis).pack(side='left'),
-        '''
 
         # Add a "Section" Submenu to the editor window.
         self._sectionMenu = tk.Menu(self._mainMenu, tearoff=0)
@@ -247,23 +211,6 @@ class EditorView(tk.Toplevel, SubController):
             command=self._sectionEditor.plain,
         )
 
-        # Add a "Word count" Submenu to the editor window.
-        self._wcMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(
-            label=_('Word count'),
-            menu=self._wcMenu,
-        )
-        self._wcMenu.add_command(
-            label=_('Update'),
-            accelerator=KEYS.UPDATE_WORDCOUNT[1],
-            command=self._show_wordcount,
-        )
-        self._wcMenu.add_checkbutton(
-            label=_('Live update'),
-            variable=EditorView.liveWordCount,
-            command=self._set_wc_mode,
-        )
-
         # Help
         self._helpMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_cascade(
@@ -286,10 +233,6 @@ class EditorView(tk.Toplevel, SubController):
         self._sectionEditor.bind(
             KEYS.APPLY_CHANGES[0],
             self._apply_changes
-        )
-        self._sectionEditor.bind(
-            KEYS.UPDATE_WORDCOUNT[0],
-            self._show_wordcount
         )
         self._sectionEditor.bind(
             '<space>',
@@ -321,7 +264,6 @@ class EditorView(tk.Toplevel, SubController):
         )
         self.protocol("WM_DELETE_WINDOW", self._request_closing)
 
-        self._set_wc_mode()
         self.lift()
 
         self.update_idletasks()
@@ -454,17 +396,10 @@ class EditorView(tk.Toplevel, SubController):
     def _load_section(self):
         # Load the section content into the text editor.
         self.title(
-            (
-                f'{self._section.title} - {self._mdl.novel.title}'
-                f', {_("Section")} ID {self._scId}'
-            )
+            f'{self._section.title} - {self._mdl.novel.title}'
+            f', {_("Section")} ID {self._scId}'
         )
         self._sectionEditor.set_text(self._section.sectionContent)
-        self._initialWc = self.wordCounter.get_word_count(
-            self._sectionEditor.get('1.0', 'end')
-        )
-
-        self._show_wordcount()
 
     def _open_help(self, event=None):
         NveditorHelp.open_help_page()
@@ -478,21 +413,6 @@ class EditorView(tk.Toplevel, SubController):
         self._sectionEditor['fg'] = self.colorModes[cm][1]
         self._sectionEditor['bg'] = self.colorModes[cm][2]
         self._sectionEditor['insertbackground'] = self.colorModes[cm][1]
-
-    def _set_wc_mode(self, *args):
-        if EditorView.liveWordCount.get():
-            self.bind('<KeyRelease>', self._show_wordcount)
-            self._show_wordcount()
-        else:
-            self.unbind('<KeyRelease>')
-
-    def _show_wordcount(self, event=None):
-        # Display the word count on the status bar.
-        wc = self.wordCounter.get_word_count(
-            self._sectionEditor.get('1.0', 'end')
-        )
-        diff = wc - self._initialWc
-        self._statusBar.config(text=f'{wc} {_("words")} ({diff} {_("new")})')
 
     def _split_section(self, event=None):
         # Split a section at the cursor position.

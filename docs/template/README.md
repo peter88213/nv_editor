@@ -15,9 +15,9 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
 ## Features
 
 - A simple text editor box without rich text display and search capability.
-- Text is edited at the "XML markup" level. XML tags are displayed as stored in the *novx* file. Most of the formatting tags are similar to those of HTML.
+- Text is edited at the "XML markup" level. XML tags are displayed as stored in the *novx* file. 
+  Most of the formatting tags are similar to those of HTML.
 - Multiple section editor windows.
-- Word count is displayed and updated either live or on demand.
 - The application is ready for internationalization with GNU gettext. A German localization is provided. 
 - Editor features:
     - Text selection.
