@@ -20,4 +20,5 @@ class GenericKeys:
     PLAIN = ('<Control-m>', f'{_("Ctrl")}-M')
     QUIT_PROGRAM = ('<Control-q>', f'{_("Ctrl")}-Q')
     SPLIT_SECTION = ('<Control-Alt-s>', f'{_("Ctrl")}-Alt-S')
+    START_EDITOR = ('<F4>', 'F4')
     UPDATE_WORDCOUNT = ('<F5>', 'F5')

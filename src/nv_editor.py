@@ -19,6 +19,7 @@ from nveditor.nveditor_locale import _
 from nveditor.editor_service import EditorService
 from nveditor.nveditor_help import NveditorHelp
 from nvlib.controller.plugin.plugin_base import PluginBase
+from nveditor.platform.platform_settings import KEYS
 
 
 class Plugin(PluginBase):
@@ -52,7 +53,7 @@ class Plugin(PluginBase):
             label=label,
             image=self._icon,
             compound='left',
-            underline=0,
+            accelerator=KEYS.START_EDITOR[1],
             command=self._open_editor_window,
         )
         self._ui.sectionMenu.disableOnLock.append(label)
@@ -63,7 +64,7 @@ class Plugin(PluginBase):
             label=label,
             image=self._icon,
             compound='left',
-            underline=0,
+            accelerator=KEYS.START_EDITOR[1],
             command=self._open_editor_window,
         )
         self._ui.sectionContextMenu.disableOnLock.append(label)
@@ -79,7 +80,7 @@ class Plugin(PluginBase):
 
         #--- Set Key bindings.
         # self._ui.tv.tree.bind('<Double-1>', self._open_editor_window)
-        # self._ui.tv.tree.bind('<Return>', self._open_editor_window)
+        self._ui.tv.tree.bind(KEYS.START_EDITOR[0], self._open_editor_window)
 
     def on_close(self, event=None):
         self.editorService.on_close()
