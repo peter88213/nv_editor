@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.9.1\n"
-"POT-Creation-Date: 2026-03-19 21:07:33\n"
+"Project-Id-Version: 5.10.0\n"
+"POT-Creation-Date: 2026-03-29 00:57:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -27,9 +27,6 @@ msgid "Apply section changes?"
 msgstr ""
 
 msgid "Bio"
-msgstr ""
-
-msgid "Bold"
 msgstr ""
 
 msgid "Bright mode"
@@ -104,13 +101,7 @@ msgstr ""
 msgid "Invalid changes"
 msgstr ""
 
-msgid "Italic"
-msgstr ""
-
 msgid "Light mode"
-msgstr ""
-
-msgid "Live update"
 msgstr ""
 
 msgid "Major Character"
@@ -173,23 +164,11 @@ msgstr ""
 msgid "Unlock and apply changes?"
 msgstr ""
 
-msgid "Update"
-msgstr ""
-
 msgid "View"
-msgstr ""
-
-msgid "Word count"
 msgstr ""
 
 msgid "World building"
 msgstr ""
 
 msgid "https://peter88213.github.io/nvhelp-en"
-msgstr ""
-
-msgid "new"
-msgstr ""
-
-msgid "words"
 msgstr ""

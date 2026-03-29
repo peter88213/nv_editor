@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.10.0
+
+- Starting the editor with F4.
+- Removed the word count feature. 
+
+API: 5.50
+Based on novelibre 5.54.4
+
+
 ### Version 5.9.1
 
 - Mac keys: Replaced "Alt" with "Option".

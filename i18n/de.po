@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.9.1\n"
+"Project-Id-Version: 5.10.0\n"
 "POT-Creation-Date: 2025-08-16 15:11:37\n"
-"PO-Revision-Date: 2026-03-19 21:07:33\n"
+"PO-Revision-Date: 2026-03-29 00:57:25\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -27,9 +27,6 @@ msgstr "Änderungen am Abschnitt übernehmen?"
 
 msgid "Bio"
 msgstr "Biographie"
-
-msgid "Bold"
-msgstr "Fett"
 
 msgid "Bright mode"
 msgstr "Heller Modus"
@@ -103,14 +100,8 @@ msgstr "Hilfe"
 msgid "Invalid changes"
 msgstr "Ungültige Änderungen"
 
-msgid "Italic"
-msgstr "Kursiv"
-
 msgid "Light mode"
 msgstr "Lichter Modus"
-
-msgid "Live update"
-msgstr "Laufende Aktualisierung"
 
 msgid "Major Character"
 msgstr "Hauptfigur"
@@ -172,23 +163,11 @@ msgstr "Das Ergebnis wäre kein wohlgeformtes XML"
 msgid "Unlock and apply changes?"
 msgstr "Entsperren und Änderungen übernehmen?"
 
-msgid "Update"
-msgstr "Aktualisieren"
-
 msgid "View"
 msgstr "Ansicht"
-
-msgid "Word count"
-msgstr "Wortzählung"
 
 msgid "World building"
 msgstr "Weltenbau"
 
 msgid "https://peter88213.github.io/nvhelp-en"
 msgstr "https://peter88213.github.io/nvhelp-de"
-
-msgid "new"
-msgstr "neu"
-
-msgid "words"
-msgstr "Wörter"
