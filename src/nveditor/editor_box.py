@@ -5,6 +5,7 @@ For further information see https://github.com/peter88213/nv_editor
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import re
+from tkinter import font as tkFont
 from tkinter import ttk
 
 from nvlib.model.xml.xml_filter import strip_illegal_characters
@@ -17,7 +18,6 @@ class EditorBox(tk.Text):
     _TAGS = ('em', 'strong')
     # Supported tags.
     XML_TAG = 'xmlTag'
-    COLOR_XML_TAG = 'cornflower blue'
 
     def __init__(self, master=None, **kw):
         """Copied from tkinter.scrolledtext and modified (use ttk widgets).
@@ -32,6 +32,14 @@ class EditorBox(tk.Text):
         tk.Text.__init__(self, self.frame, **kw)
         self.pack(side='left', fill='both', expand=True)
         self.vbar['command'] = self.yview
+
+        defaultFont = tkFont.Font(
+            root=self,
+            font=kw['font'],
+            name='editor_font',
+        )
+        boldFont = tkFont.Font(**defaultFont.configure())
+        boldFont.configure(weight='bold')
 
         # Copy geometry methods of self.frame without overriding Text
         # methods -- hack!
@@ -49,7 +57,8 @@ class EditorBox(tk.Text):
 
         self.tag_configure(
             self.XML_TAG,
-            foreground=self.COLOR_XML_TAG,
+            foreground='cornflower blue',
+            font=boldFont,
         )
 
     def check_validity(self):

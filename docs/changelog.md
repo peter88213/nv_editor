@@ -5,11 +5,13 @@
 ## Changelog
 
 
-### Version 5.10.1
+### Version 5.10.2
 
 - Starting the editor with F4.
 - Added and changed keyboard shortcuts to match with nv_writer.
-- Removed the word count feature. 
+- Removed the word count feature.
+- Changed the color modes, adding a new "Blue" mode.
+- Refactored the code for better maintainability.
 
 API: 5.50
 Based on novelibre 5.54.4

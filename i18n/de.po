@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.10.1\n"
+"Project-Id-Version: 5.10.2\n"
 "POT-Creation-Date: 2025-08-16 15:11:37\n"
-"PO-Revision-Date: 2026-03-29 01:46:58\n"
+"PO-Revision-Date: 2026-03-29 11:47:52\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,9 @@ msgstr "Änderungen am Abschnitt übernehmen?"
 
 msgid "Bio"
 msgstr "Biographie"
+
+msgid "Blue mode"
+msgstr "Blauer Modus"
 
 msgid "Bright mode"
 msgstr "Heller Modus"

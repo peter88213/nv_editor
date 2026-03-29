@@ -8,6 +8,7 @@ from tkinter import ttk
 
 from nveditor.editor_box import EditorBox
 from nveditor.nveditor_globals import FEATURE
+from nveditor.nveditor_globals import prefs
 from nveditor.nveditor_help import NveditorHelp
 from nveditor.nveditor_locale import _
 from nveditor.platform.platform_settings import KEYS
@@ -25,8 +26,36 @@ class EditorView(tk.Toplevel, SubController):
                   and set the focus to the editor box.
         on_quit() -- Exit the editor. Apply changes, if possible.
     """
-    colorMode = None
+    colorModeVar = None
     # to be overwritten by the client with tk.IntVar()
+
+    COLOR_MODES = [
+        (
+            _('Bright mode'),
+            'black',
+            'white',
+            'blue',
+        ),
+        (
+            _('Light mode'),
+            'black',
+            'antique white',
+            'firebrick',
+        ),
+        (
+            _('Dark mode'),
+            'light grey',
+            'gray20',
+            'gold',
+        ),
+        (
+            _('Blue mode'),
+            '#FFFFFF',
+            '#0000AA',
+            '#FFFF55',
+        ),
+    ]
+    # (name, foreground, background) tuples for color modes.
 
     def __init__(self, model, view, controller, scId, service, icon=None):
         self._mdl = model
@@ -36,28 +65,9 @@ class EditorView(tk.Toplevel, SubController):
         self._service = service
         self._section = self._mdl.novel.sections[scId]
 
-        self.colorModes = [
-            (
-                _('Bright mode'),
-                self._service.prefs['color_fg_bright'],
-                self._service.prefs['color_bg_bright'],
-            ),
-            (
-                _('Light mode'),
-                self._service.prefs['color_fg_light'],
-                self._service.prefs['color_bg_light'],
-            ),
-            (
-                _('Dark mode'),
-                self._service.prefs['color_fg_dark'],
-                self._service.prefs['color_bg_dark'],
-            ),
-        ]
-        # (name, foreground, background) tuples for color modes.
-
         # Create an independent editor window.
         super().__init__()
-        self.geometry(self._service.prefs['win_geometry'])
+        self.geometry(prefs['win_geometry'])
         if icon:
             self.iconphoto(False, icon)
 
@@ -71,14 +81,14 @@ class EditorView(tk.Toplevel, SubController):
             wrap='word',
             undo=True,
             autoseparators=True,
-            spacing1=self._service.prefs['paragraph_spacing'],
-            spacing2=self._service.prefs['line_spacing'],
+            spacing1=prefs['paragraph_spacing'],
+            spacing2=prefs['line_spacing'],
             maxundo=-1,
-            padx=self._service.prefs['margin_x'],
-            pady=self._service.prefs['margin_y'],
+            padx=prefs['margin_x'],
+            pady=prefs['margin_y'],
             font=(
-                self._service.prefs['font_family'],
-                self._service.prefs['font_size'],
+                prefs['editor_font'],
+                prefs['font_size'],
             ),
         )
         self._sectionEditor.pack(expand=True, fill='both')
@@ -163,11 +173,11 @@ class EditorView(tk.Toplevel, SubController):
             label=_('View'),
             menu=self._viewMenu,
         )
-        for i, cm in enumerate(self.colorModes):
+        for i, cm in enumerate(self.COLOR_MODES):
             self._viewMenu.add_radiobutton(
                 label=cm[0],
-                variable=EditorView.colorMode,
-                command=self._set_editor_colors,
+                variable=EditorView.colorModeVar,
+                command=self._change_editor_colors,
                 value=i,
             )
 
@@ -256,7 +266,7 @@ class EditorView(tk.Toplevel, SubController):
 
         self.lift()
         self.update_idletasks()
-        self.geometry(self._service.prefs['win_geometry'])
+        self.geometry(prefs['win_geometry'])
         self.isOpen = True
 
     def lift(self):
@@ -276,7 +286,7 @@ class EditorView(tk.Toplevel, SubController):
             # keeping the editor window open
             # due to malformed XML to be fixed before saving
 
-        self._service.prefs['win_geometry'] = self.winfo_geometry()
+        prefs['win_geometry'] = self.winfo_geometry()
         self.destroy()
         self.isOpen = False
 
@@ -396,11 +406,24 @@ class EditorView(tk.Toplevel, SubController):
         self._service.close_editor_window(self._scId)
         # making sure the service removes this instance from the list
 
+    def _change_editor_colors(self):
+        cm = EditorView.colorModeVar.get()
+        (
+            __,
+            prefs['color_fg'],
+            prefs['color_bg'],
+            prefs['color_xml_tag'],
+        ) = self.COLOR_MODES[cm]
+        self._set_editor_colors()
+
     def _set_editor_colors(self):
-        cm = EditorView.colorMode.get()
-        self._sectionEditor['fg'] = self.colorModes[cm][1]
-        self._sectionEditor['bg'] = self.colorModes[cm][2]
-        self._sectionEditor['insertbackground'] = self.colorModes[cm][1]
+        self._sectionEditor['fg'] = prefs['color_fg']
+        self._sectionEditor['bg'] = prefs['color_bg']
+        self._sectionEditor['insertbackground'] = prefs['color_fg']
+        self._sectionEditor.tag_configure(
+            self._sectionEditor.XML_TAG,
+            foreground=prefs['color_xml_tag'],
+        )
 
     def _split_section(self, event=None):
         # Split a section at the cursor position.

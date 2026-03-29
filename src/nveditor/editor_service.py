@@ -10,8 +10,10 @@ import sys
 
 from nveditor.editor_box import EditorBox
 from nveditor.editor_view import EditorView
+from nveditor.nveditor_globals import DEFAULT_FONT
 from nveditor.nveditor_globals import FEATURE
 from nveditor.nveditor_globals import ICON
+from nveditor.nveditor_globals import prefs
 from nveditor.nveditor_locale import _
 from nvlib.controller.sub_controller import SubController
 from nvlib.gui.observer import Observer
@@ -25,14 +27,10 @@ class EditorService(SubController, Observer):
     SETTINGS = dict(
         win_geometry='600x800',
         color_mode=0,
-        color_bg_bright='white',
-        color_fg_bright='black',
-        color_bg_light='antique white',
-        color_fg_light='black',
-        color_bg_dark='gray20',
-        color_fg_dark='light grey',
-        color_xml_tag='cornflower blue',
-        font_family='Courier',
+        color_bg='white',
+        color_fg='black',
+        color_xml_tag='blue',
+        editor_font=DEFAULT_FONT,
         font_size=12,
         line_spacing=4,
         paragraph_spacing=4,
@@ -58,9 +56,8 @@ class EditorService(SubController, Observer):
             filePath=f'{configDir}/{self.INI_FILENAME}',
         )
         self.configuration.read()
-        self.prefs = {}
-        self.prefs.update(self.configuration.settings)
-        self.prefs.update(self.configuration.options)
+        prefs.update(self.configuration.settings)
+        prefs.update(self.configuration.options)
 
         # Set window icon.
         try:
@@ -80,10 +77,10 @@ class EditorService(SubController, Observer):
         self._mdl.add_observer(self)
 
         # Configure the editor box.
-        EditorView.colorMode = tk.IntVar(
-            value=int(self.prefs['color_mode']),
+        EditorView.colorModeVar = tk.IntVar(
+            value=int(prefs['color_mode']),
         )
-        EditorBox.COLOR_XML_TAG = self.prefs['color_xml_tag']
+        EditorBox.colorXmlTag = prefs['color_xml_tag']
 
     def close_editor_window(self, nodeId):
         try:
@@ -102,14 +99,14 @@ class EditorService(SubController, Observer):
     def on_quit(self):
         """Save project specific configuration."""
         self.on_close()
-        self.prefs['color_mode'] = EditorView.colorMode.get()
+        prefs['color_mode'] = EditorView.colorModeVar.get()
 
         #--- Save configuration
-        for keyword in self.prefs:
+        for keyword in prefs:
             if keyword in self.configuration.options:
-                self.configuration.options[keyword] = self.prefs[keyword]
+                self.configuration.options[keyword] = prefs[keyword]
             elif keyword in self.configuration.settings:
-                self.configuration.settings[keyword] = self.prefs[keyword]
+                self.configuration.settings[keyword] = prefs[keyword]
         self.configuration.write()
 
     def open_editor_window(self):
