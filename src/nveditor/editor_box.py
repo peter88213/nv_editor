@@ -47,9 +47,10 @@ class EditorBox(tk.Text):
             if m[0] != '_' and m != 'config' and m != 'configure':
                 setattr(self, m, getattr(self.frame, m))
 
-        self.tag_configure(self.XML_TAG,
-                           foreground=self.COLOR_XML_TAG,
-                           )
+        self.tag_configure(
+            self.XML_TAG,
+            foreground=self.COLOR_XML_TAG,
+        )
 
     def check_validity(self):
         text = strip_illegal_characters(self.get("1.0", "end"))

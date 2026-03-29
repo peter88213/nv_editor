@@ -255,10 +255,8 @@ class EditorView(tk.Toplevel, SubController):
         self.protocol("WM_DELETE_WINDOW", self._request_closing)
 
         self.lift()
-
         self.update_idletasks()
         self.geometry(self._service.prefs['win_geometry'])
-
         self.isOpen = True
 
     def lift(self):
@@ -294,7 +292,7 @@ class EditorView(tk.Toplevel, SubController):
                 message=_('Invalid changes'),
                 detail=str(ex),
                 parent=self
-                )
+            )
             self.lift()
             return
 
@@ -315,15 +313,15 @@ class EditorView(tk.Toplevel, SubController):
                     message=_('Apply section changes?'),
                     title=FEATURE,
                     parent=self
-                    ):
+                ):
                     try:
                         self._sectionEditor.check_validity()
                     except ValueError as ex:
                         self._ui.show_error(
                             message=_('Invalid changes'),
                             detail=str(ex),
-                            parent=self
-                            )
+                            parent=self,
+                        )
                         self.lift()
                         return False
 
