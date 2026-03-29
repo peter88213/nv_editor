@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.10.0\n"
+"Project-Id-Version: 5.10.1\n"
 "POT-Creation-Date: 2025-08-16 15:11:37\n"
-"PO-Revision-Date: 2026-03-29 00:57:25\n"
+"PO-Revision-Date: 2026-03-29 01:46:58\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -54,9 +54,6 @@ msgstr "Schließen"
 
 msgid "Copy"
 msgstr "Kopieren"
-
-msgid "Create section"
-msgstr "Abschnitt erzeugen"
 
 msgid "Ctrl"
 msgstr "Strg"
@@ -112,6 +109,9 @@ msgstr "Nebenfigur"
 msgid "Move the text from the cursor position to the end into a new section?"
 msgstr "Den Text von der Cursorposition bis zum Ende in einen neuen Abschnitt verschieben?"
 
+msgid "New"
+msgstr "Neu"
+
 msgid "Next"
 msgstr "Vor"
 
@@ -129,6 +129,12 @@ msgstr "Einfügen"
 
 msgid "Peak emotional moment"
 msgstr "Emotionaler Höhepunkt"
+
+msgid "PgDn"
+msgstr "Bild↓"
+
+msgid "PgUp"
+msgstr "Bild↑"
 
 msgid "Plain"
 msgstr "Unformatiert"
@@ -148,8 +154,8 @@ msgstr "Abschnitt"
 msgid "Section Editor"
 msgstr "Abschnittseditor"
 
-msgid "Split at cursor position"
-msgstr "An der Cursorposition teilen"
+msgid "Split"
+msgstr "Teilen"
 
 msgid "Strong emphasis"
 msgstr "Stark betont"

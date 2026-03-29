@@ -5,9 +5,10 @@
 ## Changelog
 
 
-### Version 5.10.0
+### Version 5.10.1
 
 - Starting the editor with F4.
+- Added and changed keyboard shortcuts to match with nv_writer.
 - Removed the word count feature. 
 
 API: 5.50

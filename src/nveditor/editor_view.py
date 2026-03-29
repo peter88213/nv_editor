@@ -118,13 +118,27 @@ class EditorView(tk.Toplevel, SubController):
             menu=self._sectionMenu,
         )
         self._sectionMenu.add_command(
-            label=_('Next'),
-            command=self._load_next,
+            label=_('New'),
+            accelerator=KEYS.CREATE_SECTION[1],
+            command=self._create_section,
         )
         self._sectionMenu.add_command(
+            label=_('Split'),
+            accelerator=KEYS.SPLIT_SECTION[1],
+            command=self._split_section,
+        )
+        self._sectionMenu.add_separator()
+        self._sectionMenu.add_command(
             label=_('Previous'),
+            accelerator=KEYS.PREVIOUS[1],
             command=self._load_prev,
         )
+        self._sectionMenu.add_command(
+            label=_('Next'),
+            accelerator=KEYS.NEXT[1],
+            command=self._load_next,
+        )
+        self._sectionMenu.add_separator()
         self._sectionMenu.add_command(
             label=_('Apply changes'),
             accelerator=KEYS.APPLY_CHANGES[1],
@@ -164,29 +178,18 @@ class EditorView(tk.Toplevel, SubController):
             menu=self._editMenu,
         )
         self._editMenu.add_command(
+            label=_('Cut'), accelerator=KEYS.CUT[1],
+            command=lambda: self._sectionEditor.event_generate("<<Cut>>"),
+        )
+        self._editMenu.add_command(
             label=_('Copy'),
             accelerator=KEYS.COPY[1],
             command=lambda: self._sectionEditor.event_generate("<<Copy>>"),
         )
         self._editMenu.add_command(
-            label=_('Cut'), accelerator=KEYS.CUT[1],
-            command=lambda: self._sectionEditor.event_generate("<<Cut>>"),
-        )
-        self._editMenu.add_command(
             label=_('Paste'),
             accelerator=KEYS.PASTE[1],
             command=lambda: self._sectionEditor.event_generate("<<Paste>>"),
-        )
-        self._editMenu.add_separator()
-        self._editMenu.add_command(
-            label=_('Split at cursor position'),
-            accelerator=KEYS.SPLIT_SECTION[1],
-            command=self._split_section,
-        )
-        self._editMenu.add_command(
-            label=_('Create section'),
-            accelerator=KEYS.CREATE_SECTION[1],
-            command=self._create_section,
         )
 
         # Add a "Format" Submenu to the editor window.
@@ -223,45 +226,32 @@ class EditorView(tk.Toplevel, SubController):
             command=self._open_help,
         )
 
-        # Event bindings.
-        self.bind(KEYS.OPEN_HELP[0], self._open_help)
-        if PLATFORM != 'win':
-            self._sectionEditor.bind(
-                KEYS.QUIT_PROGRAM[0],
-                self._request_closing
+        #--- Key bindings.
+        keyBindings = [
+            (KEYS.OPEN_HELP[0], self._open_help),
+            (KEYS.QUIT_PROGRAM[0], self._request_closing),
+            (KEYS.APPLY_CHANGES[0], self._apply_changes),
+            ('<space>', self._sectionEditor.colorize),
+            (KEYS.SPLIT_SECTION[0], self._split_section),
+            (KEYS.CREATE_SECTION[0], self._create_section),
+            (KEYS.ITALIC[0], self._sectionEditor.emphasis),
+            (KEYS.BOLD[0], self._sectionEditor.strong_emphasis),
+            (KEYS.PLAIN[0], self._sectionEditor.plain),
+            ('<Return>', self._sectionEditor.new_paragraph),
+            (KEYS.NEXT[0], self._load_next),
+            (KEYS.PREVIOUS[0], self._load_prev),
+        ]
+        if PLATFORM == 'ix':
+            # the keys on the numeric keypad must be explicitly assigned
+            keyBindings.extend(
+                [
+                    (KEYS.NEXT_KP[0], self._load_next),
+                    (KEYS.PREVIOUS_KP[0], self._load_prev),
+                ]
             )
-        self._sectionEditor.bind(
-            KEYS.APPLY_CHANGES[0],
-            self._apply_changes
-        )
-        self._sectionEditor.bind(
-            '<space>',
-            self._sectionEditor.colorize
-        )
-        self._sectionEditor.bind(
-            KEYS.SPLIT_SECTION[0],
-            self._split_section
-        )
-        self._sectionEditor.bind(
-            KEYS.CREATE_SECTION[0],
-            self._create_section
-        )
-        self._sectionEditor.bind(
-            KEYS.ITALIC[0],
-            self._sectionEditor.emphasis
-        )
-        self._sectionEditor.bind(
-            KEYS.BOLD[0],
-            self._sectionEditor.strong_emphasis
-        )
-        self._sectionEditor.bind(
-            KEYS.PLAIN[0],
-            self._sectionEditor.plain
-        )
-        self._sectionEditor.bind(
-            '<Return>',
-            self._sectionEditor.new_paragraph
-        )
+        for key, callback in keyBindings:
+            self._sectionEditor.bind(key, callback)
+
         self.protocol("WM_DELETE_WINDOW", self._request_closing)
 
         self.lift()

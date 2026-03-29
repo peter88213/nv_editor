@@ -7,6 +7,7 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import platform
 
 from nveditor.platform.generic_keys import GenericKeys
+from nveditor.platform.linux_keys import LinuxKeys
 from nveditor.platform.mac_keys import MacKeys
 from nveditor.platform.windows_keys import WindowsKeys
 
@@ -15,7 +16,7 @@ if platform.system() == 'Windows':
     KEYS = WindowsKeys()
 elif platform.system() in ('Linux', 'FreeBSD'):
     PLATFORM = 'ix'
-    KEYS = GenericKeys()
+    KEYS = LinuxKeys()
 elif platform.system() == 'Darwin':
     PLATFORM = 'mac'
     KEYS = MacKeys()
