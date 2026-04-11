@@ -39,7 +39,7 @@ So if you don't know what "well-formed XML" means, this plugin might not be the 
 
 ### Default: Executable Python zip archive
 
-Download the latest release [nv_editor_v5.10.2.pyz](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v5.10.2.pyz)
+Download the latest release [nv_editor_v5.10.2.pyz](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v5.10.2.pyz) (25 KB)
 
 - Launch *nv_editor_v5.10.2.pyz* by double-clicking (Windows desktop),
 - or execute `python nv_editor_v5.10.2.pyz` (Windows), resp. `python3 nv_editor_v5.10.2.pyz` (Linux) on the command line.
@@ -57,7 +57,7 @@ Download the latest release [nv_editor_v5.10.2.pyz](https://github.com/peter8821
 
 ### Alternative: Zip file
 
-The package is also available in zip format: [nv_editor_v5.10.2.zip](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v5.10.2.zip)
+The package is also available in zip format: [nv_editor_v5.10.2.zip](https://github.com/peter88213/nv_editor/raw/main/dist/nv_editor_v5.10.2.zip) (26 KB)
 
 - Extract the *nv_editor_v5.10.2* folder from the downloaded zipfile "nv_editor_v5.10.2.zip".
 - Move into this new folder and launch *setup.py* by double-clicking (Windows/Linux desktop), 
