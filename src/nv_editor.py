@@ -30,7 +30,7 @@ class Plugin(PluginBase):
     URL = 'https://github.com/peter88213/nv_editor'
 
     def install(self, model, view, controller):
-        """Add a submenu to the main menu.
+        """Install the plugin at runtime.
         
         Positional arguments:
             model -- reference to the novelibre main model instance.
@@ -45,7 +45,7 @@ class Plugin(PluginBase):
 
         #--- Configure the main menu.
 
-        # Add the "Edit" command to novelibre's "Section" menu.
+        # Add the Edit command to novelibre's Section menu.
         self._ui.sectionMenu.add_separator()
 
         label = _('Edit')
@@ -58,7 +58,7 @@ class Plugin(PluginBase):
         )
         self._ui.sectionMenu.disableOnLock.append(label)
 
-        # Add the "Edit" command to novelibre's section context menu.
+        # Add the Edit command to novelibre's section context menu.
         self._ui.sectionContextMenu.add_separator()
         self._ui.sectionContextMenu.add_command(
             label=label,
@@ -79,7 +79,6 @@ class Plugin(PluginBase):
         )
 
         #--- Set Key bindings.
-        # self._ui.tv.tree.bind('<Double-1>', self._open_editor_window)
         self._ui.tv.tree.bind(KEYS.START_EDITOR[0], self._open_editor_window)
 
     def on_close(self, event=None):
