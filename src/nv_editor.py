@@ -24,7 +24,7 @@ from nveditor.platform.platform_settings import KEYS
 class Plugin(PluginBase):
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.50'
+    API_VERSION = '5.63'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
 
