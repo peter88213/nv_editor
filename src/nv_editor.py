@@ -42,7 +42,13 @@ class Plugin(PluginBase):
         self.editorService = EditorService(model, view, controller)
         self._icon = self._get_icon('editor.png')
 
-        #--- Configure the main menu.
+        #--- Configure the user interface.
+
+        def open_editor_window(event=None):
+            self.editorService.open_editor_window()
+
+        def open_help():
+            self._ctrl.helpService.open_help_page('nv_editor')
 
         # Add the Edit command to novelibre's Section menu.
         self._ui.sectionMenu.add_separator()
@@ -53,7 +59,7 @@ class Plugin(PluginBase):
             image=self._icon,
             compound='left',
             accelerator=KEYS.START_EDITOR[1],
-            command=self._open_editor_window,
+            command=open_editor_window,
         )
         self._ui.sectionMenu.disableOnLock.append(label)
 
@@ -64,7 +70,7 @@ class Plugin(PluginBase):
             image=self._icon,
             compound='left',
             accelerator=KEYS.START_EDITOR[1],
-            command=self._open_editor_window,
+            command=open_editor_window,
         )
         self._ui.sectionContextMenu.disableOnLock.append(label)
 
@@ -74,21 +80,15 @@ class Plugin(PluginBase):
             label=label,
             image=self._icon,
             compound='left',
-            command=self._open_help,
+            command=open_help,
         )
 
         #--- Set Key bindings.
-        self._ui.tv.tree.bind(KEYS.START_EDITOR[0], self._open_editor_window)
+        self._ui.tv.tree.bind(KEYS.START_EDITOR[0], open_editor_window)
 
     def on_close(self, event=None):
         self.editorService.on_close()
 
     def on_quit(self, event=None):
         self.editorService.on_quit()
-
-    def _open_editor_window(self, event=None):
-        self.editorService.open_editor_window()
-
-    def _open_help(self, event=None):
-        self._ctrl.helpService.open_help_page('nv_editor')
 
