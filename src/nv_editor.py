@@ -83,7 +83,7 @@ class Plugin(PluginBase):
             command=open_help,
         )
 
-        #--- Set Key bindings.
+        # Hotkey to start the section editor.
         self._ui.tv.tree.bind(KEYS.START_EDITOR[0], open_editor_window)
 
     def on_close(self, event=None):
