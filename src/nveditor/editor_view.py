@@ -9,7 +9,6 @@ from tkinter import ttk
 from nveditor.editor_box import EditorBox
 from nveditor.nveditor_globals import FEATURE
 from nveditor.nveditor_globals import prefs
-from nveditor.nveditor_help import NveditorHelp
 from nveditor.nveditor_locale import _
 from nveditor.platform.platform_settings import KEYS
 from nveditor.platform.platform_settings import PLATFORM
@@ -226,13 +225,8 @@ class EditorView(tk.Toplevel, SubController):
 
         # Help
         self._helpMenu = tk.Menu(self._mainMenu, tearoff=0)
-        self._mainMenu.add_cascade(
+        self._mainMenu.add_command(
             label=_('Help'),
-            menu=self._helpMenu,
-        )
-        self._helpMenu.add_command(
-            label=_('Online help'),
-            accelerator=KEYS.OPEN_HELP[1],
             command=self._open_help,
         )
 
@@ -400,7 +394,7 @@ class EditorView(tk.Toplevel, SubController):
         self._sectionEditor.set_text(self._section.sectionContent)
 
     def _open_help(self, event=None):
-        NveditorHelp.open_help_page()
+        self._ctrl.helpService.open_help_page('nv_editor')
 
     def _request_closing(self, event=None):
         self._service.close_editor_window(self._scId)

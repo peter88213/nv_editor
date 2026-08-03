@@ -17,7 +17,6 @@ GNU General Public License for more details.
 """
 from nveditor.nveditor_locale import _
 from nveditor.editor_service import EditorService
-from nveditor.nveditor_help import NveditorHelp
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nveditor.platform.platform_settings import KEYS
 
@@ -91,5 +90,5 @@ class Plugin(PluginBase):
         self.editorService.open_editor_window()
 
     def _open_help(self, event=None):
-        NveditorHelp.open_help_page()
+        self._ctrl.helpService.open_help_page('nv_editor')
 
