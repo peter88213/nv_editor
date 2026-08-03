@@ -76,8 +76,8 @@ msgstr "Entwurf"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-msgid "Editor plugin Online help"
-msgstr "Editor-Plugin Online-Hilfe"
+msgid "Editor plugin help"
+msgstr "Editor-Plugin Hilfe"
 
 msgid "Emphasis"
 msgstr "Betont"
@@ -118,8 +118,8 @@ msgstr "Neu"
 msgid "Next"
 msgstr "Vor"
 
-msgid "Online help"
-msgstr "Online-Hilfe"
+msgid "Help"
+msgstr "Hilfe"
 
 msgid "Opening"
 msgstr "Eröffnung"

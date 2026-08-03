@@ -75,7 +75,7 @@ class Plugin(PluginBase):
         self._ui.sectionContextMenu.disableOnLock.append(label)
 
         # Add an entry to the Help menu.
-        label = _('Editor plugin Online help')
+        label = _('Editor plugin help')
         self._ui.helpMenu.add_command(
             label=label,
             image=self._icon,

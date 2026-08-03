@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 5.10.2\n"
-"POT-Creation-Date: 2026-03-29 13:38:54\n"
+"POT-Creation-Date: 2026-08-03 12:47:57\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -77,7 +77,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-msgid "Editor plugin Online help"
+msgid "Editor plugin help"
 msgstr ""
 
 msgid "Emphasis"
@@ -117,9 +117,6 @@ msgid "New"
 msgstr ""
 
 msgid "Next"
-msgstr ""
-
-msgid "Online help"
 msgstr ""
 
 msgid "Opening"
@@ -177,7 +174,4 @@ msgid "View"
 msgstr ""
 
 msgid "World building"
-msgstr ""
-
-msgid "https://peter88213.github.io/nvhelp-en"
 msgstr ""
