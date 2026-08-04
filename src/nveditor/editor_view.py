@@ -224,7 +224,6 @@ class EditorView(tk.Toplevel, SubController):
         )
 
         # Help
-        self._helpMenu = tk.Menu(self._mainMenu, tearoff=0)
         self._mainMenu.add_command(
             label=_('Help'),
             command=self._open_help,
