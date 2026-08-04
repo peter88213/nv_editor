@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.10.2\n"
+"Project-Id-Version: 5.11.0\n"
 "POT-Creation-Date: 2025-08-16 15:11:37\n"
-"PO-Revision-Date: 2026-03-29 11:47:52\n"
+"PO-Revision-Date: 2026-08-04 11:12:16\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -118,9 +118,6 @@ msgstr "Neu"
 msgid "Next"
 msgstr "Vor"
 
-msgid "Help"
-msgstr "Hilfe"
-
 msgid "Opening"
 msgstr "Eröffnung"
 
@@ -177,6 +174,3 @@ msgstr "Ansicht"
 
 msgid "World building"
 msgstr "Weltenbau"
-
-msgid "https://peter88213.github.io/nvhelp-en"
-msgstr "https://peter88213.github.io/nvhelp-de"

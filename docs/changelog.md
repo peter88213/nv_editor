@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.11.0
+
+- Using the novelibre 5.63+ help service.
+- Refactored the code
+
+API: 5.63
+Based on novelibre 5.63.0
+
+
 ### Version 5.10.2
 
 - Starting the editor with F4.
