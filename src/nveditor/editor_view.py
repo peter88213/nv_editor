@@ -15,6 +15,7 @@ from nveditor.platform.platform_settings import PLATFORM
 from nvlib.controller.sub_controller import SubController
 import tkinter as tk
 import xml.etree.ElementTree as ET
+from nveditor.nveditor_globals import HELP_PAGE
 
 
 class EditorView(tk.Toplevel, SubController):
@@ -393,7 +394,7 @@ class EditorView(tk.Toplevel, SubController):
         self._sectionEditor.set_text(self._section.sectionContent)
 
     def _open_help(self, event=None):
-        self._ctrl.helpService.open_help_page('nv_editor')
+        self._ctrl.helpService.open_help_page(HELP_PAGE)
 
     def _request_closing(self, event=None):
         self._service.close_editor_window(self._scId)

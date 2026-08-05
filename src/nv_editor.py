@@ -15,10 +15,11 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
-from nveditor.nveditor_locale import _
 from nveditor.editor_service import EditorService
-from nvlib.controller.plugin.plugin_base import PluginBase
+from nveditor.nveditor_globals import HELP_PAGE
+from nveditor.nveditor_locale import _
 from nveditor.platform.platform_settings import KEYS
+from nvlib.controller.plugin.plugin_base import PluginBase
 
 
 class Plugin(PluginBase):
@@ -27,6 +28,7 @@ class Plugin(PluginBase):
     API_VERSION = '5.63'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
+    HELP_PAGE = HELP_PAGE
 
     def install(self, model, view, controller):
         """Install the plugin at runtime.
@@ -46,9 +48,6 @@ class Plugin(PluginBase):
 
         def open_editor_window(event=None):
             self.editorService.open_editor_window()
-
-        def open_help():
-            self._ctrl.helpService.open_help_page('nv_editor')
 
         # Add the Edit command to novelibre's Section menu.
         self._ui.sectionMenu.add_separator()
@@ -74,14 +73,7 @@ class Plugin(PluginBase):
         )
         self._ui.sectionContextMenu.disableOnLock.append(label)
 
-        # Add an entry to the Help menu.
-        label = _('Editor plugin help')
-        self._ui.helpMenu.add_command(
-            label=label,
-            image=self._icon,
-            compound='left',
-            command=open_help,
-        )
+        self._add_help_menu_entry(_('Editor plugin help'))
 
         # Hotkey to start the section editor.
         self._ui.tv.tree.bind(KEYS.START_EDITOR[0], open_editor_window)
