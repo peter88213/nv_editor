@@ -394,7 +394,7 @@ class EditorView(tk.Toplevel, SubController):
         self._sectionEditor.set_text(self._section.sectionContent)
 
     def _open_help(self, event=None):
-        self._ctrl.helpService.open_help_page(HELP_PAGE)
+        self._ctrl.open_help(page=HELP_PAGE)
 
     def _request_closing(self, event=None):
         self._service.close_editor_window(self._scId)
