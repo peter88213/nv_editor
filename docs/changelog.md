@@ -11,7 +11,7 @@
 - Refactored the code
 
 API: 5.63
-Based on novelibre 5.63.1
+Based on novelibre 5.63.2
 
 
 ### Version 5.10.2
