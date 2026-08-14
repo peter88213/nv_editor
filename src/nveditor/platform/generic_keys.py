@@ -22,4 +22,4 @@ class GenericKeys:
     PREVIOUS = ('<Control-Prior>', f'{_("Ctrl")}-{_("PgUp")}')
     QUIT_PROGRAM = ('<Control-q>', f'{_("Ctrl")}-Q')
     SPLIT_SECTION = ('<Control-l>', f'{_("Ctrl")}-L')
-    START_EDITOR = ('<F4>', 'F4')
+    START_EDITOR = ('<Control-e>', f'{_("Ctrl")}-E')

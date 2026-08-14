@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.12.0
+
+- Changed the START_EDITOR keyboard shortcut in order not to interfere with novelibre QUIT_PROGRAM.
+
+API: 5.63
+Based on novelibre 5.64.0
+
+
 ### Version 5.11.3
 
 - Using the novelibre 5.63+ help service.

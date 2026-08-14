@@ -19,3 +19,4 @@ class MacKeys(GenericKeys):
     PREVIOUS = ('<Command-Prior>', f'Cmd-{_("PgUp")}')
     QUIT_PROGRAM = ('<Command-q>', 'Cmd-Q')
     SPLIT_SECTION = ('<Command-l>', 'Cmd-L')
+    START_EDITOR = ('<Command-e>', 'Cmd-E')
