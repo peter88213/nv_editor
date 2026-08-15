@@ -27,9 +27,9 @@ class EditorService(SubController, Observer):
     SETTINGS = dict(
         win_geometry='600x800',
         color_mode=0,
-        color_bg='white',
-        color_fg='black',
-        color_xml_tag='blue',
+        color_bg='#ffffff',
+        color_fg='#000000',
+        color_xml_tag='#0000ff',
         editor_font=DEFAULT_FONT,
         font_size=12,
         line_spacing=4,

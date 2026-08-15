@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.12.1
+
+- Replaced tk color names with hex triple strings.
+
+API: 5.63
+Based on novelibre 5.64.4
+
+
 ### Version 5.12.0
 
 - Changed the START_EDITOR keyboard shortcut in order not to interfere with novelibre QUIT_PROGRAM.

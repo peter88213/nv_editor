@@ -32,27 +32,27 @@ class EditorView(tk.Toplevel, SubController):
     COLOR_MODES = [
         (
             _('Bright mode'),
-            'black',
-            'white',
-            'blue',
+            '#000000',  # black
+            '#ffffff',  # white
+            '#0000ff',  # blue
         ),
         (
             _('Light mode'),
-            'black',
-            'antique white',
-            'firebrick',
+            '#000000',  # black
+            '#faebd7',  # antique white
+            '#b22222',  # firebrick
         ),
         (
             _('Dark mode'),
-            'light grey',
-            'gray20',
-            'gold',
+            '#d3d3d3',  # light grey
+            '#333333',  # gray20
+            '#ffd700',  # gold
         ),
         (
             _('Blue mode'),
-            '#FFFFFF',
-            '#0000AA',
-            '#FFFF55',
+            '#ffffff',  # white
+            '#0000aa',  # EGA blue
+            '#ffff55',  # EGA bright yellow
         ),
     ]
     # (name, foreground, background) tuples for color modes.
