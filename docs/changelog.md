@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.12.2
+
+- Fixed a bug where the editor window cannot be closed when containing malformed XML.
+
+API: 5.63
+Based on novelibre 5.65.2
+
+
 ### Version 5.12.1
 
 - Replaced tk color names with hex triple strings.

@@ -73,9 +73,6 @@ class EditorBox(tk.Text):
             column = int(columnStr) - 3
             self.mark_set('insert', f'{lineStr}.{column}')
             raise ValueError(f'{issue}: line {lineStr} column {column}')
-            return False
-
-        return True
 
     def clear(self):
         self.delete('1.0', 'end')

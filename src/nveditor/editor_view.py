@@ -273,7 +273,7 @@ class EditorView(tk.Toplevel, SubController):
         super().lift()
         self._sectionEditor.focus()
 
-    def on_quit(self, event=None):
+    def on_quit(self):
         """Exit the editor. Apply changes, if possible."""
         if not self._apply_changes_after_asking():
             return 'break'

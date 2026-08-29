@@ -83,12 +83,13 @@ class EditorService(SubController, Observer):
         EditorBox.colorXmlTag = prefs['color_xml_tag']
 
     def close_editor_window(self, nodeId):
-        try:
-            if self._sectionEditors[nodeId].isOpen:
-                self._sectionEditors[nodeId].on_quit()
+        if not nodeId in self._sectionEditors:
+            return
+
+        if self._sectionEditors[nodeId].isOpen:
+            self._sectionEditors[nodeId].on_quit()
+        if not self._sectionEditors[nodeId].isOpen:
             del self._sectionEditors[nodeId]
-        except KeyError:
-            pass
 
     def on_close(self):
         """Close all open section editor windows."""
@@ -149,7 +150,7 @@ class EditorService(SubController, Observer):
             pass
 
     def refresh(self):
-        """Close editor window in case the corresmpnding section is deleted.
+        """Close editor window in case the corresponding section is deleted.
         
         Overrides the superclass method.
         """
