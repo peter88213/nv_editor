@@ -24,7 +24,8 @@ class EditorView(tk.Toplevel, SubController):
     Public instance methods:
         lift() -- Bring window to the foreground 
                   and set the focus to the editor box.
-        on_quit() -- Exit the editor. Apply changes, if possible.
+        apply_changes_after_asking() -- Transfer the editor content to the project, 
+                                        if modified. Ask first.
     """
     colorModeVar = None
     # to be overwritten by the client with tk.IntVar()
@@ -261,55 +262,13 @@ class EditorView(tk.Toplevel, SubController):
         self.lift()
         self.update_idletasks()
         self.geometry(prefs['win_geometry'])
-        self.isOpen = True
 
-    def lift(self):
-        """Bring window to the foreground and set the focus to the editor box.
+    def apply_changes_after_asking(self):
+        """Transfer the editor content to the project, if modified. Ask first.
         
-        Extends the superclass method.
+        Return False if the window is kept active due to invalid changes.
+        Otherwise. return True.
         """
-        if self.state() == 'iconic':
-            self.state('normal')
-        super().lift()
-        self._sectionEditor.focus()
-
-    def on_quit(self):
-        """Exit the editor. Apply changes, if possible."""
-        if not self._apply_changes_after_asking():
-            return 'break'
-            # keeping the editor window open
-            # due to malformed XML to be fixed before saving
-
-        prefs['win_geometry'] = self.winfo_geometry()
-        self.destroy()
-        self.isOpen = False
-
-    def _apply_changes(self, event=None):
-        # Transfer the editor content to the project, if modified.
-        if not self._scId in self._mdl.novel.sections:
-            return
-
-        try:
-            self._sectionEditor.check_validity()
-        except ValueError as ex:
-            self._ui.show_error(
-                message=_('Invalid changes'),
-                detail=str(ex),
-                parent=self
-            )
-            self.lift()
-            return
-
-        sectionText = self._sectionEditor.get_text()
-        if sectionText or self._section.sectionContent:
-            if self._section.sectionContent != sectionText:
-                self._transfer_text(sectionText)
-
-    def _apply_changes_after_asking(self, event=None):
-        # Transfer the editor content to the project, if modified. Ask first.
-        if not self._scId in self._mdl.novel.sections:
-            return True
-
         sectionText = self._sectionEditor.get_text()
         if sectionText or self._section.sectionContent:
             if self._section.sectionContent != sectionText:
@@ -331,6 +290,34 @@ class EditorView(tk.Toplevel, SubController):
 
                     self._transfer_text(sectionText)
         return True
+
+    def lift(self):
+        """Bring window to the foreground and set the focus to the editor box.
+        
+        Extends the superclass method.
+        """
+        if self.state() == 'iconic':
+            self.state('normal')
+        super().lift()
+        self._sectionEditor.focus()
+
+    def _apply_changes(self, event=None):
+        # Transfer the editor content to the project, if modified.
+        try:
+            self._sectionEditor.check_validity()
+        except ValueError as ex:
+            self._ui.show_error(
+                message=_('Invalid changes'),
+                detail=str(ex),
+                parent=self
+            )
+            self.lift()
+            return
+
+        sectionText = self._sectionEditor.get_text()
+        if sectionText or self._section.sectionContent:
+            if self._section.sectionContent != sectionText:
+                self._transfer_text(sectionText)
 
     def _create_section(self, event=None):
         # Create a new section after the currently edited section.
@@ -365,24 +352,24 @@ class EditorView(tk.Toplevel, SubController):
 
     def _load_next(self, event=None):
         # Load the next section in the tree.
-        if not self._apply_changes_after_asking():
+        if not self.apply_changes_after_asking():
             return
 
         nextNode = self._ui.tv.next_node(self._scId)
         if nextNode:
             self._ui.tv.go_to_node(nextNode)
-            self._request_closing()
+            self._service.close_editor_window_without_asking(self._scId)
             self._service.open_editor_window()
 
     def _load_prev(self, event=None):
         # Load the previous section in the tree.
-        if not self._apply_changes_after_asking():
+        if not self.apply_changes_after_asking():
             return
 
         prevNode = self._ui.tv.prev_node(self._scId)
         if prevNode:
             self._ui.tv.go_to_node(prevNode)
-            self._request_closing()
+            self._service.close_editor_window_without_asking(self._scId)
             self._service.open_editor_window()
 
     def _load_section(self):

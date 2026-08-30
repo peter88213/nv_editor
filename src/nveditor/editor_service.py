@@ -82,20 +82,28 @@ class EditorService(SubController, Observer):
         )
         EditorBox.colorXmlTag = prefs['color_xml_tag']
 
-    def close_editor_window(self, nodeId):
-        if not nodeId in self._sectionEditors:
-            return
+    def close_editor_window(self, scId):
+        """Close the editor window without data loss.
+         
+        In case of malformed XML to be fixed before saving,
+        Keep the editor window open.
+        """
+        if self._sectionEditors[scId].apply_changes_after_asking():
+            self.close_editor_window_without_asking(scId)
 
-        if self._sectionEditors[nodeId].isOpen:
-            self._sectionEditors[nodeId].on_quit()
-        if not self._sectionEditors[nodeId].isOpen:
-            del self._sectionEditors[nodeId]
+    def close_editor_window_without_asking(self, scId):
+        """Immediately close the editor window."""
+        prefs['win_geometry'] = self._sectionEditors[scId].winfo_geometry()
+        self._sectionEditors[scId].destroy()
+        del self._sectionEditors[scId]
 
     def on_close(self):
-        """Close all open section editor windows."""
+        """Close all open section editor windows.
+        
+        The project may be closed, so that changes no longe can be applied.
+        """
         for scId in self._sectionEditors:
-            if self._sectionEditors[scId].isOpen:
-                self._sectionEditors[scId].on_quit()
+            self.close_editor_window_without_asking(scId)
 
     def on_quit(self):
         """Save project specific configuration."""
@@ -130,9 +138,7 @@ class EditorService(SubController, Observer):
                     )
                     return
 
-                if (nodeId in self._sectionEditors
-                    and self._sectionEditors[nodeId].isOpen
-                ):
+                if nodeId in self._sectionEditors:
                     self._sectionEditors[nodeId].lift()
                     return
 
@@ -156,6 +162,5 @@ class EditorService(SubController, Observer):
         """
         for scId in list(self._sectionEditors):
             if not scId in self._mdl.novel.sections:
-                if self._sectionEditors[scId].isOpen:
-                    self._sectionEditors[scId].on_quit()
-                del self._sectionEditors[scId]
+                self.close_editor_window_without_asking(scId)
+
