@@ -272,6 +272,7 @@ class EditorView(tk.Toplevel, SubController):
         sectionText = self._sectionEditor.get_text()
         if sectionText or self._section.sectionContent:
             if self._section.sectionContent != sectionText:
+                self.lift()
                 if self._ui.ask_yes_no(
                     message=_('Apply section changes?'),
                     title=FEATURE,
@@ -285,7 +286,6 @@ class EditorView(tk.Toplevel, SubController):
                             detail=str(ex),
                             parent=self,
                         )
-                        self.lift()
                         return False
 
                     self._transfer_text(sectionText)

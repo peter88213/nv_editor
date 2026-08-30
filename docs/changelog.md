@@ -5,6 +5,16 @@
 ## Changelog
 
 
+### Version 5.13.0
+
+- Ensuring that the project is not closed if an editor window 
+  contains invalid content.
+  This works up to three times (`MainController.MAX_NR_OF_CLOSING_ATTEMPTS`)
+
+API: 5.66
+Based on novelibre 5.66.0
+
+
 ### Version 5.12.3
 
 - No longer asking for applying changes when the project is already closed.

@@ -25,7 +25,7 @@ from nvlib.controller.plugin.plugin_base import PluginBase
 class Plugin(PluginBase):
     """novelibre multi-section "plain text" editor plugin class."""
     VERSION = '@release'
-    API_VERSION = '5.63'
+    API_VERSION = '5.66'
     DESCRIPTION = 'A multi-section "plain text" editor'
     URL = 'https://github.com/peter88213/nv_editor'
     HELP_PAGE = HELP_PAGE
@@ -83,4 +83,7 @@ class Plugin(PluginBase):
 
     def on_quit(self, event=None):
         self.editorService.on_quit()
+
+    def ready_to_close(self):
+        return self.editorService.ready_to_close()
 
