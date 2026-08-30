@@ -269,26 +269,37 @@ class EditorView(tk.Toplevel, SubController):
         Return False if the window is kept active due to invalid changes.
         Otherwise. return True.
         """
-        sectionText = self._sectionEditor.get_text()
-        if sectionText or self._section.sectionContent:
-            if self._section.sectionContent != sectionText:
-                self.lift()
-                if self._ui.ask_yes_no(
-                    message=_('Apply section changes?'),
-                    title=FEATURE,
-                    parent=self
-                ):
-                    try:
-                        self._sectionEditor.check_validity()
-                    except ValueError as ex:
-                        self._ui.show_error(
-                            message=_('Invalid changes'),
-                            detail=str(ex),
-                            parent=self,
-                        )
-                        return False
+        if not self.changes_made():
+            return True
 
-                    self._transfer_text(sectionText)
+        self.lift()
+        if self._ui.ask_yes_no(
+            message=_('Apply section changes?'),
+            title=FEATURE,
+            parent=self
+        ):
+            try:
+                self._sectionEditor.check_validity()
+            except ValueError as ex:
+                self._ui.show_error(
+                    message=_('Invalid changes'),
+                    detail=str(ex),
+                    parent=self,
+                )
+                return False
+
+            self._transfer_text(self._sectionEditor.get_text())
+        return True
+
+    def changes_made(self):
+        """Return True if the content has been changed."""
+        sectionText = self._sectionEditor.get_text()
+        if not (sectionText or self._section.sectionContent):
+            return False
+
+        if self._section.sectionContent == sectionText:
+            return False
+
         return True
 
     def lift(self):
@@ -303,6 +314,9 @@ class EditorView(tk.Toplevel, SubController):
 
     def _apply_changes(self, event=None):
         # Transfer the editor content to the project, if modified.
+        if not self.changes_made():
+            return
+
         try:
             self._sectionEditor.check_validity()
         except ValueError as ex:
@@ -314,10 +328,7 @@ class EditorView(tk.Toplevel, SubController):
             self.lift()
             return
 
-        sectionText = self._sectionEditor.get_text()
-        if sectionText or self._section.sectionContent:
-            if self._section.sectionContent != sectionText:
-                self._transfer_text(sectionText)
+        self._transfer_text(self._sectionEditor.get_text())
 
     def _create_section(self, event=None):
         # Create a new section after the currently edited section.

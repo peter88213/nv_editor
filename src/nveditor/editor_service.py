@@ -156,13 +156,24 @@ class EditorService(SubController, Observer):
             pass
 
     def ready_to_close(self):
-        """Close all open section editor windows, if their content is valid.
+        """Close all open section editor windows if their content is valid.
         
         Return True if no editor window is open.
         Return False, if an editor window remains open due to invalid content.
         """
+
+        # First run: Close editor windows with unchanged content.
+        # Put any other editor window to the front.
+        for scId in list(self._sectionEditors):
+            if not self._sectionEditors[scId].changes_made:
+                self.close_editor_window_without_asking(scId)
+            else:
+                self._sectionEditors[scId].lift()
+
+        # Second run: Try closing the editor windows with changed content.
         for scId in list(self._sectionEditors):
             if not self._sectionEditors[scId].apply_changes_after_asking():
+                # the editor window remains open due to invalid content
                 return False
 
             self.close_editor_window_without_asking(scId)
