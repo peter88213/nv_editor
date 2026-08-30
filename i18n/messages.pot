@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.13.0\n"
-"POT-Creation-Date: 2026-08-30 12:20:44\n"
+"Project-Id-Version: 5.13.1\n"
+"POT-Creation-Date: 2026-08-30 20:11:15\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -168,6 +168,9 @@ msgid "The result would not be well-formed XML"
 msgstr ""
 
 msgid "Unlock and apply changes?"
+msgstr ""
+
+msgid "Untitled"
 msgstr ""
 
 msgid "View"

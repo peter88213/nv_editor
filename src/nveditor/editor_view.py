@@ -276,6 +276,7 @@ class EditorView(tk.Toplevel, SubController):
         self.lift()
         if self._ui.ask_yes_no(
             message=_('Apply section changes?'),
+            detail=self.title(),
             title=FEATURE,
             parent=self
         ):
@@ -378,11 +379,31 @@ class EditorView(tk.Toplevel, SubController):
 
     def _load_section(self):
         # Load the section content into the text editor.
-        self.title(
-            f'{self._section.title} - {self._mdl.novel.title}'
-            f', {_("Section")} ID {self._scId}'
-        )
         self._sectionEditor.set_text(self._section.sectionContent)
+
+        def shorten(text, length):
+            if len(text) > length:
+                return f'{text[:length - 3]}[…]'
+
+            return text
+
+        # Set the window title.
+        lengthTotal = 100
+        lengthEntry = 25
+        chId = self._mdl.novel.tree.parent(self._scId)
+        book = self._mdl.novel.title
+        chapter = self._mdl.novel.chapters[chId].title
+        section = self._section.title
+        book = book or _('Untitled')
+        book = shorten(book, lengthEntry)
+        lengthTotal -= len(book)
+        lengthEntry = lengthTotal // 2
+        chapter = chapter or _('Untitled')
+        chapter = shorten(chapter, lengthEntry)
+        lengthTotal -= len(chapter)
+        section = section or _('Untitled')
+        section = shorten(section, lengthTotal)
+        self.title(f'{section} - {book}, {chapter}')
 
     def _open_help(self, event=None):
         self._ctrl.open_help(page=HELP_PAGE)

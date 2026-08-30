@@ -5,14 +5,15 @@
 ## Changelog
 
 
-### Version 5.13.0
+### Version 5.13.1
 
-- Ensuring that the project is not closed if an editor window 
-  contains invalid content.
+- Ensuring that the project is not closed silently if an editor window 
+  contains invalid content (#2).
   This works up to three times (`MainController.MAX_NR_OF_CLOSING_ATTEMPTS`)
+- Optimized the window title.
 
 API: 5.66
-Based on novelibre 5.66.0
+Based on novelibre 5.66.1
 
 
 ### Version 5.12.3
