@@ -22,6 +22,7 @@ class EditorView(tk.Toplevel, SubController):
     """A pop-up window with a menu bar, a text box, and a status bar.
     
     Public instance methods:
+        changes_made() -- Return True if the editor content has been changed.
         lift() -- Bring window to the foreground 
                   and set the focus to the editor box.
         apply_changes_after_asking() -- Transfer the editor content to the project, 
@@ -278,17 +279,8 @@ class EditorView(tk.Toplevel, SubController):
             title=FEATURE,
             parent=self
         ):
-            try:
-                self._sectionEditor.check_validity()
-            except ValueError as ex:
-                self._ui.show_error(
-                    message=_('Invalid changes'),
-                    detail=str(ex),
-                    parent=self,
-                )
-                return False
+            return self._transfer_text()
 
-            self._transfer_text(self._sectionEditor.get_text())
         return True
 
     def changes_made(self):
@@ -314,21 +306,22 @@ class EditorView(tk.Toplevel, SubController):
 
     def _apply_changes(self, event=None):
         # Transfer the editor content to the project, if modified.
-        if not self.changes_made():
-            return
+        if  self.changes_made():
+            if not self._transfer_text():
+                self.lift()
 
+    def _content_is_valid(self):
         try:
             self._sectionEditor.check_validity()
         except ValueError as ex:
             self._ui.show_error(
                 message=_('Invalid changes'),
                 detail=str(ex),
-                parent=self
+                parent=self,
             )
-            self.lift()
-            return
+            return False
 
-        self._transfer_text(self._sectionEditor.get_text())
+        return True
 
     def _create_section(self, event=None):
         # Create a new section after the currently edited section.
@@ -500,18 +493,11 @@ class EditorView(tk.Toplevel, SubController):
             # Go to the new section.
             self._load_next()
 
-    def _transfer_text(self, sectionText):
-        # Transfer the changed editor content to the section, if possible.
-        try:
-            self._sectionEditor.check_validity()
-        except ValueError as ex:
-            self._ui.show_error(
-                message=_('Invalid changes'),
-                detail=str(ex),
-                parent=self,
-            )
-            self.lift()
-            return
+    def _transfer_text(self):
+        # Transfer the changed editor content to the section.
+        # Return False if the content is invalid, otherwise return True.
+        if not self._content_is_valid():
+            return False
 
         if self._ctrl.isLocked:
             if self._ui.ask_yes_no(
@@ -521,8 +507,9 @@ class EditorView(tk.Toplevel, SubController):
                 parent=self,
             ):
                 self._ctrl.unlock()
-                self._section.sectionContent = sectionText
-            self.lift()
-        else:
-            self._section.sectionContent = sectionText
+            else:
+                return True
+
+        self._section.sectionContent = self._sectionEditor.get_text()
+        return True
 
