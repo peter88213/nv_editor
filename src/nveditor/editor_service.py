@@ -13,6 +13,7 @@ from nveditor.editor_view import EditorView
 from nveditor.nveditor_globals import DEFAULT_FONT
 from nveditor.nveditor_globals import FEATURE
 from nveditor.nveditor_globals import ICON
+from nveditor.nveditor_globals import check_editor_settings
 from nveditor.nveditor_globals import prefs
 from nveditor.nveditor_locale import _
 from nvlib.controller.sub_controller import SubController
@@ -58,6 +59,7 @@ class EditorService(SubController, Observer):
         self.configuration.read()
         prefs.update(self.configuration.settings)
         prefs.update(self.configuration.options)
+        check_editor_settings()
 
         # Set window icon.
         try:
@@ -78,7 +80,7 @@ class EditorService(SubController, Observer):
 
         # Configure the editor box.
         EditorView.colorModeVar = tk.IntVar(
-            value=int(prefs['color_mode']),
+            value=prefs['color_mode'],
         )
         EditorBox.colorXmlTag = prefs['color_xml_tag']
 
