@@ -15,8 +15,8 @@ ICON = 'editor'
 HELP_PAGE = 'nv_editor'
 
 FONTS = [
-    'DejaVu Sans Mono',  # usually bundled with LibreOffice
     'Consolas',  # available on Windows
+    'DejaVu Sans Mono',  # usually bundled with LibreOffice
     'Liberation Mono',
     'Courier',  # fallback, if none of the above is installed
 ]
@@ -30,8 +30,8 @@ DEFAULT_FONT = editorFont
 
 def check_editor_settings():
 
-    if not prefs['editor_font'] in INSTALLED_FONTS:
-        prefs['editor_font'] = DEFAULT_FONT
+    if not prefs['font_name'] in INSTALLED_FONTS:
+        prefs['font_name'] = DEFAULT_FONT
 
     prefs['color_mode'] = int(prefs['color_mode'])
 

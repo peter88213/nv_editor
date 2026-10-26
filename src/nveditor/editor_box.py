@@ -36,7 +36,7 @@ class EditorBox(tk.Text):
         defaultFont = tkFont.Font(
             root=self,
             font=kw['font'],
-            name='editor_font',
+            name='font_name',
         )
         boldFont = tkFont.Font(**defaultFont.configure())
         boldFont.configure(weight='bold')

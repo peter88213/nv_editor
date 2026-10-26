@@ -89,7 +89,7 @@ class EditorView(tk.Toplevel, SubController):
             padx=prefs['margin_x'],
             pady=prefs['margin_y'],
             font=(
-                prefs['editor_font'],
+                prefs['font_name'],
                 prefs['font_size'],
             ),
         )

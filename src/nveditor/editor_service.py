@@ -31,7 +31,7 @@ class EditorService(SubController, Observer):
         color_bg='#ffffff',
         color_fg='#000000',
         color_xml_tag='#0000ff',
-        editor_font=DEFAULT_FONT,
+        font_name=DEFAULT_FONT,
         font_size=12,
         line_spacing=4,
         paragraph_spacing=4,
