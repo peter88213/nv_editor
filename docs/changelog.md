@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.14.0
+
+- Improved "default font" handling.
+
+API: 5.66
+Based on novelibre 5.66.8
+
+
 ### Version 5.13.1
 
 - Ensuring that the project is not closed silently if an editor window 

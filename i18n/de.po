@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.13.1\n"
+"Project-Id-Version: 5.14.0\n"
 "POT-Creation-Date: 2025-08-16 15:11:37\n"
-"PO-Revision-Date: 2026-08-30 20:11:15\n"
+"PO-Revision-Date: 2026-10-26 23:15:30\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -165,6 +165,9 @@ msgstr "Das Projekt ist gesperrt"
 
 msgid "The result would not be well-formed XML"
 msgstr "Das Ergebnis wäre kein wohlgeformtes XML"
+
+msgid "Undefined"
+msgstr "Nicht definiert"
 
 msgid "Unlock and apply changes?"
 msgstr "Entsperren und Änderungen übernehmen?"
